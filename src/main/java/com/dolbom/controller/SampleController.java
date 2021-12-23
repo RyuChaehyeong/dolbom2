@@ -117,6 +117,25 @@ public class SampleController {
 
         return new ResponseEntity<>(msg, headers, HttpStatus.OK);
 
+    }
 
+    @GetMapping("/all")
+    public void doAll() {
+        log.info("do all can access everybody");
+    }
+
+    @GetMapping("/customer")
+    public void doCustomer() {
+        log.info("logined customer");
+    }
+
+    @GetMapping("/member")
+    public void doMember() {
+        log.info("logined member");
+    }
+
+    @GetMapping("/admin")
+    public void doAdmin() {
+        log.info("admin only");
     }
 }

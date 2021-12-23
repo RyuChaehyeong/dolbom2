@@ -36,6 +36,11 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0'
     implementation 'javax.servlet:jstl:1.2'
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.5.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.5.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.5.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.5.2'
+
 
 
 

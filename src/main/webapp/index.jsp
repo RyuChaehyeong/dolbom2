@@ -12,5 +12,10 @@
 </head>
 <body>
 돌봄 페이지
+<a href="/login">로그인</a>
+<form action="/logout" method="post">
+    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+    <button>로그아웃</button>
+</form>
 </body>
 </html>
