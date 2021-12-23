@@ -104,19 +104,19 @@ public class DolbomUserTests {
 
                 if (i < 26) {
                     pstmt.setString(1, "user" + i);
-                    pstmt.setString(2, "일반사용자" + i);
+                    pstmt.setString(2, "ROLE_USER");
 
                 } else if (i < 51) {
                     pstmt.setString(1, "customer" + i);
-                    pstmt.setNString(2, "고객" + i);
+                    pstmt.setNString(2, "ROLE_CUSTOMER");
 
                 } else if (i < 76) {
                     pstmt.setString(1, "member" + i);
-                    pstmt.setNString(2, "운영자" + i);
+                    pstmt.setNString(2, "ROLE_MEMBER");
 
                 } else {
                     pstmt.setString(1, "admin" + i);
-                    pstmt.setNString(2, "관리자" + i);
+                    pstmt.setNString(2, "ROLE_ADMIN");
                 }
                 pstmt.executeUpdate();
 
