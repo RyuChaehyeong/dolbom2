@@ -13,6 +13,13 @@
 
 <body>
     <h1>TO logined admin</h1>
+
+    <p>principal : <sec:authentication property="principal"/></p>
+    <p>DolbomUserVO : <sec:authentication property="principal.dolbomUserVO"/></p>
+    <p>사용자아이디 : <sec:authentication property="principal.dolbomUserVO.userId"/></p>
+    <p>사용자아이디 : <sec:authentication property="principal.username"/></p>
+    <p>사용자 권한 리스트 : <sec:authentication property="principal.dolbomUserVO.authList"/></p>
+
     <form action="/logout" method="post">
         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
         <button>로그아웃</button>

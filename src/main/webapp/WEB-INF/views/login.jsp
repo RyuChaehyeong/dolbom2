@@ -20,7 +20,9 @@
         <div class="form-group">
             비밀번호 <input type="password" name="password" class="form-control" />
         </div>
-
+        <div>
+            <input type="checkbox" name="remember-me"> 자동로그인
+        </div>
         <div>
             <button id="loginBtn" type="submit">로그인</button>
         </div>

@@ -13,8 +13,17 @@
 
 <body>
     <h1>TO ALL</h1>
-    <form action="/logout" method="post">
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-        <button>로그아웃</button>
-    </form>
+
+    <sec:authorize access="isAnonymous()">
+        <a href="/login"> 로그인 </a>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+
+        <form action="/logout" method="post">
+            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+            <button>로그아웃</button>
+        </form>
+
+    </sec:authorize>
 </body>

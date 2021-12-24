@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: SAMSUNG
@@ -12,10 +13,18 @@
 </head>
 <body>
 돌봄 페이지
-<a href="/login">로그인</a>
-<form action="/logout" method="post">
-    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-    <button>로그아웃</button>
-</form>
+
+<sec:authorize access="isAnonymous()">
+    <a href="/login">로그인</a>
+</sec:authorize>
+
+
+<sec:authorize access="isAuthenticated()">
+    <form action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+        <button>로그아웃</button>
+    </form>
+</sec:authorize>
+
 </body>
 </html>
