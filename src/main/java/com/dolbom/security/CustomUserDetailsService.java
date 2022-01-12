@@ -1,7 +1,7 @@
 package com.dolbom.security;
 
-import com.dolbom.domain.auth.DolbomUserVO;
-import com.dolbom.mapper.auth.DolbomUserMapper;
+import com.dolbom.domain.auth.DlbmUserVO;
+import com.dolbom.mapper.auth.DlbmUserMapper;
 import com.dolbom.security.domain.CustomUser;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -15,15 +15,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
     @Setter(onMethod_ = {@Autowired})
-    private DolbomUserMapper dolbomUserMapper;
+    private DlbmUserMapper dlbmUserMapper;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         log.warn("Load User by Username: " + userName);
-        DolbomUserVO dolbomUserVO = dolbomUserMapper.readDolbomUserInfo(userName);
+        DlbmUserVO dlbmUserVO = dlbmUserMapper.readDlbmUserInfo(userName);
 
-        log.warn("queried by Dolbom User mapper: " + dolbomUserVO);
+        log.warn("queried by Dolbom User mapper: " + dlbmUserVO);
 
-        return dolbomUserVO == null ? null : new CustomUser(dolbomUserVO);
+        return dlbmUserVO == null ? null : new CustomUser(dlbmUserVO);
     }
 }

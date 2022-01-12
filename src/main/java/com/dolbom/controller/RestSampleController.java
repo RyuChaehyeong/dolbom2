@@ -67,7 +67,7 @@ public class RestSampleController {
 
     }
 
-    @PostMapping("/ticket")
+    @PostMapping(value="/ticket")
     public Ticket convert(@RequestBody Ticket ticket) {
         log.info("convert...ticket" + ticket);
         return ticket;

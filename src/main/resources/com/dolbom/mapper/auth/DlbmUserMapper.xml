@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.auth.DlbmUserMapper">
+    <resultMap id="DlbmUserMap" type="com.dolbom.domain.auth.DlbmUserVO">
+        <id property="userId" column="USER_ID"/>
+        <result property="userSn" column="USER_SN"/>
+        <result property="userNm" column="USER_NM"/>
+        <result property="userPwd" column="USER_PWD"/>
+        <result property="userEmail" column="USER_EMAIL"/>
+        <result property="userPhone" column="USER_PHONE"/>
+        <result property="userTypeCd" column="USER_TYPE_CD"/>
+        <result property="userYn" column="USE_YN"/>
+        <result property="dltYn" column="DLT_YN"/>
+        <result property="createdDt" column="CREATED_DT"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="lastModifiedDt" column="LAST_MODIFIED_DT"/>
+        <result property="lastModifiedBy" column="LAST_MODIFIED_BY"/>
+
+        <collection property="authList" resultMap="authMap"></collection>
+    </resultMap>
+
+    <resultMap id="authMap" type="com.dolbom.domain.auth.AutoVO">
+        <result property="userId" column="USER_ID"/>
+        <result property="auth" column="AUTH"/>
+    </resultMap>
+
+    <select id="readDlbmUserInfo" resultMap="DlbmUserMap">
+         SELECT DU.USER_ID,
+                DU.USER_SN,
+                DU.USER_NM,
+                DU.USER_PWD,
+                DU.USER_EMAIL,
+                DU.USER_TYPE_CD,
+                DU.LAST_MODIFIED_DT,
+                DU.LAST_MODIFIED_BY,
+                DUA.AUTH
+            FROM DLBM_USER DU
+            LEFT OUTER JOIN DLBM_USER_AUTH DUA
+                ON DU.USER_ID = DUA.USER_ID
+            WHERE DU.USER_ID = #{userId}
+    </select>
+</mapper>

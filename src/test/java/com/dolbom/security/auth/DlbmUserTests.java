@@ -1,7 +1,7 @@
 package com.dolbom.security.auth;
 
-import com.dolbom.domain.auth.DolbomUserVO;
-import com.dolbom.mapper.auth.DolbomUserMapper;
+import com.dolbom.domain.auth.DlbmUserVO;
+import com.dolbom.mapper.auth.DlbmUserMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import java.sql.PreparedStatement;
         {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                 "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 @Log4j
-public class DolbomUserTests {
+public class DlbmUserTests {
 
     @Setter(onMethod_ = @Autowired)
     private PasswordEncoder pwencoder;
@@ -29,13 +29,16 @@ public class DolbomUserTests {
     private DataSource ds;
 
     @Setter(onMethod_ = @Autowired)
-    private DolbomUserMapper mapper;
+    private DlbmUserMapper dlbmUserMapper;
+
 
     @Test
     public void testInsertMember() {
-        String sql = "INSERT INTO DOLBOM_USER (USER_ID, USER_PW, USER_NM) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO DLBM_USER (" +
+                "USER_ID, USER_SN, USER_NM, USER_PWD, USER_EMAIL, USER_TYPE_CD, CREATED_DT, CREATED_BY, LAST_MODIFIED_DT, LAST_MODIFIED_BY) VALUES " +
+                "( ?, USER_SN_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, sysdate, ?)";
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 20; i++) {
             Connection con = null;
             PreparedStatement pstmt = null;
 
@@ -43,23 +46,22 @@ public class DolbomUserTests {
                 con = ds.getConnection();
                 pstmt = con.prepareStatement(sql);
 
-                pstmt.setString(2, pwencoder.encode("pw" + i));
+                pstmt.setString(3, pwencoder.encode("pw" + i));
+                pstmt.setString(6, "fluid21");
+                pstmt.setString(7, "fluid21");
 
-                if (i < 26) {
-                    pstmt.setString(1, "user" + i);
-                    pstmt.setString(3, "일반사용자" + i);
+                if (i < 11) {
+                    pstmt.setString(1, "cust" + i);
+                    pstmt.setString(2, "고객" + i);
+                    pstmt.setString(4, "custemail" + i + "email.com");
+                    pstmt.setString(5, "10");
 
-                } else if (i < 51) {
-                    pstmt.setString(1, "customer" + i);
-                    pstmt.setNString(3, "고객" + i);
-
-                } else if (i < 76) {
-                    pstmt.setString(1, "member" + i);
-                    pstmt.setNString(3, "운영자" + i);
 
                 } else {
-                    pstmt.setString(1, "admin" + i);
-                    pstmt.setNString(3, "관리자" + i);
+                    pstmt.setString(1, "dlbm" + i);
+                    pstmt.setString(2, "돌봄씨" + i);
+                    pstmt.setString(4, "dlbmemail" + i + "email.com");
+                    pstmt.setString(5, "20");
                 }
 
                 pstmt.executeUpdate();
@@ -91,9 +93,9 @@ public class DolbomUserTests {
 
     @Test
     public void testInsertAuth() {
-        String sql = "INSERT INTO DOLBOM_USER_AUTH (USER_ID, AUTH) values (?, ?)";
+        String sql = "INSERT INTO DLBM_USER_AUTH (USER_ID, AUTH) values (?, ?)";
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 20; i++) {
             Connection con = null;
             PreparedStatement pstmt = null;
 
@@ -102,21 +104,14 @@ public class DolbomUserTests {
                 pstmt = con.prepareStatement(sql);
 
 
-                if (i < 26) {
-                    pstmt.setString(1, "user" + i);
-                    pstmt.setString(2, "ROLE_USER");
+                if (i < 11) {
+                    pstmt.setString(1, "cust" + i);
+                    pstmt.setString(2, "ROLE_CUSTOMER");
 
-                } else if (i < 51) {
-                    pstmt.setString(1, "customer" + i);
-                    pstmt.setNString(2, "ROLE_CUSTOMER");
-
-                } else if (i < 76) {
-                    pstmt.setString(1, "member" + i);
-                    pstmt.setNString(2, "ROLE_MEMBER");
 
                 } else {
-                    pstmt.setString(1, "admin" + i);
-                    pstmt.setNString(2, "ROLE_ADMIN");
+                    pstmt.setString(1, "dlbm" + i);
+                    pstmt.setNString(2, "ROLE_DLBM");
                 }
                 pstmt.executeUpdate();
 
@@ -146,8 +141,8 @@ public class DolbomUserTests {
 
     @Test
     public void testReadDolbomUserInfo() {
-        DolbomUserVO dolbomUserVO = mapper.readDolbomUserInfo("admin90");
-        log.info(dolbomUserVO);
-        dolbomUserVO.getAuthList().forEach(autoVO -> log.info(autoVO));
+        DlbmUserVO dlbmUserVO = dlbmUserMapper.readDlbmUserInfo("dlbm11");
+        log.info(dlbmUserVO);
+        dlbmUserVO.getAuthList().forEach(autoVO -> log.info(autoVO));
     }
 }

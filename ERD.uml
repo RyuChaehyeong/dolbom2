@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.ADMIN_USER</OriginalElement>
+  <nodes>
+    <node x="-62.1822516401125" y="599.8551546391752">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.SRVC</node>
+    <node x="158.86922064446816" y="1051.8933743926523">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REVIEW</node>
+    <node x="635.7825659586977" y="451.32942603071945">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.MSSG_CD</node>
+    <node x="358.0699631415076" y="513.360409287518">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REQUEST</node>
+    <node x="-61.6822516401125" y="191.72886597938145">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER</node>
+    <node x="635.7825659586977" y="975.3595196226319">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.ADMIN_USER</node>
+    <node x="391.34925957227904" y="68.13505154639178">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.PERSISTENT_LOGINS</node>
+    <node x="-36.1822516401125" y="68.13505154639178">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER_AUTH</node>
+    <node x="635.7825659586977" y="68.1350515463918">3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.CMMN_CD</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REVIEW" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.SRVC" relationship="REFERENCES">
+      <point x="-54.0" y="-132.5" />
+      <point x="212.86922064446816" y="1226.0" />
+      <point x="46.3177483598875" y="1226.0" />
+      <point x="0.0" y="167.0" />
+    </edge>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.SRVC" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER" relationship="REFERENCES">
+      <point x="0.0" y="-167.0" />
+      <point x="46.3177483598875" y="360.0" />
+      <point x="-25.682251640112497" y="360.0" />
+      <point x="-72.0" y="167.0" />
+    </edge>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REVIEW" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REQUEST" relationship="REFERENCES">
+      <point x="54.0" y="-132.5" />
+      <point x="320.86922064446816" y="1226.0" />
+      <point x="466.5699631415076" y="1226.0" />
+      <point x="0.0" y="213.0" />
+    </edge>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REQUEST" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER" relationship="REFERENCES">
+      <point x="54.25" y="-213.0" />
+      <point x="520.8199631415076" y="747.0" />
+      <point x="412.5" y="747.0" />
+      <point x="412.5" y="360.0" />
+      <point x="118.31774835988747" y="360.0" />
+      <point x="71.99999999999997" y="167.0" />
+    </edge>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER_AUTH" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.DLBM_USER" relationship="REFERENCES">
+      <point x="0.0" y="-40.0" />
+      <point x="0.0" y="167.0" />
+    </edge>
+    <edge source="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.REQUEST" target="3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.SRVC" relationship="REFERENCES">
+      <point x="-108.5" y="46.0" />
+      <point x="358.0699631415076" y="766.8551546391752" />
+      <point x="108.5" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.908223201174743" showDependencies="false" x="721.4999999999998" y="670.9999999999999" />
+  <SelectedNodes>
+    <node>3eb8f318-885d-4d42-ae5f-16744d16dbc7.TABLE:C##MANAGER.ADMIN_USER</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
