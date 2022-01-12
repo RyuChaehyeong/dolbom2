@@ -22,7 +22,7 @@
         <collection property="authList" resultMap="authMap"></collection>
     </resultMap>
 
-    <resultMap id="authMap" type="com.dolbom.domain.auth.AutoVO">
+    <resultMap id="authMap" type="com.dolbom.domain.auth.AuthVO">
         <result property="userId" column="USER_ID"/>
         <result property="auth" column="AUTH"/>
     </resultMap>

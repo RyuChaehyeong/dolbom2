@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.auth.AdminUserMapper">
+    <resultMap id="AdminUserMap" type="com.dolbom.domain.auth.AdminUserVO">
+        <id property="adminId" column="ADMIN_ID"/>
+        <result property="adminSn" column="ADMIN_SN"/>
+        <result property="adminNm" column="ADMIN_NM"/>
+        <result property="adminPwd" column="ADMIN_PWD"/>
+        <result property="adminEmail" column="ADMIN_EMAIL"/>
+        <result property="adminPhone" column="ADMIN_PHONE"/>
+        <result property="departmentCd" column="DEPARTMENT_CD"/>
+        <result property="userYn" column="USE_YN"/>
+        <result property="dltYn" column="DLT_YN"/>
+        <result property="createdDt" column="CREATED_DT"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="lastModifiedDt" column="LAST_MODIFIED_DT"/>
+        <result property="lastModifiedBy" column="LAST_MODIFIED_BY"/>
+
+        <collection property="authList" resultMap="authMap"></collection>
+    </resultMap>
+
+    <resultMap id="authMap" type="com.dolbom.domain.auth.AdminAuthVO">
+        <result property="adminId" column="ADMIN_ID"/>
+        <result property="auth" column="AUTH"/>
+    </resultMap>
+
+    <select id="readAdminUserInfo" resultMap="AdminUserMap">
+         SELECT A.ADMIN_ID,
+                A.ADMIN_SN,
+                A.ADMIN_NM,
+                A.ADMIN_PWD,
+                A.ADMIN_EMAIL,
+                A.DEPARTMENT_CD,
+                A.LAST_MODIFIED_DT,
+                A.LAST_MODIFIED_BY,
+                AUA.AUTH
+            FROM ADMIN_USER A
+            LEFT OUTER JOIN ADMIN_USER_AUTH AUA
+                ON A.ADMIN_ID = AUA.ADMIN_ID
+            WHERE A.ADMIN_ID = #{userId}
+    </select>
+</mapper>

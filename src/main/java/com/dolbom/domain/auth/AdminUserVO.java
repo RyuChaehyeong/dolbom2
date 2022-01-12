@@ -6,21 +6,21 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class DlbmUserVO {
+public class AdminUserVO {
 
-    private String userId;
+    private String adminId;
 
-    private String userSn;
+    private String adminSn;
 
-    private String userNm;
+    private String adminNm;
 
-    private String userPwd;
+    private String adminPwd;
 
-    private String userEmail;
+    private String adminEmail;
 
-    private String userPhone;
+    private String adminPhone;
 
-    private String userTypeCd;
+    private String departmentCd;
 
     private String userYn;
 
@@ -34,6 +34,6 @@ public class DlbmUserVO {
 
     private String lastModifiedBy;
 
-    private List<AuthVO> authList;
+    private List<AdminAuthVO> authList;
 
 }

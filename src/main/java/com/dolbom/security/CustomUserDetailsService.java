@@ -1,6 +1,8 @@
 package com.dolbom.security;
 
+import com.dolbom.domain.auth.AdminUserVO;
 import com.dolbom.domain.auth.DlbmUserVO;
+import com.dolbom.mapper.auth.AdminUserMapper;
 import com.dolbom.mapper.auth.DlbmUserMapper;
 import com.dolbom.security.domain.CustomUser;
 import lombok.Setter;
@@ -17,13 +19,27 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Setter(onMethod_ = {@Autowired})
     private DlbmUserMapper dlbmUserMapper;
 
+    @Setter(onMethod_ = {@Autowired})
+    private AdminUserMapper admimUserMapper;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         log.warn("Load User by Username: " + userName);
-        DlbmUserVO dlbmUserVO = dlbmUserMapper.readDlbmUserInfo(userName);
+        if (userName.startsWith("#")) {
 
-        log.warn("queried by Dolbom User mapper: " + dlbmUserVO);
+            AdminUserVO adminUserVO = admimUserMapper.readAdminUserInfo(userName);
 
-        return dlbmUserVO == null ? null : new CustomUser(dlbmUserVO);
+            log.warn("queried by Dolbom User mapper: " + adminUserVO);
+
+            return adminUserVO == null ? null : new CustomUser(adminUserVO);
+
+        } else {
+
+            DlbmUserVO dlbmUserVO = dlbmUserMapper.readDlbmUserInfo(userName);
+
+            log.warn("queried by Dolbom User mapper: " + dlbmUserVO);
+
+            return dlbmUserVO == null ? null : new CustomUser(dlbmUserVO);
+        }
     }
 }
