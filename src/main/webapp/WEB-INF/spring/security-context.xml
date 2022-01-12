@@ -22,6 +22,7 @@
         <security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccess"/>
         <security:logout logout-url="/logout" invalidate-session="true" delete-cookies="remember-me,JSESSIONID" />
         <security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+        <security:csrf disabled="true"/>
     </security:http>
 
     <security:authentication-manager>
