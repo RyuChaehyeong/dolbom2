@@ -30,4 +30,26 @@ public class DlbmSrvcController {
 
         return insertCnt == 1 ? new ResponseEntity<>("Servie Resgister Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @GetMapping(value = "/{srvcId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DlbmSrvceVO> get(@PathVariable("srvcId") Long srvcId) {
+
+        log.info("SERVICE READ SERVICE ID: " +  srvcId );
+
+        return new ResponseEntity<>(dlbmSrvcService.get(srvcId), HttpStatus.OK);
+
+    }
+
+    @PutMapping(value = "/delete/{srvcId}",
+            consumes = "application/json",
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> delete(@PathVariable("srvcId") Long srvcId) {
+
+        log.info("SERVICE DELETE SERVICE ID: " + srvcId);
+
+        return dlbmSrvcService.remove(srvcId) ? new ResponseEntity<>("Service Delete Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+
+    }
 }
