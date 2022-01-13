@@ -1,15 +1,15 @@
 
-POST localhost:8080/service/register
+POST localhost:8080/service/new
 Content-Type: application/json;charset=UTF-8
 
 {
     "srvcId" : "",
     "dlbmId" : "dlbm11",
-    "srvcNm" : "강원도 강릉시 대표 돌봄 서비스",
+    "srvcNm" : "!강원도 속초시 대표 돌봄 서비스!",
     "srvcRgsnStatCd" : "10",
     "categoryCd" : "1010",
-    "srvcDtl" : "강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스",
-    "dlbmLoc" : "강원도 강릉시",
+    "srvcDtl" : "강원도 속초시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스",
+    "dlbmLoc" : "강원도 속초시",
     "useYn" : "Y",
     "dltYn" : "N",
     "createdDt" : "",

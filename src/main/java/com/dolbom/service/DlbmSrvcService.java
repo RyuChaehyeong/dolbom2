@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 public interface DlbmSrvcService {
 
-    public void register (DlbmSrvceVO dlbmSrvceVO);
+    public int register (DlbmSrvceVO dlbmSrvceVO);
 
     public DlbmSrvceVO get(Long srvcId);
 

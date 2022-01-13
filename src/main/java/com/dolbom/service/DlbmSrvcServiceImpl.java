@@ -17,17 +17,24 @@ public class DlbmSrvcServiceImpl implements DlbmSrvcService {
     private DlbmSrvceMapper dlbmSrvceMapper;
 
     @Override
-    public void register(DlbmSrvceVO dlbmSrvceVO) {
-
+    public int register(DlbmSrvceVO dlbmSrvceVO) {
+        return dlbmSrvceMapper.insertSrvc(dlbmSrvceVO);
     }
 
     @Override
     public DlbmSrvceVO get(Long srvcId) {
-        return null;
+
+        DlbmSrvceVO dlbmSrvceVO =  dlbmSrvceMapper.readSrvc(srvcId);
+
+        return dlbmSrvceVO;
     }
 
     @Override
     public boolean remove(Long srvcId) {
-        return false;
+
+        int removeRes = dlbmSrvceMapper.deleteSrvc(srvcId);
+        log.info("삭제 결과:" + removeRes);
+
+        return removeRes == 1;
     }
 }
