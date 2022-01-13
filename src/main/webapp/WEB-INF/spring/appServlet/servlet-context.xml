@@ -16,9 +16,7 @@
     </bean>
 
 
-    <context:component-scan base-package="com.dolbom.controller"/>
-    <context:component-scan base-package="com.dolbom.exception"/>
-
+    <context:component-scan base-package="com.dolbom"/>
 
 </beans>
 

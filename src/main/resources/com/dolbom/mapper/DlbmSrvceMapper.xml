@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.DlbmSrvceMapper">
+    <insert id="insertSrvc">
+        INSERT INTO SRVC
+            (
+             SRVC_ID,
+             DLBM_ID,
+             SRVC_NM,
+             SRVC_RGSN_STAT_CD,
+             CATEGORY_CD,
+             SRVC_DTL,
+             DLBM_LOC,
+             CREATED_DT,
+             CREATED_BY,
+             LAST_MODIFIED_DT,
+             LAST_MODIFIED_BY
+             )
+        VALUES
+            (
+             SRVC_ID_SEQ.nextval,
+             #{dlbmId},
+             #{srvcNm},
+             10,
+             #{categoryCd},
+             #{srvcDtl},
+             #{dlbmLoc},
+             sysdate,
+             #{createdBy},
+             sysdate,
+             #{lastModifiedBy}
+            )
+    </insert>
+
+    <select id="readSrvc" resultType="com.dolbom.domain.DlbmSrvceVO">
+        SELECT *
+            FROM SRVC
+            WHERE SRVC_ID = #{srvcId}
+    </select>
+
+    <update id="deleteSrvc">
+        UPDATE SRVC
+        SET DLT_YN = 'Y',
+            LAST_MODIFIED_DT = sysdate
+        WHERE SRVC_ID = #{srvcId}
+
+    </update>
+</mapper>
