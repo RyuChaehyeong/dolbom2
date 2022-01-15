@@ -15,16 +15,18 @@
 돌봄 페이지
 
 <sec:authorize access="isAnonymous()">
-    <a href="/login">로그인</a>
+    <a href="${root }/login">로그인</a>
 </sec:authorize>
 
 
 <sec:authorize access="isAuthenticated()">
-    <form action="/logout" method="post">
+    <form action="${root }/logout" method="post">
         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
         <button>로그아웃</button>
     </form>
 </sec:authorize>
-
+<div>
+    <a href="${root }/service/registerDlbmSrvc">돌봄서비스 등록하기</a>
+</div>
 </body>
 </html>

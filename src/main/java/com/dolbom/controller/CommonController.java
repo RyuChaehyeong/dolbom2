@@ -42,4 +42,12 @@ public class CommonController {
     public void logoutGET(HttpServletRequest request) {
         log.info("Logout");
     }
+
+
+    @RequestMapping("/service/registerDlbmSrvc")
+    public void registerDlbmSrv() {
+        log.info("SERVICE REGISTER PAGE LOADED..");
+    }
+
+
 }
