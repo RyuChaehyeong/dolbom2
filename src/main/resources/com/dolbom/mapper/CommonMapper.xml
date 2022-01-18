@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.CommonMapper">
+
+    <select id="retrieveCode" resultType="com.dolbom.domain.common.CommonCodeVO">
+        SELECT CD_ID, CD_NM
+            FROM CMMN_CD
+            WHERE CD_GROUP_ID = #{cdGroupId}
+    </select>
+
+</mapper>

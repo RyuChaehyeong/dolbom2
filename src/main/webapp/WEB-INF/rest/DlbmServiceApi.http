@@ -4,8 +4,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "srvcId" : "",
-    "dlbmId" : "dlbm11",
-    "srvcNm" : "!강원도 속초시 대표 돌봄 서비스!",
+    "dlbmId" : "dlbm12",
+    "srvcNm" : "!강원도 속초시 대표 돌봄 서비스!-!",
     "srvcRgsnStatCd" : "10",
     "categoryCd" : "1010",
     "srvcDtl" : "강원도 속초시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스강원도 강릉시 대표 돌봄 서비스",
@@ -13,9 +13,9 @@ Content-Type: application/json;charset=UTF-8
     "useYn" : "Y",
     "dltYn" : "N",
     "createdDt" : "",
-    "createdBy" : "dlbm11",
+    "createdBy" : "dlbm12",
     "lastModifiedDt" : "",
-    "lastModifiedBy" : "dlbm11"
+    "lastModifiedBy" : "dlbm12"
 }
 
 

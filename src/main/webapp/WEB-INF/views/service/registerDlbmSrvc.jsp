@@ -25,6 +25,9 @@
 
 
 <script>
+$(document).ready(function (){
+    //ajax 통신으로 codeVOList db 조회 해오기
+});
 
 </script>
 <html>
@@ -40,7 +43,36 @@
 <div class="container">
     <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
-        mainbox입니다.
+       <div class="title">
+         <h4>서비스 등록하기</h4>
+       </div>
+        <div style="padding: 70px;">
+            <form>
+                <div class="mb-3">
+                    <label for="srvcNm" class="form-label">서비스 이름</label>
+                    <input type="text" class="form-control" id="srvcNm">
+                </div>
+                <div class="mb-3">
+                    <label for="srvcDtl" class="form-label">서비스 상세</label>
+                    <input type="text" class="form-control" id="srvcDtl">
+                </div>
+
+                <%--카테고리 코드, 주소, 로그인한 아이디--%>
+
+                <div class="mb-3">
+                    <select id="animalType" name="animalType">
+                        <option value="">선택</option>
+                        <c:forEach var="result" items="${codeVOList}">
+                            <option value="${result.cdId}">${result.cdNm}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <jsp:include page="/resources/include/footer.jsp" />
