@@ -1,6 +1,6 @@
 package com.dolbom.service;
 
-import com.dolbom.domain.DlbmSrvceVO;
+import com.dolbom.domain.DlbmSrvcVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class DlbmSrvcServiceTests {
             String dlbmLoc = "강원도 강릉시";
             String loginUser = "dlbm" + i;
 
-            DlbmSrvceVO srvcVo = new DlbmSrvceVO();
+            DlbmSrvcVO srvcVo = new DlbmSrvcVO();
 
             srvcVo.setSrvcNm(srvcNm);
             srvcVo.setCategoryCd(categoryCd);
@@ -56,7 +56,7 @@ public class DlbmSrvcServiceTests {
 
     @Test
     public void testReadSrvc() {
-        DlbmSrvceVO srvceVO = service.get(82L);
+        DlbmSrvcVO srvceVO = service.get(82L);
         log.info("****" + srvceVO);
         assertNotNull(srvceVO);
     }
@@ -65,8 +65,14 @@ public class DlbmSrvcServiceTests {
     public void testRemoveSrvc() {
         service.remove(82L);
 
-        DlbmSrvceVO srvceVO = service.get(82L);
+        DlbmSrvcVO srvceVO = service.get(82L);
         assertEquals(srvceVO.getDltYn(), "Y");
+    }
+
+
+    @Test
+    public void testGetSrvcList() {
+        service.getSrvcList().forEach(srvc -> log.info(srvc));
     }
 
 

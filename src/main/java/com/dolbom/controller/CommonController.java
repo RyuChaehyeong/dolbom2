@@ -53,15 +53,4 @@ public class CommonController {
     }
 
 
-    @RequestMapping("/service/registerDlbmSrvc")
-    public void registerDlbmSrv() {
-        log.info("SERVICE REGISTER PAGE LOADED..");
-    }
-
-    @GetMapping("/retrieveCd")
-    public void retrieveCd(@RequestParam("cdGroupId") String cdGroupId, Model model) {
-        List<CommonCodeVO> codeVOList;
-        codeVOList = commonService.retrieveCode(cdGroupId);
-        model.addAttribute("codeVOList", codeVOList);
-    }
 }

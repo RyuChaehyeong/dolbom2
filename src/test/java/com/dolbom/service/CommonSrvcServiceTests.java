@@ -1,6 +1,5 @@
 package com.dolbom.service;
 
-import com.dolbom.domain.DlbmSrvceVO;
 import com.dolbom.domain.common.CommonCodeVO;
 import com.dolbom.service.common.CommonService;
 import lombok.Setter;

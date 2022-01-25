@@ -1,14 +1,17 @@
 package com.dolbom.service;
 
-import com.dolbom.domain.DlbmSrvceVO;
-import org.springframework.stereotype.Service;
+import com.dolbom.domain.DlbmSrvcVO;
+
+import java.util.List;
 
 public interface DlbmSrvcService {
 
-    public int register (DlbmSrvceVO dlbmSrvceVO);
+    public int register (DlbmSrvcVO dlbmSrvcVO);
 
-    public DlbmSrvceVO get(Long srvcId);
+    public DlbmSrvcVO get(Long srvcId);
 
     public boolean remove(Long srvcId);
+
+    public List<DlbmSrvcVO> getSrvcList();
 
 }

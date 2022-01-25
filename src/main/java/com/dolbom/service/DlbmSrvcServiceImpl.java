@@ -1,12 +1,14 @@
 package com.dolbom.service;
 
-import com.dolbom.domain.DlbmSrvceVO;
-import com.dolbom.mapper.DlbmSrvceMapper;
+import com.dolbom.domain.DlbmSrvcVO;
+import com.dolbom.mapper.DlbmSrvcMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Log4j
 @Service
@@ -14,27 +16,33 @@ import org.springframework.stereotype.Service;
 public class DlbmSrvcServiceImpl implements DlbmSrvcService {
 
     @Setter(onMethod_ = @Autowired)
-    private DlbmSrvceMapper dlbmSrvceMapper;
+    private DlbmSrvcMapper dlbmSrvcMapper;
 
     @Override
-    public int register(DlbmSrvceVO dlbmSrvceVO) {
-        return dlbmSrvceMapper.insertSrvc(dlbmSrvceVO);
+    public int register(DlbmSrvcVO dlbmSrvcVO) {
+        return dlbmSrvcMapper.insertSrvc(dlbmSrvcVO);
     }
 
     @Override
-    public DlbmSrvceVO get(Long srvcId) {
+    public DlbmSrvcVO get(Long srvcId) {
 
-        DlbmSrvceVO dlbmSrvceVO =  dlbmSrvceMapper.readSrvc(srvcId);
+        DlbmSrvcVO dlbmSrvcVO =  dlbmSrvcMapper.readSrvc(srvcId);
 
-        return dlbmSrvceVO;
+        return dlbmSrvcVO;
     }
 
     @Override
     public boolean remove(Long srvcId) {
 
-        int removeRes = dlbmSrvceMapper.deleteSrvc(srvcId);
+        int removeRes = dlbmSrvcMapper.deleteSrvc(srvcId);
         log.info("삭제 결과:" + removeRes);
 
         return removeRes == 1;
+    }
+
+    @Override
+    public List<DlbmSrvcVO> getSrvcList() {
+        List<DlbmSrvcVO> srvcList = dlbmSrvcMapper.getSrvcList();
+        return srvcList;
     }
 }

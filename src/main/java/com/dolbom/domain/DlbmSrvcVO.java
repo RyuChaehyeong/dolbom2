@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DlbmSrvceVO {
+public class DlbmSrvcVO {
 
     private Long srvcId;
 
