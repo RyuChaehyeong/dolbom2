@@ -8,3 +8,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="footer">footer 입니다.</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
