@@ -22,9 +22,10 @@
                     console.log(data[i]);
                     var table = "<tbody><tr>";
                         table += "<td>" + data[i].dlbmId + "</td>";
-                        table += "<td><a href = '${path}/service/" + data[i].srvcId + "'>" + data[i].srvcNm + "</a></td>";
+                        table += "<td><a href = '${path}/service/retrieveSrvcDetail?srvcId=" + data[i].srvcId + "'>" + data[i].srvcNm + "</a></td>";
                         table += "<td>" + data[i].dlbmLoc + "</td>";
-                        table += "<td>" + data[i].categoryCd + "</td>";
+                        table += "<td>" + data[i].animalCtgrCd + "</td>";
+                        table += "<td>" + data[i].breedCtgrCd + "</td>";
                         table += "</tr></tbody>"
                     $('table').append(table);
                 }
@@ -59,7 +60,8 @@
                         <td>돌봄이 ID</td>
                         <td>서비스 이름</td>
                         <td>돌봄 지역</td>
-                        <td>카테고리 코드</td>
+                        <td>동물</td>
+                        <td>품종</td>
                     </tr>
                 </thead>
             </table>

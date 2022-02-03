@@ -15,7 +15,9 @@ public class DlbmSrvcVO {
 
     private String srvcRgsnStatCd;
 
-    private String categoryCd;
+    private String animalCtgrCd;
+
+    private String breedCtgrCd;
 
     private String srvcDtl;
 

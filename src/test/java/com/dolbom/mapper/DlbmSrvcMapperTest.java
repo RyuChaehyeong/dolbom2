@@ -29,7 +29,6 @@ public class DlbmSrvcMapperTest {
         for (int i = 11 ; i <= 20 ; i++) {
 
             String srvcNm = "!돌봄 대표서비스" + i;
-            String categoryCd = "1010";
             String srvcDtl = i + " 돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스 " + i;
             String dlbmLoc = "제주특별시";
             String loginUser = "dlbm" + i;
@@ -37,7 +36,6 @@ public class DlbmSrvcMapperTest {
             DlbmSrvcVO srvcVo = new DlbmSrvcVO();
 
             srvcVo.setSrvcNm(srvcNm);
-            srvcVo.setCategoryCd(categoryCd);
             srvcVo.setSrvcDtl(srvcDtl);
             srvcVo.setDlbmLoc(dlbmLoc);
             srvcVo.setDlbmId(loginUser);

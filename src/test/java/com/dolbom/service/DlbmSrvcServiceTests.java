@@ -41,7 +41,6 @@ public class DlbmSrvcServiceTests {
             DlbmSrvcVO srvcVo = new DlbmSrvcVO();
 
             srvcVo.setSrvcNm(srvcNm);
-            srvcVo.setCategoryCd(categoryCd);
             srvcVo.setSrvcDtl(srvcDtl);
             srvcVo.setDlbmLoc(dlbmLoc);
             srvcVo.setDlbmId(loginUser);
