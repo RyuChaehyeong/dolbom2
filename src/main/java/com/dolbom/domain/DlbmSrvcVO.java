@@ -23,6 +23,8 @@ public class DlbmSrvcVO {
 
     private String dlbmLoc;
 
+    private String rate;
+
     private String useYn;
 
     private String dltYn;

@@ -26,7 +26,9 @@
     </form>
 </sec:authorize>
 <div>
-    <a href="${root }/service/registerDlbmSrvc">돌봄서비스 등록하기</a>
+    <a href="${root }/service/registerSrvc">돌봄서비스 등록하기</a>
+    <br>
+    <a href="${root }/service/retrieveSrvcList">돌봄서비스 목록</a>
 </div>
 </body>
 </html>

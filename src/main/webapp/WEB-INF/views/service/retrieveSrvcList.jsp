@@ -53,19 +53,19 @@
         <div class="title">
             <h4>서비스 조회하기</h4>
         </div>
-        <div style="padding: 70px;">
-            <table class="table">
-                <thead class="table-light">
-                    <tr>
-                        <td>돌봄이 ID</td>
-                        <td>서비스 이름</td>
-                        <td>돌봄 지역</td>
-                        <td>동물</td>
-                        <td>품종</td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+        <div class="content">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <td>돌봄이 ID</td>
+                            <td>서비스 이름</td>
+                            <td>돌봄 지역</td>
+                            <td>동물</td>
+                            <td>품종</td>
+                        </tr>
+                    </thead>
+                </table>
+        <div>
     </div>
 </div>
 <jsp:include page="/resources/include/footer.jsp" />

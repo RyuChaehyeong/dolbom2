@@ -35,9 +35,31 @@
     </insert>
 
     <select id="readSrvc" resultType="com.dolbom.domain.DlbmSrvcVO">
-        SELECT *
-            FROM SRVC
-            WHERE SRVC_ID = #{srvcId}
+        SELECT SRVC.SRVC_ID,
+               SRVC.DLBM_ID,
+               SRVC.SRVC_NM,
+               SRVC.SRVC_RGSN_STAT_CD,
+               SRVC.SRVC_DTL,
+               SRVC.DLBM_LOC,
+               SRVC.USE_YN,
+               SRVC.DLT_YN,
+               SRVC.CREATED_DT,
+               SRVC.CREATED_BY,
+               SRVC.LAST_MODIFIED_DT,
+               SRVC.LAST_MODIFIED_BY,
+               SRVC.RATE,
+               CC1.CD_NM BREED_CTGR_CD,
+               CC2.CD_NM ANIMAL_CTGR_CD
+        FROM SRVC
+                 LEFT OUTER JOIN CMMN_CD CC1
+                                 ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
+                                     AND SRVC.BREED_CTGR_CD = CC1.CD_ID
+                 LEFT OUTER JOIN CMMN_CD CC2
+                                 ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
+        WHERE SRVC.DLT_YN = 'N'
+          AND SRVC.USE_YN = 'Y'
+          AND
+              SRVC_ID = #{srvcId}
     </select>
 
     <update id="deleteSrvc">
