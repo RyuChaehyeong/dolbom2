@@ -23,7 +23,7 @@ public class CommonController {
 
     private CommonService commonService;
 
-    @GetMapping("accessError")
+    @GetMapping("/accessError")
     public void accessDenied(Authentication auth, Model model) {
         log.info("Access Denied: " + auth);
         model.addAttribute("msg: " + "Access Denied");

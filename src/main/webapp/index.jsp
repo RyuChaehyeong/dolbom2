@@ -1,34 +1,37 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: SAMSUNG
-  Date: 2021-12-22
-  Time: 오전 11:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+<script>
+
+</script>
+
 <html>
 <head>
-    <title>반려동물 돌봄</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Welcome</title>
+    <script src="${path}/resources/js/test.js"></script>
 </head>
+
 <body>
-돌봄 페이지
+<jsp:include page="/resources/include/header.jsp" />
+<div class="container">
+    <jsp:include page="/resources/include/sidebar.jsp" />
+    <div class="mainbox">
+        <div class="title">
+            <h4>메인페이지</h4>
+        </div>
+        <div class="content">
 
-<sec:authorize access="isAnonymous()">
-    <a href="${root }/login">로그인</a>
-</sec:authorize>
-
-
-<sec:authorize access="isAuthenticated()">
-    <form action="${root }/logout" method="post">
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-        <button>로그아웃</button>
-    </form>
-</sec:authorize>
-<div>
-    <a href="${root }/service/registerSrvc">돌봄서비스 등록하기</a>
-    <br>
-    <a href="${root }/service/retrieveSrvcList">돌봄서비스 목록</a>
-</div>
+        </div>
+        <jsp:include page="/resources/include/footer.jsp" />
 </body>
-</html>

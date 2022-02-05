@@ -14,7 +14,7 @@
 
 function openPopup() {
     window.open(
-        '/service/registerRequestPopup',
+        '/service/registerRequestPopup?srvcId=${srvc.srvcId}',
         'window_name',
         'width=800,height=600,location=no,status=no,scrollbars=yes');
 }
@@ -56,9 +56,9 @@ function openPopup() {
                            value='<c:out value="${srvc.dlbmId}" />' readonly = "readonly">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">동물-품종</span>
+                    <span class="input-group-text" id="basic-addon3">동물 - 품종</span>
                     <input type="text" class="form-control" name="dlbmId"
-                           value='<c:out value="${srvc.animalCtgrCd}" />-<c:out value="${srvc.breedCtgrCd}" />' readonly = "readonly">
+                           value='<c:out value="${srvc.animalCtgrCd}" /> - <c:out value="${srvc.breedCtgrCd}" />' readonly = "readonly">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon4">돌봄 지역</span>

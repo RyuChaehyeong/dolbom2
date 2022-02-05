@@ -5,6 +5,7 @@ import com.dolbom.service.DlbmSrvcService;
 import com.dolbom.service.DlbmSrvcServiceImpl;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Pre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,8 @@ public class SrvcIndexController {
     @Setter(onMethod_ = @Autowired)
     private DlbmSrvcService service;
 
-    @RequestMapping("/registerSrvc")
+    @PreAuthorize("hasRole('ROLE_DLBM')")
+    @GetMapping("/registerSrvc")
     public void registerDlbmSrv() {
         log.info("SERVICE REGISTER PAGE LOADED..");
     }
@@ -36,9 +38,9 @@ public class SrvcIndexController {
         DlbmSrvcVO vo = service.get(srvcId);
         model.addAttribute("srvc", vo);
     }
-
-    @RequestMapping("/registerRequestPopup")
-    public void registerRequestPopup() {
-        log.info("SERVICE REGISTER PAGE LOADED..");
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    @GetMapping("/registerRequestPopup")
+    public void registerRequestPopup(@RequestParam("srvcId") Long srvcId) {
+        log.info("REQUEST REGISTER POPUP LOADED..");
     }
 }

@@ -130,6 +130,7 @@ public class SampleController {
         log.info("logined customer");
     }
 
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
     @GetMapping("/member")
     public void doMember() {
         log.info("logined member");
