@@ -16,8 +16,6 @@
     function selectPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
@@ -55,6 +53,7 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("custLoc").value = addr;
+                document.getElementById("detailAddress").focus();
 
             }
         }).open();
@@ -89,17 +88,21 @@
                     <input type="text" class="form-control" name="reqTitle">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="postcode">우편번호</span>
-                    <input type="text" class="form-control" name="postcode">
+                    <span class="input-group-text" >우편번호</span>
+                    <input type="text" class="form-control" name="postcode" id="postcode">
                     <button onclick="selectPostcode()" type="button" >우편번호 찾기</button>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="custLoc">돌봄 지역</span>
-                    <input type="text" class="form-control" name="custLoc">
+                    <span class="input-group-text" >주소</span>
+                    <input type="text" class="form-control" name="custLoc" id="custLoc">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="extraAddress">extraAddress</span>
-                    <input type="text" class="form-control" name="extraAddress">
+                    <span class="input-group-text" >상세주소</span>
+                    <input type="text" class="form-control" name="detailAddress" id="detailAddress">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" >extraAddress</span>
+                    <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="startDt">시작날짜</span>

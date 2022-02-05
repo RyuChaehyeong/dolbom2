@@ -19,6 +19,8 @@ public class DlbmRequestVO {
 
     private String custLoc;
 
+    private String detailAddress;
+
     private Date startDt;
 
     private Date endDt;
