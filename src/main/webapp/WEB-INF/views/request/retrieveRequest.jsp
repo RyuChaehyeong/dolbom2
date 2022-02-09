@@ -12,8 +12,15 @@
 <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="${root }/resources/css/style.css" rel="stylesheet">
-<script>;
+<script>
 
+    const result = '${result}';
+
+    if (result == 'success') {
+        alert("견적 요청 등록 완료");
+    } else {
+        alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
+    }
 
 </script>
 <html>
@@ -33,49 +40,43 @@
     <div class="content">
         <form name="reqRegisterForm">
             <div class="formGroup">
-                <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />'/>
+                <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
+                <input type="text" class="form-control" name="custId" value='<c:out value="${req.custId}"/>' hidden>
 
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">내ID</span>
-                    <input type="text" class="form-control"
-                           name="custId" value='<c:out value="${req.custId}"/>' readonly ='readonly'>
-                </div>
-<%--                <div class="input-group mb-3">
                     <span class="input-group-text" id="srvcNm">서비스이름</span>
-                    <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}"/>'/>
-                </div>--%>
+                    <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="reqTitle">요청서 제목</span>
-                    <input type="text" class="form-control" name="reqTitle"  value='<c:out value="${req.reqTitle}"/>'>
+                    <input type="text" class="form-control" name="reqTitle"  value='<c:out value="${req.reqTitle}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" >우편번호</span>
-                    <input type="text" class="form-control" name="postcode" id="postcode" value='<c:out value="${req.postcode}"/>'>
-                    <button onclick="selectPostcode()" type="button" >우편번호 찾기</button>
+                    <input type="text" class="form-control" name="postcode" id="postcode" value='<c:out value="${req.postcode}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" >주소</span>
-                    <input type="text" class="form-control" name="custLoc" id="custLoc" value='<c:out value="${req.custLoc}"/>'>
+                    <input type="text" class="form-control" name="custLoc" id="custLoc" value='<c:out value="${req.custLoc}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" >상세주소</span>
-                    <input type="text" class="form-control" name="detailAddress" id="detailAddress" value='<c:out value="${req.detailAddress}"/>'>
+                    <input type="text" class="form-control" name="detailAddress" id="detailAddress" value='<c:out value="${req.detailAddress}"/>' readonly ='readonly'>
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="startDt">시작날짜</span>
-                    <input type="text" class="form-control" name="startDt" value='<c:out value="${req.startDt}"/>'>
+                    <input type="text" class="form-control" name="startDt" value='<c:out value="${req.startDt}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="endDt">종료날짜</span>
-                    <input type="text" class="form-control" name="endDt" value='<c:out value="${req.endDt}"/>'>
+                    <input type="text" class="form-control" name="endDt" value='<c:out value="${req.endDt}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">요청상세</span>
-                    <textarea class="form-control" id="reqDtl" name="reqDtl" ><c:out value="${req.reqDtl}"/></textarea>
+                    <textarea class="form-control" id="reqDtl" name="reqDtl" readonly ='readonly'><c:out value="${req.reqDtl}"/></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">보내기</button>
 
             </div>
             <form>

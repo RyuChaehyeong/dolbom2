@@ -52,4 +52,15 @@ public class RequestControllerTests {
         ).andReturn().getModelAndView().getViewName();
         log.info(resultPage);
     }
+
+
+    @Test
+    public void testGet() throws Exception {
+        log.info(mockMvc.perform(MockMvcRequestBuilders
+                        .get("/request/retrieveRequest")
+                        .param("reqId", "7"))
+                .andReturn()
+                .getModelAndView().getModelMap()
+        );
+    }
 }

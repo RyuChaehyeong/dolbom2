@@ -4,6 +4,9 @@
 
 <mapper namespace="com.dolbom.mapper.RequestMapper">
     <insert id="insertRequest">
+        <selectKey keyProperty="reqId" order="BEFORE" resultType="long">
+            SELECT REQ_ID_SEQ.nextval FROM dual
+        </selectKey>
         INSERT INTO REQUEST
         (REQ_ID,
          SRVC_ID,
@@ -21,7 +24,7 @@
          LAST_MODIFIED_DT,
          LAST_MODIFIED_BY)
         VALUES
-            (REQ_ID_SEQ.nextval,
+            (#{reqId},
              #{srvcId},
              #{custId},
              #{reqTitle},

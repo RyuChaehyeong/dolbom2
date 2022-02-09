@@ -1,4 +1,4 @@
-package com.dolbom.mapper.boardtest;
+package com.dolbom.mapper;
 
 
 import com.dolbom.domain.DlbmSrvcVO;

@@ -14,13 +14,6 @@
 <link href="${root }/resources/css/style.css" rel="stylesheet">
 <script>
 
-    const result = '${result}';
-
-    if (result == 'success') {
-        alert("견적 요청 등록 완료");
-    } else {
-        alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
-    }
 
     function selectPostcode() {
         new daum.Postcode({
@@ -88,13 +81,9 @@
         <div class="content">
             <form name="reqRegisterForm" action="/request/registerRequest" method="post">
                 <div class="formGroup">
-                    <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />'/>
+                    <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />' hidden/>
                     <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">내ID</span>
-                        <input type="text" class="form-control"
-                               name="custId" value='<sec:authentication property="principal.username"/>' readonly ='readonly'>
-                    </div>
+                    <input type="text" class="form-control" name="custId" value='<sec:authentication property="principal.username"/>' hidden>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="srvcNm">서비스이름</span>
@@ -131,7 +120,7 @@
                         <textarea class="form-control" id="reqDtl" name="reqDtl"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">보내기</button>
+                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 20px">보내기</button>
 
                 </div>
             <form>
