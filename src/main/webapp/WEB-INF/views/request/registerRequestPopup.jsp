@@ -120,7 +120,7 @@
                         <textarea class="form-control" id="reqDtl" name="reqDtl"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 20px">보내기</button>
+                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 10px">견적 보내기</button>
 
                 </div>
             <form>

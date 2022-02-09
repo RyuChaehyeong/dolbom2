@@ -38,13 +38,5 @@ public class SrvcIndexController {
         DlbmSrvcVO vo = service.get(srvcId);
         model.addAttribute("srvc", vo);
     }
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    @GetMapping("/registerRequestPopup")
-    public void registerRequestPopup(@RequestParam("srvcId") Long srvcId, Model model) {
-        log.info("REQUEST REGISTER POPUP LOADED..");
-        String srvcNm = service.get(srvcId).getSrvcNm();
-        model.addAttribute("srvcNm", srvcNm);
-    }
-
 
 }

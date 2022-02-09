@@ -5,6 +5,7 @@ import com.dolbom.service.DlbmSrvcService;
 import com.dolbom.service.RequestService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,4 +44,13 @@ public class RequestController {
         model.addAttribute("req", req);
         model.addAttribute("srvcNm", srvcNm);
     }
+
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    @GetMapping("/registerRequestPopup")
+    public void registerRequestPopup(@RequestParam("srvcId") Long srvcId, Model model) {
+        log.info("REQUEST REGISTER POPUP LOADED..");
+        String srvcNm = srvcService.get(srvcId).getSrvcNm();
+        model.addAttribute("srvcNm", srvcNm);
+    }
+
 }
