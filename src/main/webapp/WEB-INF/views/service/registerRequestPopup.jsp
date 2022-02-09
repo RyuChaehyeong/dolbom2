@@ -13,6 +13,15 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="${root }/resources/css/style.css" rel="stylesheet">
 <script>
+
+    const result = '${result}';
+
+    if (result == 'success') {
+        alert("견적 요청 등록 완료");
+    } else {
+        alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
+    }
+
     function selectPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -58,6 +67,9 @@
             }
         }).open();
     }
+
+
+
 </script>
 <html>
 <head>
@@ -72,53 +84,57 @@
             <h4>견적 요청하기</h4>
         </div>
 
+
         <div class="content">
-            <div class="formGroup">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">내ID</span>
-                    <input type="text" class="form-control"
-                           name="custId" value='<sec:authentication property="principal.username"/>' readonly ='readonly'>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="srvcId">서비스ID</span>
+            <form name="reqRegisterForm" action="/request/registerRequest" method="post">
+                <div class="formGroup">
                     <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />'/>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="reqTitle">요청서 제목</span>
-                    <input type="text" class="form-control" name="reqTitle">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" >우편번호</span>
-                    <input type="text" class="form-control" name="postcode" id="postcode">
-                    <button onclick="selectPostcode()" type="button" >우편번호 찾기</button>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" >주소</span>
-                    <input type="text" class="form-control" name="custLoc" id="custLoc">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" >상세주소</span>
-                    <input type="text" class="form-control" name="detailAddress" id="detailAddress">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" >extraAddress</span>
                     <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="startDt">시작날짜</span>
-                    <input type="date" class="form-control" name="startDt">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="endDt">종료날짜</span>
-                    <input type="date" class="form-control" name="endDt">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-text">요청상세</span>
-                    <textarea class="form-control"></textarea>
-                </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">내ID</span>
+                        <input type="text" class="form-control"
+                               name="custId" value='<sec:authentication property="principal.username"/>' readonly ='readonly'>
+                    </div>
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="srvcNm">서비스이름</span>
+                        <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}" />'/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="reqTitle">요청서 제목</span>
+                        <input type="text" class="form-control" name="reqTitle">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" >우편번호</span>
+                        <input type="text" class="form-control" name="postcode" id="postcode">
+                        <button onclick="selectPostcode()" type="button" >우편번호 찾기</button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" >주소</span>
+                        <input type="text" class="form-control" name="custLoc" id="custLoc">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" >상세주소</span>
+                        <input type="text" class="form-control" name="detailAddress" id="detailAddress">
+                    </div>
 
-            </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="startDt">시작날짜</span>
+                        <input type="date" class="form-control" name="startDt">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="endDt">종료날짜</span>
+                        <input type="date" class="form-control" name="endDt">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">요청상세</span>
+                        <textarea class="form-control" id="reqDtl" name="reqDtl"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">보내기</button>
+
+                </div>
+            <form>
         </div>
     </div>
 

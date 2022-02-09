@@ -1,11 +1,12 @@
 package com.dolbom.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Data
-public class DlbmRequestVO {
+public class RequestVO {
 
     private Long reqId;
 
@@ -21,8 +22,10 @@ public class DlbmRequestVO {
 
     private String detailAddress;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDt;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDt;
 
     private String reqDtl;

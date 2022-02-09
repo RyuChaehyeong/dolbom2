@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DlbmSrvcController {
 
-    private DlbmSrvcService dlbmSrvcService;
+    private DlbmSrvcService service;
 
     @PostMapping(value = "/new",
         consumes = "application/json",
@@ -27,7 +27,7 @@ public class DlbmSrvcController {
 
         log.info("DlbmSrvcVO: " + dlbmSrvcVO);
 
-        int insertCnt = dlbmSrvcService.register(dlbmSrvcVO);
+        int insertCnt = service.register(dlbmSrvcVO);
 
         log.info("SERVICE INSERT COUNT: " + insertCnt);
 
@@ -40,7 +40,7 @@ public class DlbmSrvcController {
 
         log.info("SERVICE READ SERVICE ID: " +  srvcId );
 
-        return new ResponseEntity<>(dlbmSrvcService.get(srvcId), HttpStatus.OK);
+        return new ResponseEntity<>(service.get(srvcId), HttpStatus.OK);
 
     }
 
@@ -51,7 +51,7 @@ public class DlbmSrvcController {
 
         log.info("SERVICE DELETE SERVICE ID: " + srvcId);
 
-        return dlbmSrvcService.remove(srvcId) ? new ResponseEntity<>("Service Delete Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return service.remove(srvcId) ? new ResponseEntity<>("Service Delete Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 
     }
@@ -59,8 +59,8 @@ public class DlbmSrvcController {
     @GetMapping(value = "/getList" ,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DlbmSrvcVO>> getSrvcList(Model model) {
-        List<DlbmSrvcVO> srvcList = dlbmSrvcService.getSrvcList();
-        return new ResponseEntity<>(dlbmSrvcService.getSrvcList(), HttpStatus.OK);
+        List<DlbmSrvcVO> srvcList = service.getSrvcList();
+        return new ResponseEntity<>(service.getSrvcList(), HttpStatus.OK);
     }
 
 
