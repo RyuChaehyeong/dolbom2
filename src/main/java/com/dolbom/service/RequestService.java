@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface RequestService {
 
-    public int register (RequestVO requestVO);
+    public int register(RequestVO request);
 
     public RequestVO retrieveRequest(Long reqId);
+
+    public int modifyRequest(RequestVO request);
 
 }

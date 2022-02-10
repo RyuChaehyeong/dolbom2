@@ -33,4 +33,10 @@ public class RequestServiceImpl implements RequestService {
         RequestVO request = requestMapper.retrieveRequest(reqId);
         return request;
     }
+
+    @Override
+    public int modifyRequest(RequestVO request) {
+        request.setLastModifiedBy(request.getCustId());
+        return requestMapper.modifyRequest(request);
+    }
 }

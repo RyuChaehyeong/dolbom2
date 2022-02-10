@@ -45,6 +45,7 @@
     <select id="retrieveRequest" resultType="com.dolbom.domain.RequestVO">
 
     SELECT
+         REQ_ID,
          SRVC_ID,
          CUST_ID,
          REQ_TITLE,
@@ -62,4 +63,19 @@
     FROM REQUEST
     WHERE REQ_ID = #{reqId}
     </select>
+
+
+    <update id="modifyRequest">
+        UPDATE REQUEST
+            SET REQ_TITLE = #{reqTitle},
+                POSTCODE = #{postcode},
+                CUST_LOC = #{custLoc},
+                DETAIL_ADDRESS = #{detailAddress},
+                START_DT = #{startDt},
+                END_DT = #{endDt},
+                REQ_DTL = #{reqDtl},
+                LAST_MODIFIED_DT = sysdate,
+                LAST_MODIFIED_BY = #{lastModifiedBy}
+            WHERE REQ_ID = #{reqId}
+    </update>
 </mapper>

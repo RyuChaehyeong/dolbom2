@@ -63,4 +63,26 @@ public class RequestControllerTests {
                 .getModelAndView().getModelMap()
         );
     }
+
+    @Test
+    public void testModify() throws Exception {
+        String resultPage = mockMvc
+                .perform(MockMvcRequestBuilders.post("/request/modifyRequest")
+                        .param("reqId", "47")
+                        .param("srvcId", "84")
+                        .param("custId", "cust9")
+                        .param("reqTitle", "수정된 타이틀")
+                        .param("postcode", "1234")
+                        .param("custLoc", "testadd")
+                        .param("detailAddress", "asdfgh")
+                        .param("startDt", "2021-06-01")
+                        .param("endDt", "2021-06-20")
+                        .param("reqDtl", "수정된 상세")
+                        .param("createdBy", "cust9")
+                        .param("lastModifiedBy", "cust9")
+                )
+                .andReturn().getModelAndView().getViewName();
+
+        log.info(resultPage);
+    }
 }

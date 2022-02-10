@@ -62,4 +62,15 @@ public class RequestTests {
         RequestVO req = service.retrieveRequest(7L);
         log.info(req);
     }
+
+    @Test
+    public void modifyRequest() {
+        RequestVO req = service.retrieveRequest(47L);
+        log.info(req.toString());
+
+        req.setReqDtl("수정된 상세!!");
+        req.setReqTitle("수정된 제목!!");
+
+        service.modifyRequest(req);
+    }
 }

@@ -4,7 +4,9 @@ import com.dolbom.domain.RequestVO;
 
 public interface RequestMapper {
 
-    public int insertRequest(RequestVO serviceVO);
+    public int insertRequest(RequestVO requestVO);
 
     public RequestVO retrieveRequest(Long reqId);
+
+    public int modifyRequest(RequestVO requestVO);
 }

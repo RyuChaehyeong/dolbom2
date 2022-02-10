@@ -14,13 +14,38 @@
 <link href="${root }/resources/css/style.css" rel="stylesheet">
 <script>
 
-    const result = '${result}';
+const regiResult = '${regiResult}';
+const modiResult = '${modiResult}';
 
-    if (result == 'success') {
-        alert("견적 요청 등록 완료");
-    } else {
-        alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
-    }
+if (regiResult != '' && regiResult == 'success') {
+    alert("견적 요청 등록 완료");
+}
+if (regiResult != '' && regiResult != 'success') {
+    alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
+}
+
+if (modiResult != '' && modiResult == 'success') {
+    alert("견적 요청 수정 완료");
+}
+if (modiResult != '' && modiResult != 'success'){
+    alert("견적 요청 수정 실패 \n관리자에게 문의하세요.");
+    alert(modiResult);
+}
+
+function modify() {
+    $('#reqTitle').attr('readonly', false);
+    $('#postcode').attr('readonly', false);
+    $('#custLoc').attr('readonly', false);
+    $('#detailAddress').attr('readonly', false);
+    $('#startDt').attr('readonly', false);
+    $('#endDt').attr('readonly', false);
+    $('#startDt').attr('type', 'date');
+    $('#endDt').attr('type', 'date');
+    $('#reqDtl').attr('readonly', false);
+    $('#modiDelBtn').attr('hidden', true);
+    $('#complModi').attr('hidden', false);
+}
+
 
 </script>
 <html>
@@ -38,8 +63,9 @@
 
 
     <div class="content">
-        <form name="reqRegisterForm">
+        <form name="reqRegisterForm" action="${root }/request/modifyRequest" method="post" onsubmit="return validateForm()">
             <div class="formGroup">
+                <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
                 <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
                 <input type="text" class="form-control" name="custId" value='<c:out value="${req.custId}"/>' hidden>
 
@@ -48,36 +74,60 @@
                     <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="reqTitle">요청서 제목</span>
-                    <input type="text" class="form-control" name="reqTitle"  value='<c:out value="${req.reqTitle}"/>' readonly ='readonly'>
+                    <span class="input-group-text">요청서 제목</span>
+                    <input type="text" class="form-control" name="reqTitle" id="reqTitle"
+                           value='<c:out value="${req.reqTitle}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" >우편번호</span>
-                    <input type="text" class="form-control" name="postcode" id="postcode" value='<c:out value="${req.postcode}"/>' readonly ='readonly'>
+                    <span class="input-group-text">우편번호</span>
+                    <input type="text" class="form-control" name="postcode" id="postcode"
+                           value='<c:out value="${req.postcode}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" >주소</span>
-                    <input type="text" class="form-control" name="custLoc" id="custLoc" value='<c:out value="${req.custLoc}"/>' readonly ='readonly'>
+                    <span class="input-group-text">주소</span>
+                    <input type="text" class="form-control" name="custLoc" id="custLoc"
+                           value='<c:out value="${req.custLoc}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" >상세주소</span>
-                    <input type="text" class="form-control" name="detailAddress" id="detailAddress" value='<c:out value="${req.detailAddress}"/>' readonly ='readonly'>
+                    <span class="input-group-text">상세주소</span>
+                    <input type="text" class="form-control" name="detailAddress" id="detailAddress"
+                           value='<c:out value="${req.detailAddress}"/>' readonly ='readonly'>
                 </div>
 
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="startDt">시작날짜</span>
-                    <input type="text" class="form-control" name="startDt" value='<c:out value="${req.startDt}"/>' readonly ='readonly'>
+                    <span class="input-group-text">시작날짜</span>
+                    <input type="text" class="form-control" name="startDt" id="startDt"
+                           value='<c:out value="${req.startDt}"/>' readonly ='readonly' onchange="validateStartDt(this)">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="endDt">종료날짜</span>
-                    <input type="text" class="form-control" name="endDt" value='<c:out value="${req.endDt}"/>' readonly ='readonly'>
+                    <span class="input-group-text">종료날짜</span>
+                    <input type="text" class="form-control" name="endDt" id="endDt"
+                           value='<c:out value="${req.endDt}"/>'readonly ='readonly' onchange="validateEndDt(this)">
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">요청상세</span>
-                    <textarea class="form-control" id="reqDtl" name="reqDtl" readonly ='readonly'><c:out value="${req.reqDtl}"/></textarea>
+                    <textarea class="form-control" name="reqDtl" id="reqDtl" readonly ='readonly'><c:out value="${req.reqDtl}"/></textarea>
                 </div>
 
-
+                <c:if test="${req.reqPrgrStatCd == 10}">
+                    <div id="modiDelBtn">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="modify()">수정</button>
+                        <button type="button" class="btn btn-secondary btn-sm">삭제</button>
+                    </div>
+                </c:if>
+                <c:if test="${req.reqPrgrStatCd == 20}">
+                    <div class="input-group mb-3" style="margin-top: 15px">
+                        <span class="input-group-text">견적금액</span>
+                        <input type="text" class="form-control" name="quoPrice" id="quoPrice" onkeyup="commas(this)">
+                    </div>
+                </c:if>
+                <c:if test="${req.reqPrgrStatCd >= 30}">
+                    <div class="input-group mb-3" style="margin-top: 15px">
+                        <span class="input-group-text">견적금액</span>
+                        <input type="text" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
+                    </div>
+                </c:if>
+                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" hidden>수정 완료</button>
             </div>
             <form>
     </div>

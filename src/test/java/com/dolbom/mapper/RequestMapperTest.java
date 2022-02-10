@@ -62,5 +62,15 @@ public class RequestMapperTest {
         log.info(req);
     }
 
+    @Test
+    public void modifyRequest() {
+        RequestVO req = requestMapper.retrieveRequest(47L);
+        log.info(req.toString());
 
+        req.setReqDtl("수정된 상세");
+        req.setReqTitle("수정된 제목");
+
+        requestMapper.modifyRequest(req);
+
+    }
 }

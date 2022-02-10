@@ -60,6 +60,10 @@
     display: block;
 }
 
+#modiDelBtn {
+    padding-top: 20px;
+}
+
 .formGroup {
     padding: 30px;
 }

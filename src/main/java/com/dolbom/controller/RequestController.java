@@ -27,9 +27,9 @@ public class RequestController {
         int cnt = requestService.register(request);
 
         if (cnt == 1) {
-            rttr.addFlashAttribute("result", "success");
+            rttr.addFlashAttribute("regiResult", "success");
         } else {
-            rttr.addFlashAttribute("result", "fail");
+            rttr.addFlashAttribute("regiResult", "fail");
         }
 
         rttr.addAttribute("reqId", request.getReqId());
@@ -39,10 +39,24 @@ public class RequestController {
 
     @GetMapping("/retrieveRequest")
     public void retrieveRequest(@RequestParam("reqId") Long reqId, Model model) {
+        log.info("RETRIEVE REQUEST - REQID: " + reqId );
         RequestVO req = requestService.retrieveRequest(reqId);
         String srvcNm = srvcService.get(req.getSrvcId()).getSrvcNm();
         model.addAttribute("req", req);
         model.addAttribute("srvcNm", srvcNm);
+    }
+
+    @PostMapping("/modifyRequest")
+    public String modifyRequest(RequestVO request, RedirectAttributes rttr) {
+        log.info("MODIFY REQUEST - REQID: " + request.getReqId());
+        int cnt = requestService.modifyRequest(request);
+        if (cnt == 1) {
+            rttr.addFlashAttribute("modiResult", "success");
+        } else {
+            rttr.addFlashAttribute("modiResult", "fail");
+        }
+        rttr.addAttribute("reqId", request.getReqId());
+        return "redirect:/request/retrieveRequest";
     }
 
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
@@ -52,5 +66,7 @@ public class RequestController {
         String srvcNm = srvcService.get(srvcId).getSrvcNm();
         model.addAttribute("srvcNm", srvcNm);
     }
+
+
 
 }
