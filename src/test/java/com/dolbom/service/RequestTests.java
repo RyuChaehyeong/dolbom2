@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,8 +38,8 @@ public class RequestTests {
 
         String strStartDt = "2022-01-05";
         String strEndDt = "2022-01-31";
-        Date startDt = new SimpleDateFormat("yyyy-MM-dd").parse(strStartDt);
-        Date endDt = new SimpleDateFormat("yyyy-MM-dd").parse(strEndDt);
+        Date strDt = Date.valueOf(strStartDt);
+        Date endDt = Date.valueOf(strEndDt);
 
         requestVO.setSrvcId(77L);
         requestVO.setCustId("cust9");
@@ -47,7 +47,7 @@ public class RequestTests {
         requestVO.setPostcode("1234");
         requestVO.setCustLoc("testadd");
         requestVO.setDetailAddress("asdfgh");
-        requestVO.setStartDt(startDt);
+        requestVO.setStartDt(strDt);
         requestVO.setEndDt(endDt);
         requestVO.setReqDtl("aaaaa");
         requestVO.setCreatedBy("cust9");

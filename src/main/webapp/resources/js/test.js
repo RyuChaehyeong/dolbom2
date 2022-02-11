@@ -86,20 +86,3 @@ function getFormatDt(obj) {
     return obj.getFullYear() + "-" + ("0"+(obj.getMonth()+1)).slice(-2) + "-" + ("0"+obj.getDate()).slice(-2);
 }
 
-function commas(t) {
-
-    var x = t.value;
-    x = x.replace(/,/gi, '');
-
-    var regexp = /^[0-9]*$/;
-
-    if(!regexp.test(x)){
-        $(t).val("");
-        alert("숫자만 입력 가능합니다.");
-
-    } else {
-        x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $(t).val(x);
-    }
-
-}

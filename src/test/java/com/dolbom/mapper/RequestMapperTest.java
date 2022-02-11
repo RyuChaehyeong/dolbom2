@@ -16,7 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,8 +38,8 @@ public class RequestMapperTest {
 
         String strStartDt = "2022-01-05";
         String strEndDt = "2022-01-31";
-        Date startDt = new SimpleDateFormat("yyyy-MM-dd").parse(strStartDt);
-        Date endDt = new SimpleDateFormat("yyyy-MM-dd").parse(strEndDt);
+        Date strDt = Date.valueOf(strStartDt);
+        Date endDt = Date.valueOf(strEndDt);
 
         requestVO.setSrvcId(77L);
         requestVO.setCustId("cust9");
@@ -46,7 +47,7 @@ public class RequestMapperTest {
         requestVO.setPostcode("1234");
         requestVO.setCustLoc("testadd");
         requestVO.setDetailAddress("asdfgh");
-        requestVO.setStartDt(startDt);
+        requestVO.setStartDt(strDt);
         requestVO.setEndDt(endDt);
         requestVO.setReqDtl("aaaaa");
         requestVO.setCreatedBy("cust9");
@@ -59,7 +60,7 @@ public class RequestMapperTest {
     public void getRequest() {
 
         RequestVO req = requestMapper.retrieveRequest(7L);
-        log.info(req);
+        log.info(req.toString());
     }
 
     @Test
@@ -72,5 +73,14 @@ public class RequestMapperTest {
 
         requestMapper.modifyRequest(req);
 
+    }
+
+    @Test
+    public void insertQuoPrice() {
+        RequestVO req = requestMapper.retrieveRequest(47L);
+        req.setQuoPrice("10000");
+        req.setLastModifiedBy("dlbm20");
+        req.setReqPrgrStatCd("30");
+        requestMapper.insertQuoPrice(req);
     }
 }

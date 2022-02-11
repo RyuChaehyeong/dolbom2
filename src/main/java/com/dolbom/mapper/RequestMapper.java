@@ -9,4 +9,6 @@ public interface RequestMapper {
     public RequestVO retrieveRequest(Long reqId);
 
     public int modifyRequest(RequestVO requestVO);
+
+    public int insertQuoPrice(RequestVO req);
 }

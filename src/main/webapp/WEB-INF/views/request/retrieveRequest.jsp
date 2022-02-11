@@ -2,7 +2,9 @@
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+    <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,6 +18,7 @@
 
 const regiResult = '${regiResult}';
 const modiResult = '${modiResult}';
+const insertPriceResult = '${insertPriceResult}';
 
 if (regiResult != '' && regiResult == 'success') {
     alert("견적 요청 등록 완료");
@@ -29,7 +32,12 @@ if (modiResult != '' && modiResult == 'success') {
 }
 if (modiResult != '' && modiResult != 'success'){
     alert("견적 요청 수정 실패 \n관리자에게 문의하세요.");
-    alert(modiResult);
+}
+if (insertPriceResult != '' && insertPriceResult == 'success') {
+    alert("견적 금액 등록 완료");
+}
+if (insertPriceResult != '' && insertPriceResult != 'success'){
+    alert("견적 금액 등록 실패 \n관리자에게 문의하세요.");
 }
 
 function modify() {
@@ -39,8 +47,6 @@ function modify() {
     $('#detailAddress').attr('readonly', false);
     $('#startDt').attr('readonly', false);
     $('#endDt').attr('readonly', false);
-    $('#startDt').attr('type', 'date');
-    $('#endDt').attr('type', 'date');
     $('#reqDtl').attr('readonly', false);
     $('#modiDelBtn').attr('hidden', true);
     $('#complModi').attr('hidden', false);
@@ -96,13 +102,13 @@ function modify() {
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">시작날짜</span>
-                    <input type="text" class="form-control" name="startDt" id="startDt"
-                           value='<c:out value="${req.startDt}"/>' readonly ='readonly' onchange="validateStartDt(this)">
+                    <input type="date" class="form-control" name="startDt" id="startDt" value='<fmt:formatDate value="${req.startDt}" pattern="yyyy-MM-dd"/>'
+                         readonly ='readonly' onchange="validateStartDt(this)">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">종료날짜</span>
-                    <input type="text" class="form-control" name="endDt" id="endDt"
-                           value='<c:out value="${req.endDt}"/>'readonly ='readonly' onchange="validateEndDt(this)">
+                    <input type="date" class="form-control" name="endDt" id="endDt" value='<fmt:formatDate value="${req.endDt}" pattern="yyyy-MM-dd"/>'
+                          readonly ='readonly' onchange="validateEndDt(this)">
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">요청상세</span>
@@ -115,21 +121,29 @@ function modify() {
                         <button type="button" class="btn btn-secondary btn-sm">삭제</button>
                     </div>
                 </c:if>
-                <c:if test="${req.reqPrgrStatCd == 20}">
-                    <div class="input-group mb-3" style="margin-top: 15px">
-                        <span class="input-group-text">견적금액</span>
-                        <input type="text" class="form-control" name="quoPrice" id="quoPrice" onkeyup="commas(this)">
-                    </div>
-                </c:if>
+                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" hidden>수정 완료</button>
+
                 <c:if test="${req.reqPrgrStatCd >= 30}">
                     <div class="input-group mb-3" style="margin-top: 15px">
-                        <span class="input-group-text">견적금액</span>
-                        <input type="text" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
+                        <span class="input-group-text">확정견적금액</span>
+                        <input type="number" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
                     </div>
                 </c:if>
-                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" hidden>수정 완료</button>
             </div>
-            <form>
+        </form>
+
+        <c:if test="${req.reqPrgrStatCd == 20}">
+            <form name="insertQuoPrice" action="${root }/request/insertQuoPrice" method="post">
+                <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
+                <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
+                    <div class="input-group mb-3" style="margin-top: 15px">
+                        <span class="input-group-text">견적금액</span>
+                        <input type="number" class="form-control" name="quoPrice" id="quoPrice">
+                    </div>
+
+                <button type="submit" class="btn btn-primary btn-sm" id="insertQuo" style="margin-top: 10px">견적금액 등록</button>
+            </form>
+        </c:if>
     </div>
 </div>
 

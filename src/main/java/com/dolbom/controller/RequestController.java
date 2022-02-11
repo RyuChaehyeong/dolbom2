@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
+
 @RequestMapping("/request")
 @Log4j
 @AllArgsConstructor
@@ -41,9 +43,14 @@ public class RequestController {
     public void retrieveRequest(@RequestParam("reqId") Long reqId, Model model) {
         log.info("RETRIEVE REQUEST - REQID: " + reqId );
         RequestVO req = requestService.retrieveRequest(reqId);
+        Date strDt = req.getStartDt();
+        Date endDt = req.getEndDt();
+        log.info("*******controller:" + strDt);
+        log.info("*******controller:" + endDt);
         String srvcNm = srvcService.get(req.getSrvcId()).getSrvcNm();
         model.addAttribute("req", req);
         model.addAttribute("srvcNm", srvcNm);
+
     }
 
     @PostMapping("/modifyRequest")
@@ -68,5 +75,16 @@ public class RequestController {
     }
 
 
-
+    @PostMapping("/insertQuoPrice")
+    public String insertQuoPrice(RequestVO request, RedirectAttributes rttr) {
+        log.info("UPDATE QUOTE PRICE - REQID: " + request.getReqId());
+        int cnt = requestService.insertQuoPrice(request);
+        if (cnt == 1) {
+            rttr.addFlashAttribute("insertPriceResult", "success");
+        } else {
+            rttr.addFlashAttribute("insertPriceResult", "fail");
+        }
+        rttr.addAttribute("reqId", request.getReqId());
+        return "redirect:/request/retrieveRequest";
+    }
 }

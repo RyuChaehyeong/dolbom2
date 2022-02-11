@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Log4j
@@ -38,5 +39,10 @@ public class RequestServiceImpl implements RequestService {
     public int modifyRequest(RequestVO request) {
         request.setLastModifiedBy(request.getCustId());
         return requestMapper.modifyRequest(request);
+    }
+
+    @Override
+    public int insertQuoPrice(RequestVO request) {
+        return requestMapper.insertQuoPrice(request);
     }
 }

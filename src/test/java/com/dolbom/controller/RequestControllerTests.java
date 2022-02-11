@@ -85,4 +85,17 @@ public class RequestControllerTests {
 
         log.info(resultPage);
     }
+
+    @Test
+    public void testInsertQuo() throws Exception {
+        String resultPage = mockMvc
+                .perform(MockMvcRequestBuilders.post("/request/insertQuoPrice")
+                        .param("reqId", "47")
+                        .param("quoPrice", "100000")
+                        .param("lastModifiedBy", "dlbm20")
+                )
+                .andReturn().getModelAndView().getViewName();
+
+        log.info(resultPage);
+    }
 }
