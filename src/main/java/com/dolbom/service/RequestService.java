@@ -14,4 +14,6 @@ public interface RequestService {
     public int modifyRequest(RequestVO request);
 
     public int insertQuoPrice(RequestVO request);
+
+    public int deleteRequest(RequestVO request);
 }

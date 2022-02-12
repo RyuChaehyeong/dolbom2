@@ -87,4 +87,17 @@ public class RequestController {
         rttr.addAttribute("reqId", request.getReqId());
         return "redirect:/request/retrieveRequest";
     }
+
+    @PostMapping("/deleteRequest")
+    public String deleteRequest(RequestVO request, RedirectAttributes rttr) {
+        log.info("DELETE REQUEST - REQID: " + request.getReqId());
+        int cnt = requestService.deleteRequest(request);
+        if (cnt == 1) {
+            rttr.addFlashAttribute("delReqResult", "success");
+        } else {
+            rttr.addFlashAttribute("delReqResult", "fail");
+        }
+        rttr.addAttribute("reqId", request.getReqId());
+        return "redirect:/request/retrieveRequest";
+    }
 }

@@ -77,3 +77,11 @@
     width: 200px;
     height: 70px;
 }
+
+#rememberCheck {
+    margin-bottom: 10px;
+}
+
+#loginBtn {
+    margin-left: 100px;
+}

@@ -98,4 +98,16 @@ public class RequestControllerTests {
 
         log.info(resultPage);
     }
+
+    @Test
+    public void testDeleteReq() throws Exception {
+        String resultPage = mockMvc
+                .perform(MockMvcRequestBuilders.post("/request/deleteRequest")
+                        .param("reqId", "51")
+                        .param("lastModifiedBy", "cust9")
+                )
+                .andReturn().getModelAndView().getViewName();
+
+        log.info(resultPage);
+    }
 }

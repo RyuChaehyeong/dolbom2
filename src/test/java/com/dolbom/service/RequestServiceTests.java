@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class RequestTests {
+public class RequestServiceTests {
 
     @Setter(onMethod_ = @Autowired)
     private  RequestService service;
@@ -72,5 +72,12 @@ public class RequestTests {
         req.setReqTitle("수정된 제목!!");
 
         service.modifyRequest(req);
+    }
+
+    @Test
+    public void deleteRequest() {
+        RequestVO req = service.retrieveRequest(51L);
+        req.setLastModifiedBy("cust9");
+        service.deleteRequest(req);
     }
 }

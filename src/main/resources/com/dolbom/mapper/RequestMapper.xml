@@ -88,4 +88,13 @@
             LAST_MODIFIED_BY = #{lastModifiedBy}
         WHERE REQ_ID = #{reqId}
     </update>
+
+    <update id="deleteRequest">
+        UPDATE REQUEST
+        SET DLT_YN = 'Y',
+            REQ_PRGR_STAT_CD = '99',
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
+        WHERE REQ_ID = #{reqId}
+    </update>
 </mapper>

@@ -14,4 +14,5 @@ public interface DlbmSrvcService {
 
     public List<DlbmSrvcVO> getSrvcList();
 
+
 }

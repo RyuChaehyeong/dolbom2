@@ -45,4 +45,9 @@ public class RequestServiceImpl implements RequestService {
     public int insertQuoPrice(RequestVO request) {
         return requestMapper.insertQuoPrice(request);
     }
+
+    @Override
+    public int deleteRequest(RequestVO request) {
+        return requestMapper.deleteRequest(request);
+    }
 }

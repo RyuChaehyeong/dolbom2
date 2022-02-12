@@ -19,6 +19,7 @@
 const regiResult = '${regiResult}';
 const modiResult = '${modiResult}';
 const insertPriceResult = '${insertPriceResult}';
+const delReqResult = '${delReqResult}';
 
 if (regiResult != '' && regiResult == 'success') {
     alert("견적 요청 등록 완료");
@@ -39,6 +40,14 @@ if (insertPriceResult != '' && insertPriceResult == 'success') {
 if (insertPriceResult != '' && insertPriceResult != 'success'){
     alert("견적 금액 등록 실패 \n관리자에게 문의하세요.");
 }
+if (delReqResult != '' && delReqResult == 'success') {
+    alert("견적 요청 삭제 완료");
+    window.open("about:blank","_self");
+    window.close();
+}
+if (delReqResult != '' && delReqResult != 'success'){
+    alert("견적 요청 삭제 실패 \n관리자에게 문의하세요.");
+}
 
 function modify() {
     $('#reqTitle').attr('readonly', false);
@@ -50,9 +59,17 @@ function modify() {
     $('#reqDtl').attr('readonly', false);
     $('#modiDelBtn').attr('hidden', true);
     $('#complModi').attr('hidden', false);
+    $('#searchPostcode').attr('hidden', false);
 }
 
 
+function delConfirm() {
+    if (!confirm('해당 견적 요청을 삭제하시겠습니까?')) {
+        return false;
+    } else {
+        document.delReqForm.submit();
+    }
+}
 </script>
 <html>
 <head>
@@ -74,7 +91,7 @@ function modify() {
                 <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
                 <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
                 <input type="text" class="form-control" name="custId" value='<c:out value="${req.custId}"/>' hidden>
-
+                <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden >
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="srvcNm">서비스이름</span>
                     <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
@@ -88,6 +105,7 @@ function modify() {
                     <span class="input-group-text">우편번호</span>
                     <input type="text" class="form-control" name="postcode" id="postcode"
                            value='<c:out value="${req.postcode}"/>' readonly ='readonly'>
+                    <button onclick="selectPostcode()" type="button" id="searchPostcode" hidden>우편번호 찾기</button>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">주소</span>
@@ -118,7 +136,7 @@ function modify() {
                 <c:if test="${req.reqPrgrStatCd == 10}">
                     <div id="modiDelBtn">
                         <button type="button" class="btn btn-primary btn-sm" onclick="modify()">수정</button>
-                        <button type="button" class="btn btn-secondary btn-sm">삭제</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="delConfirm()">삭제</button>
                     </div>
                 </c:if>
                 <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" hidden>수정 완료</button>
@@ -144,6 +162,11 @@ function modify() {
                 <button type="submit" class="btn btn-primary btn-sm" id="insertQuo" style="margin-top: 10px">견적금액 등록</button>
             </form>
         </c:if>
+
+        <form name="delReqForm" action="${root }/request/deleteRequest" method="post" hidden>
+            <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
+            <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
+        </form>
     </div>
 </div>
 

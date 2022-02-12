@@ -83,4 +83,11 @@ public class RequestMapperTest {
         req.setReqPrgrStatCd("30");
         requestMapper.insertQuoPrice(req);
     }
+
+    @Test
+    public void deleteRequest() {
+        RequestVO req = requestMapper.retrieveRequest(51L);
+        req.setLastModifiedBy("cust9");
+        requestMapper.deleteRequest(req);
+    }
 }
