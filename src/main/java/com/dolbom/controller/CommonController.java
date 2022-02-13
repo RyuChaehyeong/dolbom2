@@ -1,27 +1,17 @@
 package com.dolbom.controller;
 
-import com.dolbom.domain.common.CommonCodeVO;
-import com.dolbom.service.common.CommonService;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Controller
 @Log4j
 public class CommonController {
-
-    private CommonService commonService;
 
     @GetMapping("/accessError")
     public void accessDenied(Authentication auth, Model model) {

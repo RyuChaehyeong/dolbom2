@@ -19,7 +19,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Welcome</title>
-    <script src="${path}/resources/js/test.js"></script>
+    <script src="${path}/resources/js/common.js"></script>
 </head>
 
 <body>

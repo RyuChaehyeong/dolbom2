@@ -24,7 +24,7 @@ function openPopup() {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>돌봄 서비스 상세 조회하기</title>
-    <script src="${path}/resources/js/test.js"></script>
+    <script src="${path}/resources/js/common.js"></script>
 </head>
 
 <body>

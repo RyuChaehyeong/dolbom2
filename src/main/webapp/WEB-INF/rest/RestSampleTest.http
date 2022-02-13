@@ -1,9 +1,0 @@
-
-POST http://localhost:8080/sample/ticket
-Content-Type: application/json
-
-{
-  "tno" : 1,
-  "owner" : "ch",
-  "grade" : "aaa"
-}

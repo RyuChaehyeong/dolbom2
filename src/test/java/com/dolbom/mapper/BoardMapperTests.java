@@ -1,7 +1,6 @@
 package com.dolbom.mapper;
 
 import com.dolbom.domain.BoardVO;
-import com.dolbom.mapper.boardtest.BoardTestMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
