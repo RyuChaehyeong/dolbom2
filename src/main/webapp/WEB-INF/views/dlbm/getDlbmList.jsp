@@ -22,7 +22,7 @@
                     console.log(data[i]);
                     var table = "<tbody><tr>";
                         table += "<td>" + data[i].dlbmId + "</td>";
-                        table += "<td><a href = '${path}/service/retrieveSrvcDetail?srvcId=" + data[i].srvcId + "'>" + data[i].srvcNm + "</a></td>";
+                        table += "<td><a href = '${path}/dlbm/get?srvcId=" + data[i].srvcId + "'>" + data[i].srvcNm + "</a></td>";
                         table += "<td>" + data[i].dlbmLoc + "</td>";
                         table += "<td>" + data[i].animalCtgrCd + "</td>";
                         table += "<td>" + data[i].breedCtgrCd + "</td>";

@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 @Data
-public class RequestVO {
+public class QuoteReqVO {
 
     private Long reqId;
 

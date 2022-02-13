@@ -33,7 +33,7 @@
 
 
         <div class="content">
-            <form name="reqRegisterForm" action="${root }/request/registerRequest" method="post" onsubmit="return validateForm()">
+            <form name="reqRegisterForm" action="${root }/quote/register" method="post" onsubmit="return validateForm()">
                 <div class="formGroup">
                     <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />' hidden />
                     <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden >

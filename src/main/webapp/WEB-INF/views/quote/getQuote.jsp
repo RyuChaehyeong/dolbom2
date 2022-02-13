@@ -86,7 +86,7 @@ function delConfirm() {
 
 
     <div class="content">
-        <form name="reqRegisterForm" action="${root }/request/modifyRequest" method="post" onsubmit="return validateForm()">
+        <form name="reqRegisterForm" action="${root }/quote/modify" method="post" onsubmit="return validateForm()">
             <div class="formGroup">
                 <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
                 <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
@@ -151,7 +151,7 @@ function delConfirm() {
         </form>
 
         <c:if test="${req.reqPrgrStatCd == 20}">
-            <form name="insertQuoPrice" action="${root }/request/insertQuoPrice" method="post">
+            <form name="insertQuoPrice" action="${root }/quote/addQuoPrice" method="post">
                 <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
                 <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
                     <div class="input-group mb-3" style="margin-top: 15px">
@@ -163,7 +163,7 @@ function delConfirm() {
             </form>
         </c:if>
 
-        <form name="delReqForm" action="${root }/request/deleteRequest" method="post" hidden>
+        <form name="delReqForm" action="${root }/quote/delete" method="post" hidden>
             <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
             <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
         </form>

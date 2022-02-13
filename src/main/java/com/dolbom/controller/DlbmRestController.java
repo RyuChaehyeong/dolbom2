@@ -1,7 +1,7 @@
 package com.dolbom.controller;
 
-import com.dolbom.domain.DlbmSrvcVO;
-import com.dolbom.service.DlbmSrvcService;
+import com.dolbom.domain.DlbmVO;
+import com.dolbom.service.DlbmService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
@@ -16,18 +16,18 @@ import java.util.List;
 @RestController
 @Log4j
 @AllArgsConstructor
-public class DlbmSrvcController {
+public class DlbmRestController {
 
-    private DlbmSrvcService service;
+    private DlbmService service;
 
     @PostMapping(value = "/new",
         consumes = "application/json",
         produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> create(@RequestBody DlbmSrvcVO dlbmSrvcVO) {
+    public ResponseEntity<String> create(@RequestBody DlbmVO dlbm) {
 
-        log.info("DlbmSrvcVO: " + dlbmSrvcVO);
+        log.info("DlbmSrvcVO: " + dlbm);
 
-        int insertCnt = service.register(dlbmSrvcVO);
+        int insertCnt = service.register(dlbm);
 
         log.info("SERVICE INSERT COUNT: " + insertCnt);
 
@@ -36,7 +36,7 @@ public class DlbmSrvcController {
 
     @GetMapping(value = "/{srvcId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DlbmSrvcVO> get(@PathVariable("srvcId") Long srvcId) {
+    public ResponseEntity<DlbmVO> get(@PathVariable("srvcId") Long srvcId) {
 
         log.info("SERVICE READ SERVICE ID: " +  srvcId );
 
@@ -51,16 +51,16 @@ public class DlbmSrvcController {
 
         log.info("SERVICE DELETE SERVICE ID: " + srvcId);
 
-        return service.remove(srvcId) ? new ResponseEntity<>("Service Delete Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return service.delete(srvcId) ? new ResponseEntity<>("Service Delete Success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 
     }
 
     @GetMapping(value = "/getList" ,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DlbmSrvcVO>> getSrvcList(Model model) {
-        List<DlbmSrvcVO> srvcList = service.getSrvcList();
-        return new ResponseEntity<>(service.getSrvcList(), HttpStatus.OK);
+    public ResponseEntity<List<DlbmVO>> getSrvcList(Model model) {
+        List<DlbmVO> srvcList = service.getList();
+        return new ResponseEntity<>(service.getList(), HttpStatus.OK);
     }
 
 

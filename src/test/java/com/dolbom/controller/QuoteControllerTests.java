@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
         "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @Log4j
-public class RequestControllerTests {
+public class QuoteControllerTests {
 
     @Setter(onMethod_ = {@Autowired})
     private WebApplicationContext cxt;
@@ -36,16 +36,16 @@ public class RequestControllerTests {
     @Test
     public void testRegister() throws Exception {
 
-        String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/request/registerRequest")
+        String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/quote/register")
                 .param("srvcId", "77")
                 .param("custId", "cust9")
-                .param("reqTitle", "testest")
+                .param("reqTitle", "test quo title")
                 .param("postcode", "1234")
-                .param("custLoc", "testadd")
-                .param("detailAddress", "asdfgh")
+                .param("custLoc", "test cust loc")
+                .param("detailAddress", "test detail address")
                 .param("startDt", "2021-06-01")
                 .param("endDt", "2021-06-20")
-                .param("reqDtl", "aaaaa")
+                .param("reqDtl", "test req dtl")
                 .param("createdBy", "cust9")
                 .param("lastModifiedBy", "cust9")
 
@@ -57,7 +57,7 @@ public class RequestControllerTests {
     @Test
     public void testGet() throws Exception {
         log.info(mockMvc.perform(MockMvcRequestBuilders
-                        .get("/request/retrieveRequest")
+                        .get("/quote/get")
                         .param("reqId", "7"))
                 .andReturn()
                 .getModelAndView().getModelMap()
@@ -67,17 +67,17 @@ public class RequestControllerTests {
     @Test
     public void testModify() throws Exception {
         String resultPage = mockMvc
-                .perform(MockMvcRequestBuilders.post("/request/modifyRequest")
+                .perform(MockMvcRequestBuilders.post("/quote/modify")
                         .param("reqId", "47")
                         .param("srvcId", "84")
                         .param("custId", "cust9")
-                        .param("reqTitle", "수정된 타이틀")
+                        .param("reqTitle", "modified title")
                         .param("postcode", "1234")
-                        .param("custLoc", "testadd")
-                        .param("detailAddress", "asdfgh")
+                        .param("custLoc", "modified cust loc")
+                        .param("detailAddress", "modified detail Address")
                         .param("startDt", "2021-06-01")
                         .param("endDt", "2021-06-20")
-                        .param("reqDtl", "수정된 상세")
+                        .param("reqDtl", "modified detail")
                         .param("createdBy", "cust9")
                         .param("lastModifiedBy", "cust9")
                 )
@@ -87,11 +87,11 @@ public class RequestControllerTests {
     }
 
     @Test
-    public void testInsertQuo() throws Exception {
+    public void testAddQuoPrice() throws Exception {
         String resultPage = mockMvc
-                .perform(MockMvcRequestBuilders.post("/request/insertQuoPrice")
-                        .param("reqId", "47")
-                        .param("quoPrice", "100000")
+                .perform(MockMvcRequestBuilders.post("/quote/addQuoPrice")
+                        .param("reqId", "11")
+                        .param("quoPrice", "10000000")
                         .param("lastModifiedBy", "dlbm20")
                 )
                 .andReturn().getModelAndView().getViewName();
@@ -102,8 +102,8 @@ public class RequestControllerTests {
     @Test
     public void testDeleteReq() throws Exception {
         String resultPage = mockMvc
-                .perform(MockMvcRequestBuilders.post("/request/deleteRequest")
-                        .param("reqId", "51")
+                .perform(MockMvcRequestBuilders.post("/quote/delete")
+                        .param("reqId", "11")
                         .param("lastModifiedBy", "cust9")
                 )
                 .andReturn().getModelAndView().getViewName();

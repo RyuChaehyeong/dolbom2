@@ -1,6 +1,6 @@
 package com.dolbom.service;
 
-import com.dolbom.domain.DlbmSrvcVO;
+import com.dolbom.domain.DlbmVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
@@ -15,10 +15,10 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class DlbmSrvcServiceTests {
+public class DlbmServiceTests {
 
     @Setter(onMethod_ = @Autowired)
-    private DlbmSrvcService service;
+    private DlbmService service;
 
     @Test
     public void testExist() {
@@ -27,20 +27,21 @@ public class DlbmSrvcServiceTests {
     }
 
     @Test
-    public void testRegister() {
+    public void testRegisterDlbm() {
         for (int i = 11 ; i <= 20 ; i++) {
 
             int j = i + 5;
 
-            String srvcNm = "대표서비스 돌봄" + j;
-            String categoryCd = "1010";
+            String srvcNm = "코리아대표서비스 돌봄" + j;
             String srvcDtl = j + " 돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스돌봄 대표서비스 " + j;
-            String dlbmLoc = "강원도 강릉시";
+            String dlbmLoc = "서울 남산";
             String loginUser = "dlbm" + i;
 
-            DlbmSrvcVO srvcVo = new DlbmSrvcVO();
+            DlbmVO srvcVo = new DlbmVO();
 
             srvcVo.setSrvcNm(srvcNm);
+            srvcVo.setAnimalCtgrCd("10");
+            srvcVo.setBreedCtgrCd("10");
             srvcVo.setSrvcDtl(srvcDtl);
             srvcVo.setDlbmLoc(dlbmLoc);
             srvcVo.setDlbmId(loginUser);
@@ -49,29 +50,29 @@ public class DlbmSrvcServiceTests {
 
             service.register(srvcVo);
 
-            log.info("생성된 서비스 ID : " + srvcVo.getSrvcNm());
+            log.info("생성된 서비스 ID : " + srvcVo.getSrvcId());
         }
     }
 
     @Test
-    public void testReadSrvc() {
-        DlbmSrvcVO srvceVO = service.get(82L);
+    public void testGetDlbm() {
+        DlbmVO srvceVO = service.get(146L);
         log.info("****" + srvceVO);
         assertNotNull(srvceVO);
     }
 
     @Test
     public void testRemoveSrvc() {
-        service.remove(82L);
+        service.delete(148L);
 
-        DlbmSrvcVO srvceVO = service.get(82L);
+        DlbmVO srvceVO = service.get(148L);
         assertEquals(srvceVO.getDltYn(), "Y");
     }
 
 
     @Test
-    public void testGetSrvcList() {
-        service.getSrvcList().forEach(srvc -> log.info(srvc));
+    public void testGetList() {
+        service.getList().forEach(srvc -> log.info(srvc));
     }
 
 

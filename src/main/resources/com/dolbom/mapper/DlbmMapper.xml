@@ -2,15 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dolbom.mapper.DlbmSrvcMapper">
-    <insert id="insertSrvc">
+<mapper namespace="com.dolbom.mapper.DlbmMapper">
+
+
+    <select id="getList" resultType="com.dolbom.domain.DlbmVO">
+        SELECT SRVC.SRVC_ID,
+               SRVC.DLBM_ID,
+               SRVC.SRVC_NM,
+               SRVC.SRVC_RGSN_STAT_CD,
+               SRVC.SRVC_DTL,
+               SRVC.DLBM_LOC,
+               SRVC.USE_YN,
+               SRVC.DLT_YN,
+               SRVC.CREATED_DT,
+               SRVC.CREATED_BY,
+               SRVC.LAST_MODIFIED_DT,
+               SRVC.LAST_MODIFIED_BY,
+               SRVC.RATE,
+               CC1.CD_NM BREED_CTGR_CD,
+               CC2.CD_NM ANIMAL_CTGR_CD
+        FROM SRVC
+                 LEFT OUTER JOIN CMMN_CD CC1
+                                 ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
+                                     AND SRVC.BREED_CTGR_CD = CC1.CD_ID
+                 LEFT OUTER JOIN CMMN_CD CC2
+                                 ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
+        WHERE SRVC.DLT_YN = 'N'
+          AND SRVC.USE_YN = 'Y'
+    </select>
+
+    <insert id="register">
         INSERT INTO SRVC
             (
              SRVC_ID,
              DLBM_ID,
              SRVC_NM,
              SRVC_RGSN_STAT_CD,
-             CATEGORY_CD,
+             ANIMAL_CTGR_CD,
+             BREED_CTGR_CD,
              SRVC_DTL,
              DLBM_LOC,
              CREATED_DT,
@@ -24,7 +53,8 @@
              #{dlbmId},
              #{srvcNm},
              10,
-             #{categoryCd},
+             #{animalCtgrCd},
+             #{breedCtgrCd},
              #{srvcDtl},
              #{dlbmLoc},
              sysdate,
@@ -34,7 +64,7 @@
             )
     </insert>
 
-    <select id="readSrvc" resultType="com.dolbom.domain.DlbmSrvcVO">
+    <select id="get" resultType="com.dolbom.domain.DlbmVO">
         SELECT SRVC.SRVC_ID,
                SRVC.DLBM_ID,
                SRVC.SRVC_NM,
@@ -62,7 +92,7 @@
               SRVC_ID = #{srvcId}
     </select>
 
-    <update id="deleteSrvc">
+    <update id="delete">
         UPDATE SRVC
         SET DLT_YN = 'Y',
             LAST_MODIFIED_DT = sysdate
@@ -70,29 +100,4 @@
 
     </update>
 
-    <select id="getSrvcList" resultType="com.dolbom.domain.DlbmSrvcVO">
-        SELECT SRVC.SRVC_ID,
-               SRVC.DLBM_ID,
-               SRVC.SRVC_NM,
-               SRVC.SRVC_RGSN_STAT_CD,
-               SRVC.SRVC_DTL,
-               SRVC.DLBM_LOC,
-               SRVC.USE_YN,
-               SRVC.DLT_YN,
-               SRVC.CREATED_DT,
-               SRVC.CREATED_BY,
-               SRVC.LAST_MODIFIED_DT,
-               SRVC.LAST_MODIFIED_BY,
-               SRVC.RATE,
-               CC1.CD_NM BREED_CTGR_CD,
-               CC2.CD_NM ANIMAL_CTGR_CD
-        FROM SRVC
-                 LEFT OUTER JOIN CMMN_CD CC1
-                                 ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
-                                     AND SRVC.BREED_CTGR_CD = CC1.CD_ID
-                 LEFT OUTER JOIN CMMN_CD CC2
-                                 ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
-            WHERE SRVC.DLT_YN = 'N'
-              AND SRVC.USE_YN = 'Y'
-    </select>
 </mapper>

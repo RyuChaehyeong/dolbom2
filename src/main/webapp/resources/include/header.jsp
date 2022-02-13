@@ -15,7 +15,7 @@
 
             <ul class="nav justify-content-end">
                 <li style="margin-right: 480px">
-                    <a href="${root }/service/retrieveSrvcList" target="_blank"><img src="${root }/resources/image/logo.jpg" class="logoPic" /></a>
+                    <a href="${root }/dlbm/getList" target="_blank"><img src="${root }/resources/image/logo.jpg" class="logoPic" /></a>
                 </li>
                 <sec:authorize access="isAnonymous()">
                     <li class="nav-item">
@@ -29,11 +29,11 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" href="${root }/service/registerSrvc">서비스등록</a>
+                        <a class="nav-link" href="${root }/dlbm/registerForm">서비스등록</a>
                     </li>
                 </sec:authorize>
                 <li class="nav-item">
-                    <a class="nav-link" href="${root }/service/retrieveSrvcList">서비스목록</a>
+                    <a class="nav-link" href="${root }/dlbm/getList">서비스목록</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">마이페이지</a>

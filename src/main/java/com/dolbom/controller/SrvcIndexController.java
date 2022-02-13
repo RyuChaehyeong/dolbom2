@@ -1,11 +1,9 @@
 package com.dolbom.controller;
 
-import com.dolbom.domain.DlbmSrvcVO;
-import com.dolbom.service.DlbmSrvcService;
-import com.dolbom.service.DlbmSrvcServiceImpl;
+import com.dolbom.domain.DlbmVO;
+import com.dolbom.service.DlbmService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import oracle.jdbc.proxy.annotation.Pre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SrvcIndexController {
 
     @Setter(onMethod_ = @Autowired)
-    private DlbmSrvcService service;
+    private DlbmService service;
 
     @PreAuthorize("hasRole('ROLE_DLBM')")
     @GetMapping("/registerSrvc")
@@ -35,7 +33,7 @@ public class SrvcIndexController {
 
     @GetMapping("/retrieveSrvcDetail")
     public void retrieveSrvcDetail(@RequestParam("srvcId") Long srvcId, Model model) {
-        DlbmSrvcVO vo = service.get(srvcId);
+        DlbmVO vo = service.get(srvcId);
         model.addAttribute("srvc", vo);
     }
 

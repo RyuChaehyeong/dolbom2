@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dolbom.mapper.RequestMapper">
-    <insert id="insertRequest">
+<mapper namespace="com.dolbom.mapper.QuoteMapper">
+    <insert id="register">
         <selectKey keyProperty="reqId" order="BEFORE" resultType="long">
             SELECT REQ_ID_SEQ.nextval FROM dual
         </selectKey>
-        INSERT INTO REQUEST
+        INSERT INTO QUOTE_REQ
         (REQ_ID,
          SRVC_ID,
          CUST_ID,
@@ -42,7 +42,7 @@
     </insert>
 
 
-    <select id="retrieveRequest" resultType="com.dolbom.domain.RequestVO">
+    <select id="get" resultType="com.dolbom.domain.QuoteReqVO">
 
     SELECT
          REQ_ID,
@@ -61,13 +61,13 @@
          CREATED_BY,
          LAST_MODIFIED_DT,
          LAST_MODIFIED_BY
-    FROM REQUEST
+    FROM QUOTE_REQ
     WHERE REQ_ID = #{reqId}
     </select>
 
 
-    <update id="modifyRequest">
-        UPDATE REQUEST
+    <update id="modify">
+        UPDATE QUOTE_REQ
             SET REQ_TITLE = #{reqTitle},
                 POSTCODE = #{postcode},
                 CUST_LOC = #{custLoc},
@@ -80,8 +80,8 @@
             WHERE REQ_ID = #{reqId}
     </update>
 
-    <update id="insertQuoPrice">
-        UPDATE REQUEST
+    <update id="addQuoPrice">
+        UPDATE QUOTE_REQ
         SET QUO_PRICE = #{quoPrice},
             REQ_PRGR_STAT_CD = 30,
             LAST_MODIFIED_DT = sysdate,
@@ -89,8 +89,8 @@
         WHERE REQ_ID = #{reqId}
     </update>
 
-    <update id="deleteRequest">
-        UPDATE REQUEST
+    <update id="delete">
+        UPDATE QUOTE_REQ
         SET DLT_YN = 'Y',
             REQ_PRGR_STAT_CD = '99',
             LAST_MODIFIED_DT = sysdate,

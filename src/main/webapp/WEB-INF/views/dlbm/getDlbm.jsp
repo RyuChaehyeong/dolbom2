@@ -14,7 +14,7 @@
 
 function openPopup() {
     window.open(
-        '/request/registerRequestPopup?srvcId=${srvc.srvcId}',
+        '/quote/registerForm?srvcId=${srvc.srvcId}',
         'window_name',
         'width=800,height=600,location=no,status=no,scrollbars=yes');
 }
