@@ -32,6 +32,9 @@
     </select>
 
     <insert id="register">
+        <selectKey keyProperty="srvcId" order="BEFORE" resultType="long">
+            SELECT SRVC_ID_SEQ.nextval FROM dual
+        </selectKey>
         INSERT INTO SRVC
             (
              SRVC_ID,
@@ -41,7 +44,9 @@
              ANIMAL_CTGR_CD,
              BREED_CTGR_CD,
              SRVC_DTL,
+             POSTCODE,
              DLBM_LOC,
+             DETAIL_ADDRESS,
              CREATED_DT,
              CREATED_BY,
              LAST_MODIFIED_DT,
@@ -49,14 +54,16 @@
              )
         VALUES
             (
-             SRVC_ID_SEQ.nextval,
+             #{srvcId},
              #{dlbmId},
              #{srvcNm},
              10,
              #{animalCtgrCd},
              #{breedCtgrCd},
              #{srvcDtl},
+             #{postcode},
              #{dlbmLoc},
+             #{detailAddress},
              sysdate,
              #{createdBy},
              sysdate,
@@ -70,7 +77,9 @@
                SRVC.SRVC_NM,
                SRVC.SRVC_RGSN_STAT_CD,
                SRVC.SRVC_DTL,
+               SRVC.POSTCODE,
                SRVC.DLBM_LOC,
+               SRVC.DETAIL_ADDRESS,
                SRVC.USE_YN,
                SRVC.DLT_YN,
                SRVC.CREATED_DT,
@@ -95,9 +104,25 @@
     <update id="delete">
         UPDATE SRVC
         SET DLT_YN = 'Y',
-            LAST_MODIFIED_DT = sysdate
+            SRVC_RGSN_STAT_CD = 99,
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
         WHERE SRVC_ID = #{srvcId}
 
+    </update>
+
+    <update id="modify">
+        UPDATE SRVC
+        SET SRVC_NM = #{srvcNm},
+            ANIMAL_CTGR_CD = #{animalCtgrCd},
+            BREED_CTGR_CD = #{breedCtgrCd},
+            POSTCODE = #{postcode},
+            DLBM_LOC = #{dlbmLoc},
+            DETAIL_ADDRESS = #{detailAddress},
+            SRVC_DTL = #{srvcDtl},
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
+        WHERE SRVC_ID = #{srvcId}
     </update>
 
 </mapper>

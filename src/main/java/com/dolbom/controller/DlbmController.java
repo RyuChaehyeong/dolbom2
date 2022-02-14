@@ -1,16 +1,17 @@
 package com.dolbom.controller;
 
 import com.dolbom.domain.DlbmVO;
+import com.dolbom.domain.QuoteReqVO;
 import com.dolbom.service.DlbmService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Log4j
@@ -27,10 +28,17 @@ public class DlbmController {
     }
 
     @PostMapping("/register")
-    public String register(DlbmVO dlbmVO) {
-        log.info("SERVICE REGISTER");
-        dlbmService.register(dlbmVO);
-        return "redirect:/dlbm/getList";
+    public String register(DlbmVO dlbm, RedirectAttributes rttr) {
+        log.info("SERVICE REGISTER- SRVC ID: " + dlbm.getSrvcId());
+        int cnt = dlbmService.register(dlbm);
+        if (cnt == 1) {
+            rttr.addFlashAttribute("regiResult", "success");
+        } else {
+            rttr.addFlashAttribute("regiResult", "fail");
+        }
+
+        rttr.addAttribute("srvcId", dlbm.getSrvcId());
+        return "redirect:/dlbm/get";
     }
 
     @RequestMapping("/getList")
@@ -41,8 +49,32 @@ public class DlbmController {
 
     @GetMapping("/get")
     public String get(@RequestParam("srvcId") Long srvcId, Model model) {
+        log.info("GET SERVICE: " +srvcId);
         DlbmVO vo = dlbmService.get(srvcId);
         model.addAttribute("srvc", vo);
         return "/dlbm/getDlbm";
     }
+
+    @PostMapping ("/modify")
+    public @ResponseBody
+    ResponseEntity modify(@RequestBody DlbmVO dlbm) {
+        log.info("MODIFY DLBM SERVICE - SRVC ID: " + dlbm.getSrvcId());
+
+        int cnt = dlbmService.modify(dlbm);
+
+        return cnt == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PostMapping("/delete")
+    public @ResponseBody ResponseEntity delete(@RequestBody DlbmVO dlbm) {
+        log.info("DELETE SERVICE - SRVC ID: " + dlbm.getSrvcId());
+        int cnt = dlbmService.delete(dlbm);
+
+        return cnt == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

@@ -32,7 +32,6 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public int modify(QuoteReqVO quote) {
-        quote.setLastModifiedBy(quote.getCustId());
         return quoteMapper.modify(quote);
     }
 

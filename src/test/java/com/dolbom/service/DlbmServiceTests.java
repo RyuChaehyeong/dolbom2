@@ -61,18 +61,32 @@ public class DlbmServiceTests {
         assertNotNull(srvceVO);
     }
 
-    @Test
-    public void testRemoveSrvc() {
-        service.delete(148L);
-
-        DlbmVO srvceVO = service.get(148L);
-        assertEquals(srvceVO.getDltYn(), "Y");
-    }
-
 
     @Test
     public void testGetList() {
         service.getList().forEach(srvc -> log.info(srvc));
+    }
+
+    @Test
+    public void testModifyDlbm() {
+        DlbmVO dlbm = service.get(166L);
+        dlbm.setSrvcNm("modified dlbm service 제목!!");
+        dlbm.setAnimalCtgrCd("A01");
+        dlbm.setBreedCtgrCd("01");
+        dlbm.setPostcode("111");
+        dlbm.setDlbmLoc("test Loc");
+        dlbm.setDetailAddress("test detail addr");
+        dlbm.setSrvcDtl("test srvc Dtl");
+        dlbm.setLastModifiedBy("dlbm20");
+        int res = service.modify(dlbm);
+        log.info("*****" + dlbm);
+    }
+
+    @Test
+    public void testDeleteDlbm() {
+        DlbmVO dlbm = service.get(166L);
+        dlbm.setLastModifiedBy("dlbm20");
+        service.delete(dlbm);
     }
 
 

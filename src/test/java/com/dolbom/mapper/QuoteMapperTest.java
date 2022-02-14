@@ -79,7 +79,7 @@ public class QuoteMapperTest {
     }
 
     @Test
-    public void deleteQuo() {
+    public void testDeleteQuo() {
         QuoteReqVO req = mapper.get(51L);
         req.setLastModifiedBy("cust9");
         mapper.delete(req);

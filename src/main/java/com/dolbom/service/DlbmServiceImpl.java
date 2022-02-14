@@ -20,6 +20,9 @@ public class DlbmServiceImpl implements DlbmService {
 
     @Override
     public int register(DlbmVO dlbm) {
+        String userId = dlbm.getDlbmId();
+        dlbm.setCreatedBy(userId);
+        dlbm.setLastModifiedBy(userId);
         return dlbmMapper.register(dlbm);
     }
 
@@ -31,17 +34,20 @@ public class DlbmServiceImpl implements DlbmService {
     }
 
     @Override
-    public boolean delete(Long srvcId) {
-
-        int delCnt = dlbmMapper.delete(srvcId);
-        log.info("DELETE RESULT:" + delCnt);
-        return delCnt == 1;
+    public int delete(DlbmVO dlbm) {
+        return dlbmMapper.delete(dlbm);
     }
+
 
     @Override
     public List<DlbmVO> getList() {
 
         List<DlbmVO> srvcList = dlbmMapper.getList();
         return srvcList;
+    }
+
+    @Override
+    public int modify(DlbmVO dlbm) {
+        return dlbmMapper.modify(dlbm);
     }
 }

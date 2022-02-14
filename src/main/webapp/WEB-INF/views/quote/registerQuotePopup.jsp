@@ -33,7 +33,7 @@
 
 
         <div class="content">
-            <form name="reqRegisterForm" action="${root }/quote/register" method="post" onsubmit="return validateForm()">
+            <form name="reqRegisterForm" action="${root }/quote/register" method="post" onsubmit="return validateQuoForm()">
                 <div class="formGroup">
                     <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />' hidden />
                     <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden >
@@ -54,7 +54,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" >주소</span>
-                        <input type="text" class="form-control" name="custLoc" id="custLoc">
+                        <input type="text" class="form-control" name="custLoc" id="loc">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" >상세주소</span>

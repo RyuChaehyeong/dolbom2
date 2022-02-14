@@ -59,13 +59,23 @@ public class DlbmMapperTest {
 
     @Test
     public void testDeleteDlbm() {
-        int res = mapper.delete(53L);
-        log.info("******" + res +"");
+        DlbmVO dlbm = mapper.get(166L);
+        dlbm.setLastModifiedBy("dlbm20");
+        mapper.delete(dlbm);
     }
 
 
     @Test
     public void testGetList() {
         mapper.getList().forEach(srvc -> log.info(srvc));
+    }
+
+    @Test
+    public void testModifyDlbm() {
+        DlbmVO dlbm = mapper.get(166L);
+        dlbm.setSrvcNm("modified dlbm service 제목");
+        dlbm.setDetailAddress("modified detailed 상세주소");
+        int res = mapper.modify(dlbm);
+        log.info("*****" + dlbm);
     }
 }

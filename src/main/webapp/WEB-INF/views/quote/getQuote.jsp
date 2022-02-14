@@ -17,9 +17,6 @@
 <script>
 
 const regiResult = '${regiResult}';
-const modiResult = '${modiResult}';
-const insertPriceResult = '${insertPriceResult}';
-const delReqResult = '${delReqResult}';
 
 if (regiResult != '' && regiResult == 'success') {
     alert("견적 요청 등록 완료");
@@ -28,28 +25,7 @@ if (regiResult != '' && regiResult != 'success') {
     alert("견적 요청 등록 실패 \n관리자에게 문의하세요.");
 }
 
-if (modiResult != '' && modiResult == 'success') {
-    alert("견적 요청 수정 완료");
-}
-if (modiResult != '' && modiResult != 'success'){
-    alert("견적 요청 수정 실패 \n관리자에게 문의하세요.");
-}
-if (insertPriceResult != '' && insertPriceResult == 'success') {
-    alert("견적 금액 등록 완료");
-}
-if (insertPriceResult != '' && insertPriceResult != 'success'){
-    alert("견적 금액 등록 실패 \n관리자에게 문의하세요.");
-}
-if (delReqResult != '' && delReqResult == 'success') {
-    alert("견적 요청 삭제 완료");
-    window.open("about:blank","_self");
-    window.close();
-}
-if (delReqResult != '' && delReqResult != 'success'){
-    alert("견적 요청 삭제 실패 \n관리자에게 문의하세요.");
-}
-
-function modify() {
+function modify(){
     $('#reqTitle').attr('readonly', false);
     $('#postcode').attr('readonly', false);
     $('#custLoc').attr('readonly', false);
@@ -60,16 +36,102 @@ function modify() {
     $('#modiDelBtn').attr('hidden', true);
     $('#complModi').attr('hidden', false);
     $('#searchPostcode').attr('hidden', false);
-}
-
+};
 
 function delConfirm() {
     if (!confirm('해당 견적 요청을 삭제하시겠습니까?')) {
         return false;
     } else {
-        document.delReqForm.submit();
+        const paramData = {
+            reqId : $("#reqId").val(),
+            lastModifiedBy : $("#lastModifiedBy").val()
+        }
+
+        const param = JSON.stringify(paramData);
+        $.ajax({
+            type : 'post',
+            url : '/quote/delete',
+            data : param,
+            contentType : "application/json; charset=utf-8",
+            success : function (result, status, xhr) {
+                alert("견적 요청이 삭제되었습니다.");;
+                window.open("about:blank","_self");
+                window.close();
+            },
+            error : function (xhr, status, er) {
+                if (error) {
+                    error(er);
+                }
+            }
+        })
     }
 }
+
+function modifyQuo(){
+
+    const paramData = {
+       reqId : $("#reqId").val(),
+       reqTitle : $("#reqTitle").val(),
+       postcode : $("#postcode").val(),
+       custLoc : $("#loc").val(),
+       detailAddress : $("#detailAddress").val(),
+       startDt : $("#startDt").val(),
+       endDt : $("#endDt").val(),
+       reqDtl : $("#reqDtl").val(),
+       lastModifiedBy : $("#lastModifiedBy").val()
+   }
+
+    const param = JSON.stringify(paramData);
+   $.ajax({
+       type : 'post',
+       url : '/quote/modify',
+       data : param,
+       contentType : "application/json; charset=utf-8",
+       success : function (result, status, xhr) {
+               alert("수정이 완료되었습니다.");
+               location.reload();
+       },
+       error : function (xhr, status, er) {
+           if (error) {
+               error(er);
+           }
+       }
+   })
+};
+
+function addQuoPrice() {
+
+    const insertedPrice = $("#quoPrice").val();
+
+    if (insertedPrice == null || insertedPrice == '') {
+        alert("견적금액을 입력해주세요.");
+        return false;
+    }
+
+    const paramData = {
+        reqId : $("#reqId").val(),
+        quoPrice : insertedPrice,
+        lastModifiedBy : $("#lastModifiedBy").val()
+    }
+
+    const param = JSON.stringify(paramData);
+    $.ajax({
+        type : 'post',
+        url : '/quote/addQuoPrice',
+        data : param,
+        contentType : "application/json; charset=utf-8",
+        success : function (result, status, xhr) {
+            alert("견적 금액이 등록되었습니다.");
+            location.reload();
+        },
+        error : function (xhr, status, er) {
+            if (error) {
+                error(er);
+            }
+        }
+    })
+};
+
 </script>
 <html>
 <head>
@@ -86,15 +148,17 @@ function delConfirm() {
 
 
     <div class="content">
-        <form name="reqRegisterForm" action="${root }/quote/modify" method="post" onsubmit="return validateForm()">
+        <form name="reqRegisterForm" onsubmit="return validateForm()">
             <div class="formGroup">
-                <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
-                <input type="text" class="form-control" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
-                <input type="text" class="form-control" name="custId" value='<c:out value="${req.custId}"/>' hidden>
-                <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden >
+                <input type="text" class="form-control" id="reqId" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
+                <input type="text" class="form-control" id="srvcId" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
+                <input type="text" class="form-control" id="custId" name="custId" value='<c:out value="${req.custId}"/>' hidden>
+                <input type="text" class="form-control" id="extraAddress" name="extraAddress" hidden >
+                <sec:authentication property="principal" var="principal"/>
+                <input type="text" class="form-control" id="lastModifiedBy" name="lastModifiedBy" value='<c:out value="${principal.username}"/>' hidden  >
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="srvcNm">서비스이름</span>
-                    <input type="text" class="form-control" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
+                    <span class="input-group-text">서비스이름</span>
+                    <input type="text" class="form-control" id="srvcNm" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">요청서 제목</span>
@@ -109,7 +173,7 @@ function delConfirm() {
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">주소</span>
-                    <input type="text" class="form-control" name="custLoc" id="custLoc"
+                    <input type="text" class="form-control" name="custLoc" id="loc"
                            value='<c:out value="${req.custLoc}"/>' readonly ='readonly'>
                 </div>
                 <div class="input-group mb-3">
@@ -135,11 +199,19 @@ function delConfirm() {
 
                 <c:if test="${req.reqPrgrStatCd == 10}">
                     <div id="modiDelBtn">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="modify()">수정</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="modiBtn" onclick="modify()">수정</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="delConfirm()">삭제</button>
                     </div>
                 </c:if>
-                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" hidden>수정 완료</button>
+                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyQuo()" hidden>수정 완료</button>
+
+                <c:if test="${req.reqPrgrStatCd == 20}">
+                    <div class="input-group mb-3" style="margin-top: 15px">
+                        <span class="input-group-text">견적금액</span>
+                        <input type="number" class="form-control" name="quoPrice" id="quoPrice">
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="addPrice" style="margin-top: 10px" onclick="addQuoPrice()">견적금액 등록</button>
+                </c:if>
 
                 <c:if test="${req.reqPrgrStatCd >= 30}">
                     <div class="input-group mb-3" style="margin-top: 15px">
@@ -150,23 +222,6 @@ function delConfirm() {
             </div>
         </form>
 
-        <c:if test="${req.reqPrgrStatCd == 20}">
-            <form name="insertQuoPrice" action="${root }/quote/addQuoPrice" method="post">
-                <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
-                <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
-                    <div class="input-group mb-3" style="margin-top: 15px">
-                        <span class="input-group-text">견적금액</span>
-                        <input type="number" class="form-control" name="quoPrice" id="quoPrice">
-                    </div>
-
-                <button type="submit" class="btn btn-primary btn-sm" id="insertQuo" style="margin-top: 10px">견적금액 등록</button>
-            </form>
-        </c:if>
-
-        <form name="delReqForm" action="${root }/quote/delete" method="post" hidden>
-            <input type="text" class="form-control" name="lastModifiedBy" value='<sec:authentication property="principal.username"/>' hidden>
-            <input type="text" class="form-control" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
-        </form>
     </div>
 </div>
 

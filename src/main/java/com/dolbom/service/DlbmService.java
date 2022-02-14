@@ -10,9 +10,11 @@ public interface DlbmService {
 
     DlbmVO get(Long srvcId);
 
-    boolean delete(Long srvcId);
+    int delete(DlbmVO dlbm);
 
     List<DlbmVO> getList();
+
+    int modify(DlbmVO dlbm);
 
 
 }

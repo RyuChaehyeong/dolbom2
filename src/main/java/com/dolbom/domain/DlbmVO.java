@@ -21,6 +21,10 @@ public class DlbmVO {
 
     private String srvcDtl;
 
+    private String postcode;
+
+    private String detailAddress;
+
     private String dlbmLoc;
 
     private String rate;

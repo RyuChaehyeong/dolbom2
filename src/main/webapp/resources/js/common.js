@@ -1,4 +1,4 @@
-function validateForm() {
+function validateQuoForm() {
     if (reqRegisterForm.reqTitle.value == "" ||reqRegisterForm.reqTitle.value == null) {
         reqRegisterForm.reqTitle.focus();
         alert("요청서 제목을 입력하세요.");
@@ -38,6 +38,39 @@ function validateForm() {
     if (reqRegisterForm.reqDtl.value == "" ||reqRegisterForm.reqDtl.value == null) {
         reqRegisterForm.reqDtl.focus();
         alert("상세한 요청 내용을 입력하세요.");
+        return false;
+    }
+}
+
+function validateDlbmForm() {
+    if (dlbmRegForm.srvcNm.value == "" ||dlbmRegForm.srvcNm.value == null) {
+        dlbmRegForm.srvcNm.focus();
+        alert("서비스 이름을 입력하세요.");
+        return false;
+    }
+
+    if (dlbmRegForm.postcode.value == "" ||dlbmRegForm.postcode.value == null) {
+        dlbmRegForm.postcode.focus();
+        alert("오른쪽 버튼을 클릭하여 주소를 검색하여 우편번호를 선택하세요.");
+        return false;
+    }
+
+    if (dlbmRegForm.custLoc.value == "" ||dlbmRegForm.custLoc.value == null) {
+        dlbmRegForm.dlbmLoc.focus();
+        alert("주소를 입력하세요.");
+        return false;
+    }
+
+    if (dlbmRegForm.detailAddress.value == "" ||dlbmRegForm.detailAddress.value == null) {
+        dlbmRegForm.detailAddress.focus();
+        alert("상세주소를 입력하세요.");
+        return false;
+    }
+
+
+    if (dlbmRegForm.srvcDtl.value == "" ||dlbmRegForm.srvcDtl.value == null) {
+        dlbmRegForm.srvcDtl.focus();
+        alert("상세한 서비스 내용을 입력하세요.");
         return false;
     }
 }
@@ -125,7 +158,7 @@ function selectPostcode() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postcode').value = data.zonecode;
-            document.getElementById("custLoc").value = addr;
+            document.getElementById("loc").value = addr;
             document.getElementById("detailAddress").focus();
 
         }

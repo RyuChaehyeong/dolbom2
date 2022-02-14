@@ -8,9 +8,11 @@ public interface DlbmMapper {
 
     List<DlbmVO> getList();
 
-    int register(DlbmVO serviceVO);
+    int register(DlbmVO dlbm);
 
     DlbmVO get(Long srvcId);
 
-    int delete(Long srvcId);
+    int delete(DlbmVO dlbm);
+
+    int modify(DlbmVO dlbm);
 }
