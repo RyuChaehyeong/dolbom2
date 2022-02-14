@@ -85,3 +85,9 @@
 #loginBtn {
     margin-left: 100px;
 }
+
+.comment {
+    background-color: #43a8ca;
+    margin-top: 10px;
+    padding: 10px;
+}

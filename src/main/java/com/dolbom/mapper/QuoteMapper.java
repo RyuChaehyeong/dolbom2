@@ -13,4 +13,6 @@ public interface QuoteMapper {
     int addQuoPrice(QuoteReqVO request);
 
     int delete(QuoteReqVO request);
+
+    int acceptQuo(QuoteReqVO request);
 }

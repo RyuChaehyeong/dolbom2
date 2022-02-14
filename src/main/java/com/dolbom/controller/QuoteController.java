@@ -88,6 +88,18 @@ public class QuoteController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @PostMapping("/acceptQuo")
+    public @ResponseBody ResponseEntity acceptQuo(@RequestBody QuoteReqVO quote) {
+        log.info("CUST ACCEPT QUOTE PRICE - REQID: " + quote.getReqId());
+
+        int cnt = quoteService.acceptQuo(quote);
+
+        return cnt == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
     @PostMapping("/delete")
     public @ResponseBody ResponseEntity delete(@RequestBody QuoteReqVO request) {
         log.info("DELETE REQUEST - REQID: " + request.getReqId());

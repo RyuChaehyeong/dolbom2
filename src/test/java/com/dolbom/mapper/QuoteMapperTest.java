@@ -79,6 +79,13 @@ public class QuoteMapperTest {
     }
 
     @Test
+    public void testAcceptQuo() {
+        QuoteReqVO req = mapper.get(72L);
+        req.setLastModifiedBy("cust9");
+        mapper.acceptQuo(req);
+    }
+
+    @Test
     public void testDeleteQuo() {
         QuoteReqVO req = mapper.get(51L);
         req.setLastModifiedBy("cust9");

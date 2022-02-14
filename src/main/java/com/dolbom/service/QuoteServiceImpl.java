@@ -41,6 +41,11 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
+    public int acceptQuo(QuoteReqVO quote) {
+        return quoteMapper.acceptQuo(quote);
+    }
+
+    @Override
     public int delete(QuoteReqVO quote) {
         return quoteMapper.delete(quote);
     }

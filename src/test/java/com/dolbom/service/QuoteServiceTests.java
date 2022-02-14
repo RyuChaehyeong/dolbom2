@@ -81,6 +81,13 @@ public class QuoteServiceTests {
         service.addQuoPrice(req);
     }
 
+    @Test
+    public void testAcceptQuo() {
+        QuoteReqVO req = service.get(72L);
+        req.setLastModifiedBy("cust9");
+        service.addQuoPrice(req);
+    }
+
 
     @Test
     public void deleteQuo() {

@@ -97,4 +97,12 @@
             LAST_MODIFIED_BY = #{lastModifiedBy}
         WHERE REQ_ID = #{reqId}
     </update>
+
+    <update id="acceptQuo">
+        UPDATE QUOTE_REQ
+        SET  REQ_PRGR_STAT_CD = '40',
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
+        WHERE REQ_ID = #{reqId}
+    </update>
 </mapper>

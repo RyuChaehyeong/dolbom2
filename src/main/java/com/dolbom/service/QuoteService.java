@@ -12,5 +12,7 @@ public interface QuoteService {
 
     int addQuoPrice(QuoteReqVO quote);
 
+    int acceptQuo(QuoteReqVO quote);
+
     int delete(QuoteReqVO quote);
 }

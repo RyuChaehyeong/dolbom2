@@ -129,8 +129,37 @@ function addQuoPrice() {
                 error(er);
             }
         }
-    })
-};
+    });
+}
+
+function acceptQuo() {
+    if (!confirm('해당 금액으로 돌봄을 성사하시겠습니까?')) {
+        return false;
+    } else {
+        const paramData = {
+            reqId : $("#reqId").val(),
+            lastModifiedBy : $("#lastModifiedBy").val()
+        }
+
+        const param = JSON.stringify(paramData);
+        $.ajax({
+            type : 'post',
+            url : '/quote/acceptQuo',
+            data : param,
+            contentType : "application/json; charset=utf-8",
+            success : function (result, status, xhr) {
+                alert("돌봄이 수락되었습니다. \n돌봄이가 확인중이니, 잠시만 기다려주세요!");
+                window.open("about:blank","_self");
+                window.close();
+            },
+            error : function (xhr, status, er) {
+                if (error) {
+                    error(er);
+                }
+            }
+        })
+    }
+}
 
 </script>
 <html>
@@ -218,6 +247,16 @@ function addQuoPrice() {
                         <span class="input-group-text">확정견적금액</span>
                         <input type="number" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
                     </div>
+                </c:if>
+
+                <c:if test="${req.reqPrgrStatCd == 30}">
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                        <button class="btn btn-primary btn-sm" id="accQuo" style="margin-top: 10px" onclick="acceptQuo()">수락</button>
+                    </sec:authorize>
+                </c:if>
+
+                <c:if test="${req.reqPrgrStatCd == 40}">
+                    <p class="comment">돌봄이 수락되었습니다. \n돌봄이가 확인중이니, 잠시만 기다려주세요!</p>
                 </c:if>
             </div>
         </form>
