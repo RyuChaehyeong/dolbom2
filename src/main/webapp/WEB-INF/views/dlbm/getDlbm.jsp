@@ -127,7 +127,7 @@ function delConfirm() {
             data : param,
             contentType : "application/json; charset=utf-8",
             success : function (result, status, xhr) {
-                alert("돌봄 서비스가 삭제되었습니다.");;
+                alert("돌봄 서비스가 삭제되었습니다.");
                 location.href = '/dlbm/getList';
             },
             error : function (xhr, status, er) {

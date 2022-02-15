@@ -22,7 +22,7 @@
         <collection property="authList" resultMap="authMap"></collection>
     </resultMap>
 
-    <resultMap id="authMap" type="com.dolbom.domain.auth.AuthVO">
+    <resultMap id="authMap" type="com.dolbom.domain.auth.DlbmUserAuthVO">
         <result property="userId" column="USER_ID"/>
         <result property="auth" column="AUTH"/>
     </resultMap>
@@ -41,5 +41,67 @@
             LEFT OUTER JOIN DLBM_USER_AUTH DUA
                 ON DU.USER_ID = DUA.USER_ID
             WHERE DU.USER_ID = #{userId}
+    </select>
+
+    <insert id="registerMemberInfo">
+        <selectKey keyProperty="userSn" order="BEFORE" resultType="long">
+            SELECT USER_SN_SEQ.nextval
+            FROM dual
+        </selectKey>
+
+        INSERT INTO DLBM_USER
+        (
+        USER_SN,
+        USER_ID,
+        USER_NM,
+        USER_PWD,
+        USER_EMAIL,
+        USER_PHONE,
+        USER_TYPE_CD,
+        CREATED_DT,
+        CREATED_BY,
+        LAST_MODIFIED_DT,
+        LAST_MODIFIED_BY
+        )
+        VALUES
+        (
+        #{userSn},
+        #{userId},
+        #{userNm},
+        #{userPwd},
+        #{userEmail},
+        #{userPhone},
+        #{userTypeCd},
+        sysdate,
+        #{createdBy},
+        sysdate,
+        #{lastModifiedBy}
+        )
+    </insert>
+
+    <insert id="registerAuthInfo">
+
+        INSERT INTO DLBM_USER_AUTH
+        (
+            USER_ID,
+            AUTH
+        )
+        VALUES
+            (
+                #{userId},
+                #{auth}
+            )
+    </insert>
+
+    <select id="checkId" resultType="string" parameterType="string">
+        SELECT COUNT(*)
+            FROM DLBM_USER
+            WHERE USER_ID = #{id}
+    </select>
+
+    <select id="checkEmail" resultType="string" parameterType="string">
+        SELECT COUNT(*)
+            FROM DLBM_USER
+            WHERE USER_EMAIL = #{email}
     </select>
 </mapper>

@@ -16,7 +16,7 @@
     $(document).ready(function (){
         $.ajax({
             type : "get",
-            url : "${root }/service/getList",
+            url : "${path }/service/getList",
             success : function (data) {
                 console.log(data);
                 for (var i in data) {

@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="${root }/login">로그인</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="${root }/member/register">회원가입</a>
+                    </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="nav-item">

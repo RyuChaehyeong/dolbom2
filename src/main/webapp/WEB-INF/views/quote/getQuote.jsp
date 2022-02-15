@@ -108,28 +108,34 @@ function addQuoPrice() {
         return false;
     }
 
-    const paramData = {
-        reqId : $("#reqId").val(),
-        quoPrice : insertedPrice,
-        lastModifiedBy : $("#lastModifiedBy").val()
+    if (!confirm('견적 금액 등록 후에는 변경하실 수 없습니다.')) {
+        return false;
+    } else {
+        const paramData = {
+            reqId : $("#reqId").val(),
+            quoPrice : insertedPrice,
+            lastModifiedBy : $("#lastModifiedBy").val()
+        }
+
+        const param = JSON.stringify(paramData);
+        $.ajax({
+            type : 'post',
+            url : '/quote/addQuoPrice',
+            data : param,
+            contentType : "application/json; charset=utf-8",
+            success : function (result, status, xhr) {
+                alert("견적 금액이 등록되었습니다.");
+                location.reload();
+            },
+            error : function (xhr, status, er) {
+                if (error) {
+                    error(er);
+                }
+            }
+        });
     }
 
-    const param = JSON.stringify(paramData);
-    $.ajax({
-        type : 'post',
-        url : '/quote/addQuoPrice',
-        data : param,
-        contentType : "application/json; charset=utf-8",
-        success : function (result, status, xhr) {
-            alert("견적 금액이 등록되었습니다.");
-            location.reload();
-        },
-        error : function (xhr, status, er) {
-            if (error) {
-                error(er);
-            }
-        }
-    });
+
 }
 
 function acceptQuo() {

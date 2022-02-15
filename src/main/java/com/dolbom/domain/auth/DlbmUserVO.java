@@ -1,5 +1,6 @@
 package com.dolbom.domain.auth;
 
+import com.dolbom.domain.auth.DlbmUserAuthVO;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,9 +9,9 @@ import java.util.List;
 @Data
 public class DlbmUserVO {
 
-    private String userId;
+    private Long userSn;
 
-    private String userSn;
+    private String userId;
 
     private String userNm;
 
@@ -22,18 +23,17 @@ public class DlbmUserVO {
 
     private String userTypeCd;
 
-    private String userYn;
+    private String useYn;
 
     private String dltYn;
 
     private Date createdDt;
 
-    private Date lastModifiedDt;
-
     private String createdBy;
+
+    private Date lastModifiedDt;
 
     private String lastModifiedBy;
 
-    private List<AuthVO> authList;
-
+    private List<DlbmUserAuthVO> authList;
 }

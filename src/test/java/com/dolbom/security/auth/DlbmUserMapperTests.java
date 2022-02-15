@@ -1,12 +1,14 @@
 package com.dolbom.security.auth;
 
 import com.dolbom.domain.auth.AdminUserVO;
+import com.dolbom.domain.auth.DlbmUserAuthVO;
 import com.dolbom.domain.auth.DlbmUserVO;
 import com.dolbom.mapper.auth.AdminUserMapper;
 import com.dolbom.mapper.auth.DlbmUserMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +24,7 @@ import java.sql.PreparedStatement;
         {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                 "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 @Log4j
-public class DlbmUserTests {
+public class DlbmUserMapperTests {
 
     @Setter(onMethod_ = @Autowired)
     private PasswordEncoder pwencoder;
@@ -263,6 +265,32 @@ public class DlbmUserTests {
         AdminUserVO adminUserVO = adminUserMapper.readAdminUserInfo("#sysadmin3");
         log.info(adminUserVO);
         adminUserVO.getAuthList().forEach(authVO -> log.info(authVO));
+    }
+
+    @Test
+    @DisplayName("돌봄 사용자 등록 테스트")
+    public void testRegisterUser() {
+        DlbmUserVO dlbmUser = new DlbmUserVO();
+        dlbmUser.setUserId("chaehyeong14");
+        dlbmUser.setUserPwd(pwencoder.encode("123"));
+        dlbmUser.setUserNm("유채형");
+        dlbmUser.setUserEmail("fluid15@test.com");
+        dlbmUser.setUserPhone("01012345678");
+        dlbmUser.setUserTypeCd("10");
+        dlbmUser.setCreatedBy("chaehyeong1");
+        dlbmUser.setLastModifiedBy("chaehyeong1");
+        dlbmUserMapper.registerMemberInfo(dlbmUser);
+
+    }
+
+    @Test
+    @DisplayName("돌봄 사용자 권한 등록 테스트")
+    public void testRegisterUserAuth() {
+        DlbmUserAuthVO authVO = new DlbmUserAuthVO();
+        authVO.setUserId("chaehyeong14");
+        authVO.setAuth("ROLE_DLBM");
+        dlbmUserMapper.registerAuthInfo(authVO);
+
     }
 
 }
