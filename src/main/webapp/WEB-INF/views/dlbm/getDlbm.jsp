@@ -164,6 +164,8 @@ function delConfirm() {
                     <input type="text" class="form-control" id="dlbmId" name="dlbmId" value='<c:out value="${principal.username}"/>' hidden >
                     <input type="text" class="form-control" id="extraAddress" name="extraAddress" hidden >
                     <input type="text" class="form-control" id="lastModifiedBy" name="lastModifiedBy" value='<c:out value="${principal.username}"/>' hidden  >
+                    <input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+                    <input type="hidden" name="pageNum" value='<c:out value="${cri.amount}"/>'>
                 </div>
                 <div style="margin-bottom: 30px; margin-left: 10px; font-weight: bold">
                     <h3><c:out value="${srvc.srvcNm}"/></h3>

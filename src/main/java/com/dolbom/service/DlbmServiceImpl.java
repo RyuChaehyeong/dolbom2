@@ -1,5 +1,6 @@
 package com.dolbom.service;
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
 import com.dolbom.mapper.DlbmMapper;
 import lombok.AllArgsConstructor;
@@ -40,14 +41,20 @@ public class DlbmServiceImpl implements DlbmService {
 
 
     @Override
-    public List<DlbmVO> getList() {
+    public List<DlbmVO> getList(Criteria cri) {
 
-        List<DlbmVO> srvcList = dlbmMapper.getList();
+        log.info("GET DLBM LIST WITH PAGING" + cri);
+        List<DlbmVO> srvcList = dlbmMapper.getListWithPaging(cri);
         return srvcList;
     }
 
     @Override
     public int modify(DlbmVO dlbm) {
         return dlbmMapper.modify(dlbm);
+    }
+
+    @Override
+    public int getTotalCnt(Criteria cri) {
+        return dlbmMapper.getTotalCnt(cri);
     }
 }

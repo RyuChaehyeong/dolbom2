@@ -1,5 +1,6 @@
 package com.dolbom.service;
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface DlbmService {
 
     int delete(DlbmVO dlbm);
 
-    List<DlbmVO> getList();
+    List<DlbmVO> getList(Criteria cri);
 
     int modify(DlbmVO dlbm);
 
-
+    int getTotalCnt(Criteria cri);
 }

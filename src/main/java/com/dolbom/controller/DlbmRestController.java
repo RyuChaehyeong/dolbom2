@@ -1,5 +1,6 @@
 package com.dolbom.controller;
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
 import com.dolbom.service.DlbmService;
 import lombok.AllArgsConstructor;
@@ -22,9 +23,9 @@ public class DlbmRestController {
 
     @GetMapping(value = "/getList" ,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<DlbmVO>> getSrvcList(Model model) {
-        List<DlbmVO> srvcList = service.getList();
-        return new ResponseEntity<>(service.getList(), HttpStatus.OK);
+    public ResponseEntity<List<DlbmVO>> getSrvcList(Criteria cri, Model model) {
+        List<DlbmVO> srvcList = service.getList(cri);
+        return new ResponseEntity<>(srvcList, HttpStatus.OK);
     }
 
 

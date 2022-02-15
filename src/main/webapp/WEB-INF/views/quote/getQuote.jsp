@@ -226,6 +226,13 @@ function acceptQuo() {
                     <textarea class="form-control" name="reqDtl" id="reqDtl" readonly ='readonly'><c:out value="${req.reqDtl}"/></textarea>
                 </div>
 
+                <c:if test="${req.reqPrgrStatCd >= 30}">
+                    <div class="input-group mb-3" style="margin-top: 15px">
+                        <span class="input-group-text">확정견적금액</span>
+                        <input type="number" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
+                    </div>
+                </c:if>
+
                 <c:if test="${req.reqPrgrStatCd == 10}">
                     <div id="modiDelBtn">
                         <button type="button" class="btn btn-primary btn-sm" id="modiBtn" onclick="modify()">수정</button>
@@ -242,13 +249,6 @@ function acceptQuo() {
                     <button class="btn btn-primary btn-sm" id="addPrice" style="margin-top: 10px" onclick="addQuoPrice()">견적금액 등록</button>
                 </c:if>
 
-                <c:if test="${req.reqPrgrStatCd >= 30}">
-                    <div class="input-group mb-3" style="margin-top: 15px">
-                        <span class="input-group-text">확정견적금액</span>
-                        <input type="number" class="form-control" name="savedQuoPrice" id="savedQuoPrice" value='<c:out value="${req.quoPrice}"/>' readonly ='readonly' >
-                    </div>
-                </c:if>
-
                 <c:if test="${req.reqPrgrStatCd == 30}">
                     <sec:authorize access="hasRole('ROLE_CUSTOMER')">
                         <button class="btn btn-primary btn-sm" id="accQuo" style="margin-top: 10px" onclick="acceptQuo()">수락</button>
@@ -256,7 +256,7 @@ function acceptQuo() {
                 </c:if>
 
                 <c:if test="${req.reqPrgrStatCd == 40}">
-                    <p class="comment">돌봄이 수락되었습니다. \n돌봄이가 확인중이니, 잠시만 기다려주세요!</p>
+                    <p class="comment">돌봄이 수락되었습니다. 돌봄이가 확인중이니, 잠시만 기다려주세요!</p>
                 </c:if>
             </div>
         </form>

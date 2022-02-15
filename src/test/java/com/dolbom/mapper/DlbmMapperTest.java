@@ -1,6 +1,7 @@
 package com.dolbom.mapper;
 
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -77,5 +78,15 @@ public class DlbmMapperTest {
         dlbm.setDetailAddress("modified detailed 상세주소");
         int res = mapper.modify(dlbm);
         log.info("*****" + dlbm);
+    }
+
+    @Test
+    public void testPaging() {
+
+        Criteria cri = new Criteria();
+        cri.setPageNum(3);
+        cri.setAmount(10);
+        List<DlbmVO> list = mapper.getListWithPaging(cri);
+        list.forEach(dlbm -> log.info(dlbm));
     }
 }

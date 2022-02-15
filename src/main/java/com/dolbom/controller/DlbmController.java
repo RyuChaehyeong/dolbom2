@@ -1,6 +1,8 @@
 package com.dolbom.controller;
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
+import com.dolbom.domain.PageDTO;
 import com.dolbom.domain.QuoteReqVO;
 import com.dolbom.service.DlbmService;
 import lombok.Setter;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @Log4j
@@ -42,13 +46,21 @@ public class DlbmController {
     }
 
     @RequestMapping("/getList")
-    public String getList() {
+    public String getList(Criteria cri, Model model) {
         log.info("SERVICE LIST PAGE LOADED..");
+        log.info("list: " + cri);
+
+        List<DlbmVO> list = dlbmService.getList(cri);
+        int total = dlbmService.getTotalCnt(cri);
+
+        model.addAttribute("dlbmList", list);
+        model.addAttribute("pageMaker", new PageDTO(cri, total));
+
         return "/dlbm/getDlbmList";
     }
 
     @GetMapping("/get")
-    public String get(@RequestParam("srvcId") Long srvcId, Model model) {
+    public String get(@RequestParam("srvcId") Long srvcId, @ModelAttribute("cri") Criteria cri, Model model) {
         log.info("GET SERVICE: " +srvcId);
         DlbmVO vo = dlbmService.get(srvcId);
         model.addAttribute("srvc", vo);

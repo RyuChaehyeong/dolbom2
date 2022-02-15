@@ -1,5 +1,6 @@
 package com.dolbom.service;
 
+import com.dolbom.domain.Criteria;
 import com.dolbom.domain.DlbmVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -64,7 +65,7 @@ public class DlbmServiceTests {
 
     @Test
     public void testGetList() {
-        service.getList().forEach(srvc -> log.info(srvc));
+        service.getList(new Criteria(2,10)).forEach(srvc -> log.info(srvc));
     }
 
     @Test
