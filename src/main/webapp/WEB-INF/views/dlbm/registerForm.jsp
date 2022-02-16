@@ -82,7 +82,7 @@ $(document).ready(function (){
                         <span class="input-group-text">서비스 상세</span>
                         <textarea class="form-control" id="srvcDtl" name="srvcDtl"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 10px">견적 보내기</button>
+                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 10px">서비스 등록</button>
     </div>
 </div>
 <jsp:include page="/resources/include/footer.jsp" />

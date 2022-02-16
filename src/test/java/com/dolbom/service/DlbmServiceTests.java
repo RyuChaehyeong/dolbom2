@@ -14,7 +14,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(
+        {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+                "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 @Log4j
 public class DlbmServiceTests {
 

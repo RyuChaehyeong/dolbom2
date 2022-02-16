@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.ReviewMapper">
+
+    <select id="getList" resultType="com.dolbom.domain.ReviewVO">
+        SELECT REQ_ID,
+               SRVC_ID,
+               CUST_ID,
+               RATE,
+               REVIEW_COMMENT,
+               USE_YN,
+               DLT_YN,
+               CREATED_DT,
+               CREATED_BY,
+               LAST_MODIFIED_DT,
+               LAST_MODIFIED_BY
+            FROM REVIEW
+            WHERE SRVC_ID = #{srvcId}
+              AND USE_YN = 'Y'
+    </select>
+
+    <insert id="register">
+
+    </insert>
+</mapper>

@@ -139,12 +139,64 @@ function delConfirm() {
     }
 }
 
+
+function openReview() {
+
+    const srvcId = $("#srvcId").val();
+
+    $('#closeReviewBtn').attr('hidden', false);
+    $('#openReviewBtn').attr('hidden', true);
+
+    $.ajax({
+        type: 'GET',
+        url: "/review/getList?srvcId=" + srvcId,
+        dataType: 'json',
+        success : function (data) {
+            const tbl = $("#reviewTbl");
+            console.log(data);
+            console.log(data.length);
+            if (data.length == 0) {
+                $('#noneReview').attr('hidden', false);
+            } else {
+                $('#reviewTbl').attr('hidden', false);
+                $.each(data, function(idx, item) {
+                    console.log(item);
+                    var review = "<tbody><tr>";
+                    review += "<td>" + item.custId + "</td>";
+                    review += "<td>" + item.rate + "</td>";
+                    review += "<td>" + item.reviewComment + "</td>";
+                    review += "</tr></tbody>";
+
+                    tbl.append(review);
+                });
+            }
+
+        }
+    })
+
+}
+
+function closeReview(item) {
+    $('#reviewTbl').attr('hidden', true);
+    $( '#reviewTbl > tbody').empty();
+    $('#closeReviewBtn').attr('hidden', true);
+    $('#openReviewBtn').attr('hidden', false);
+    $('#noneReview').attr('hidden', true);
+}
+
 </script>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>돌봄 서비스 상세 조회하기</title>
     <script src="${path}/resources/js/common.js"></script>
+    <style type="text/css">
+        #noneReview{
+            text-align: center;
+            align-content: center;
+            background-color: antiquewhite;
+        }
+    </style>
 </head>
 
 <body>
@@ -170,13 +222,7 @@ function delConfirm() {
                 <div style="margin-bottom: 30px; margin-left: 10px; font-weight: bold">
                     <h3><c:out value="${srvc.srvcNm}"/></h3>
                 </div>
-                <c:if test="${srvc.rate ne '' or null ne srvc.rate }">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">별점</span>
-                        <input type="text" class="form-control" name="rate"
-                               value='<c:out value="${srvc.rate}" />' readonly = "readonly">
-                    </div>
-                </c:if>
+
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon2">돌봄이ID</span>
                     <input type="text" class="form-control" name="dlbmId"
@@ -225,7 +271,22 @@ function delConfirm() {
                     <span class="input-group-text">서비스 상세</span>
                     <textarea class="form-control" readonly="readonly" name="srvcDtl" id="srvcDtl"><c:out value="${srvc.srvcDtl}" /></textarea>
                 </div>
-
+                <div class="text-center" style="margin-bottom: 10px">
+                    <button id="openReviewBtn" class="btn btn-warning btn-sm" style="margin-top: 20px;" onclick="openReview()">리뷰열기▼</button>
+                    <button id="closeReviewBtn" class="btn btn-warning btn-sm" style="margin-top: 20px;" onclick="closeReview()" hidden>리뷰 닫기▲</button>
+                </div>
+                <div id="reviewContainer">
+                    <table class="table" id="reviewTbl" hidden>
+                        <thead class="table-light">
+                        <tr>
+                            <td>고객ID</td>
+                            <td>평점</td>
+                            <td>한줄평</td>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div id="noneReview" hidden>작성된 리뷰가 없습니다!</div>
+                </div>
             </div>
         </div>
         <sec:authentication property="principal" var="principal"/>

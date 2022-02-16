@@ -12,31 +12,8 @@
 
 
 <script>
-/*
-    $(document).ready(function (){
-        $.ajax({
-            type : "get",
-            url : "${path }/service/getList",
-            success : function (data) {
-                console.log(data);
-                for (var i in data) {
-                    console.log(data[i]);
-                    var table = "<tbody><tr>";
-                        table += "<td>" + data[i].dlbmId + "</td>";
-                        table += "<td><a href = '${path}/dlbm/get?srvcId=" + data[i].srvcId + "'>" + data[i].srvcNm + "</a></td>";
-                        table += "<td>" + data[i].dlbmLoc + "</td>";
-                        table += "<td>" + data[i].animalCtgrCd + "</td>";
-                        table += "<td>" + data[i].breedCtgrCd + "</td>";
-                        table += "</tr></tbody>"
-                    $('table').append(table);
-                }
-            },
-            error : function () {
-                alert("실패");
-            }
-        })
-    });
-*/
+
+
 $(document).ready(function (){
     const actionForm = $("#actionForm");
     $(".paginate_btn a").on("click", function (e) {

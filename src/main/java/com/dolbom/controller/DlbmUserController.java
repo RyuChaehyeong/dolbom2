@@ -4,6 +4,7 @@ import com.dolbom.domain.auth.DlbmUserAuthVO;
 import com.dolbom.domain.auth.DlbmUserVO;
 import com.dolbom.service.DlbmUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @Log4j
+@AllArgsConstructor
 @RequestMapping("/member/*")
 public class DlbmUserController {
 
