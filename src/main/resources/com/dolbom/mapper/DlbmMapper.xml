@@ -154,4 +154,38 @@
         WHERE SRVC_ID = #{srvcId}
     </update>
 
+    <select id="getmyDlbmHist" resultType="com.dolbom.domain.DlbmVO">
+        SELECT SRVC.SRVC_NM,
+               SRVC.RATE,
+               SRVC.CNT,
+               CC1.CD_NM BREED_CTGR_CD,
+               CC2.CD_NM ANIMAL_CTGR_CD
+            FROM SRVC
+            LEFT OUTER JOIN CMMN_CD CC1
+                 ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
+                 AND SRVC.BREED_CTGR_CD = CC1.CD_ID
+            LEFT OUTER JOIN CMMN_CD CC2
+                 ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
+            WHERE DLBM_ID = #{userId}
+    </select>
+
+    <select id="getCmplDlbmHist" resultType="com.dolbom.domain.DlbmVO">
+        SELECT SRVC.SRVC_NM,
+               SRVC.RATE,
+               SRVC.CNT,
+               CC1.CD_NM BREED_CTGR_CD,
+               CC2.CD_NM ANIMAL_CTGR_CD
+        FROM SRVC
+        INNER JOIN QUOTE_REQ QR
+            ON SRVC.SRVC_ID = QR.SRVC_ID
+        INNER JOIN DLBM_USER DU
+            ON QR.CUST_ID = DU.USER_ID
+        LEFT OUTER JOIN CMMN_CD CC1
+            ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
+            AND SRVC.BREED_CTGR_CD = CC1.CD_ID
+        LEFT OUTER JOIN CMMN_CD CC2
+            ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
+        WHERE QR.CUST_ID = #{userId}
+        GROUP BY SRVC.SRVC_NM, SRVC.RATE, SRVC.CNT, CC1.CD_NM, CC2.CD_NM
+    </select>
 </mapper>

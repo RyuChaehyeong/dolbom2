@@ -156,6 +156,7 @@ function openReview() {
             console.log(data);
             console.log(data.length);
             if (data.length == 0) {
+                //리뷰 개수 0개
                 $('#noneReview').attr('hidden', false);
             } else {
                 $('#reviewTbl').attr('hidden', false);
@@ -178,7 +179,7 @@ function openReview() {
 
 function closeReview(item) {
     $('#reviewTbl').attr('hidden', true);
-    $( '#reviewTbl > tbody').empty();
+    $('#reviewTbl > tbody').empty();
     $('#closeReviewBtn').attr('hidden', true);
     $('#openReviewBtn').attr('hidden', false);
     $('#noneReview').attr('hidden', true);
@@ -276,7 +277,7 @@ function closeReview(item) {
                     <button id="closeReviewBtn" class="btn btn-warning btn-sm" style="margin-top: 20px;" onclick="closeReview()" hidden>리뷰 닫기▲</button>
                 </div>
                 <div id="reviewContainer">
-                    <table class="table" id="reviewTbl" hidden>
+                    <table class="table" id="reviewTbl"  hidden>
                         <thead class="table-light">
                         <tr>
                             <td>고객ID</td>

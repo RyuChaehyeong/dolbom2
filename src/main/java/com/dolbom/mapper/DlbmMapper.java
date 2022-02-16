@@ -20,4 +20,9 @@ public interface DlbmMapper {
     int modify(DlbmVO dlbm);
 
     int getTotalCnt(Criteria cri);
+
+    List<DlbmVO> getmyDlbmHist(String userId);
+
+    List<DlbmVO> getCmplDlbmHist(String userId);
 }
+

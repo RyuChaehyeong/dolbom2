@@ -13,6 +13,8 @@ public class QuoteReqVO {
 
     private Long srvcId;
 
+    private String srvcNm;
+
     private String custId;
 
     private String reqTitle;
@@ -33,6 +35,8 @@ public class QuoteReqVO {
 
     private String reqPrgrStatCd;
 
+    private String reqPrgrStatNm;
+
     private String quoPrice;
 
     private String useYn;
@@ -46,6 +50,15 @@ public class QuoteReqVO {
     private Date lastModifiedDt;
 
     private String lastModifiedBy;
+
+    private String animalCtgrCd;
+
+    private String breedCtgrCd;
+
+    private String animalCtgrNm;
+
+    private String breedCtgrNm;
+
 
 
 

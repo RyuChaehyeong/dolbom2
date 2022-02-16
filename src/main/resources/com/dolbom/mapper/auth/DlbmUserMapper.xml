@@ -104,4 +104,13 @@
             FROM DLBM_USER
             WHERE USER_EMAIL = #{email}
     </select>
+
+    <select id="getUserInfo" resultType="com.dolbom.domain.auth.DlbmUserVO">
+        SELECT USER_ID,
+               USER_NM,
+               USER_EMAIL,
+               USER_PHONE
+            FROM DLBM_USER
+            WHERE USER_ID = #{userId}
+    </select>
 </mapper>

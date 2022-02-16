@@ -8,6 +8,10 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Log4j
 @Service
 @AllArgsConstructor
@@ -48,5 +52,18 @@ public class QuoteServiceImpl implements QuoteService {
     @Override
     public int delete(QuoteReqVO quote) {
         return quoteMapper.delete(quote);
+    }
+
+    @Override
+    public Map<String, List<QuoteReqVO>> getQuoHist(String userId, String auth) {
+        Map<String, List<QuoteReqVO>> map = new HashMap<>();
+        List<QuoteReqVO> cmpl = quoteMapper.getQuoHist(userId, auth, "cmpl");
+        List<QuoteReqVO> prgr =quoteMapper.getQuoHist(userId, auth, "prgr");
+
+        map.put("cmplList", cmpl);
+        map.put("prgrList", prgr);
+
+        return map;
+
     }
 }

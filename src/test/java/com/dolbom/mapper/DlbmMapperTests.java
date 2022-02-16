@@ -89,4 +89,14 @@ public class DlbmMapperTests {
         List<DlbmVO> list = mapper.getListWithPaging(cri);
         list.forEach(dlbm -> log.info(dlbm));
     }
+
+    @Test
+    public void testGetmyDlbmHist() {
+        mapper.getmyDlbmHist("dlbm20").forEach(srvc -> log.info(srvc));
+    }
+
+    @Test
+    public void testGetCmplDlbmHist() {
+        mapper.getCmplDlbmHist("cust9").forEach(srvc -> log.info(srvc));
+    }
 }

@@ -10,4 +10,6 @@ public interface DlbmUserService {
     String checkId(String id);
 
     String checkEmail(String email);
+
+    DlbmUserVO getUserInfo(String userId);
 }

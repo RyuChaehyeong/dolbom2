@@ -57,4 +57,18 @@ public class DlbmServiceImpl implements DlbmService {
     public int getTotalCnt(Criteria cri) {
         return dlbmMapper.getTotalCnt(cri);
     }
+
+    /*돌봄이가 등록한 서비스 조회*/
+    @Override
+    public List<DlbmVO> getmyDlbmHist(String userId) {
+        List<DlbmVO> myHist = dlbmMapper.getmyDlbmHist(userId);
+        return myHist;
+    }
+
+    /*고객이 이용한 서비스 조회*/
+    @Override
+    public List<DlbmVO> getCmplDlbmHist(String userId) {
+        List<DlbmVO> cmplHist = dlbmMapper.getCmplDlbmHist(userId);
+        return cmplHist;
+    }
 }

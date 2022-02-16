@@ -34,4 +34,10 @@ public class DlbmUserServiceImpl implements DlbmUserService{
         return dlbmUserMapper.checkEmail(email);
     }
 
+    @Override
+    public DlbmUserVO getUserInfo(String userId) {
+        DlbmUserVO userInfo = dlbmUserMapper.getUserInfo(userId);
+        return userInfo;
+    }
+
 }

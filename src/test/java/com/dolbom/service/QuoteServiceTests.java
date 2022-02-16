@@ -11,12 +11,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.text.ParseException;
 import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(
+        {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
+                "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 @Log4j
 public class QuoteServiceTests {
 
@@ -90,9 +94,26 @@ public class QuoteServiceTests {
 
 
     @Test
-    public void deleteQuo() {
+    public void testDeleteQuo() {
         QuoteReqVO req = service.get(11L);
         req.setLastModifiedBy("cust9");
         service.delete(req);
     }
+
+    @Test
+    public void testGetQuoList() {
+        //Map<String, List<QuoteReqVO>> map = service.getQuoHist("cust9", "CUST");
+        Map<String, List<QuoteReqVO>> map = service.getQuoHist("dlbm20", "DLBM");
+
+        List<QuoteReqVO> cmpl = map.get("cmplList");
+        cmpl.forEach(list -> log.info(list));
+        log.info("cmpl size: " + cmpl.size());
+
+        List<QuoteReqVO> prgr = map.get("prgrList");
+        prgr.forEach(list -> log.info(list));
+        log.info("prgr size: " +prgr.size());
+
+
+    }
+
 }

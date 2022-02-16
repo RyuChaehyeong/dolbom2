@@ -92,5 +92,13 @@ public class DlbmServiceTests {
         service.delete(dlbm);
     }
 
+    @Test
+    public void testGetmyDlbmHist() {
+        service.getmyDlbmHist("dlbm20").forEach(srvc -> log.info(srvc));
+    }
 
+    @Test
+    public void testGetCmplDlbmHist() {
+        service.getCmplDlbmHist("cust9").forEach(srvc -> log.info(srvc));
+    }
 }

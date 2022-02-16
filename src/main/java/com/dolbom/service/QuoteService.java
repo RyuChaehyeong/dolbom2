@@ -2,6 +2,9 @@ package com.dolbom.service;
 
 import com.dolbom.domain.QuoteReqVO;
 
+import java.util.List;
+import java.util.Map;
+
 public interface QuoteService {
 
     int register(QuoteReqVO quote);
@@ -15,4 +18,6 @@ public interface QuoteService {
     int acceptQuo(QuoteReqVO quote);
 
     int delete(QuoteReqVO quote);
+
+    Map<String, List<QuoteReqVO>> getQuoHist(String userId, String auth);
 }

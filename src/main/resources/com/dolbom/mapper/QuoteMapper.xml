@@ -105,4 +105,45 @@
             LAST_MODIFIED_BY = #{lastModifiedBy}
         WHERE REQ_ID = #{reqId}
     </update>
+
+    <select id="getQuoHist" resultType="com.dolbom.domain.QuoteReqVO">
+        SELECT QR.REQ_TITLE REQ_TITLE,
+               QR.START_DT START_DT,
+               QR.END_DT END_DT,
+               QR.CUST_LOC CUST_LOC,
+               SRVC.SRVC_NM SRVC_NM,
+               CC1.CD_NM BREED_CTGR_NM,
+               CC2.CD_NM ANIMAL_CTGR_NM,
+               CC3.CD_NM REQ_PRGR_STAT_NM
+        FROM QUOTE_REQ QR
+                 INNER JOIN SRVC
+                            ON QR.SRVC_ID = SRVC.SRVC_ID
+                 INNER JOIN DLBM_USER DU
+                            ON SRVC.DLBM_ID = DU.USER_ID
+                 LEFT OUTER JOIN CMMN_CD CC1
+                                 ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
+                                     AND SRVC.BREED_CTGR_CD = CC1.CD_ID
+                 LEFT OUTER JOIN CMMN_CD CC2
+                                 ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
+                 LEFT OUTER JOIN CMMN_CD CC3
+                                 ON  CC3.CD_GROUP_ID = 'CDA'
+                                     AND QR.REQ_PRGR_STAT_CD = CC3.CD_ID
+        <if test="status != null and status.equals('cmpl') ">
+            <![CDATA[
+            WHERE QR.END_DT < sysdate
+            ]]>
+        </if>
+        <if test="status != null and status.equals('prgr') ">
+            <![CDATA[
+            WHERE QR.END_DT >= sysdate
+            ]]>
+        </if>
+        <if test="auth != null and auth.equals('DLBM') ">
+            AND SRVC.DLBM_ID = #{userId}
+        </if>
+        <if test="auth != null and auth.equals('CUST') ">
+            AND QR.CUST_ID = #{userId}
+        </if>
+        ORDER BY QR.END_DT DESC
+    </select>
 </mapper>

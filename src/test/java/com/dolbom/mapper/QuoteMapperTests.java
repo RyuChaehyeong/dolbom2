@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.text.ParseException;
 
 import java.sql.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
@@ -91,4 +92,16 @@ public class QuoteMapperTests {
         req.setLastModifiedBy("cust9");
         mapper.delete(req);
     }
+
+    @Test
+    public void testGetQuoHist() {
+        //List<QuoteReqVO> list = mapper.getQuoHist("cust9", "CUST", "cmpl");
+        //List<QuoteReqVO> list = mapper.getQuoHist("cust9", "CUST", "prgr");
+        //List<QuoteReqVO> list = mapper.getQuoHist("dlbm20", "DLBM", "cmpl");
+        List<QuoteReqVO> list = mapper.getQuoHist("dlbm20", "DLBM", "prgr");
+        list.forEach(quote -> log.info(quote));
+        log.info("size: " + list.size());
+
+    }
+
 }

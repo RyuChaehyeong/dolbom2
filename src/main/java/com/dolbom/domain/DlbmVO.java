@@ -41,4 +41,6 @@ public class DlbmVO {
 
     private Date lastModifiedDt;
 
+    private String cnt;
+
 }

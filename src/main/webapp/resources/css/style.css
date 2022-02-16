@@ -91,3 +91,20 @@
     margin-top: 10px;
     padding: 10px;
 }
+
+
+.section1 {
+    magin: 20px;
+    padding: 15px;
+    background-color: aliceblue;
+}
+
+.section2 {
+    magin: 30px;
+    padding: 15px;
+    background-color: mintcream;
+}
+
+.smallTitle {
+    margin-bottom: 10px;
+}
