@@ -37,12 +37,20 @@
             border-style: hidden;
             font-size: 7px;
             width: 300px;
+            background-color: #f7f7f7;
         }
         .form-group {
             margin-top: 5px;
         }
         .checkComment:focus {
             outline: none;
+        }
+
+        #joinForm {
+            padding: 35px;
+        }
+        .form-control {
+            width: 85%;
         }
     </style>
     <title>회원가입</title>
@@ -54,55 +62,62 @@
 <div class="container">
     <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
-            <div class="form-group">
-                <label>ID</label>
-                <input type="text" id="userId" name="userId" class="form-control" placeholder="ID를 입력해주세요">
-            </div>
-                <input class="checkComment" id="idCheck" tabindex="-1">
-            <div class="form-group">
-                <label>비밀번호</label>
-                <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="비밀번호 입력">
-            </div>
-                <input class="checkComment" id="pwdCheck" tabindex="-1">
-            <div class="form-group">
-                <label>비밀번호 확인</label>
-                <input type="password" id="userPwdCheck" name="userPwdCheck" class="form-control" placeholder="비밀번호 확인 입력">
-            </div>
-                <input class="checkComment" id="pwdCheckCheck" tabindex="-1">
-            <div class="form-group">
-                <label>이름</label>
-                <input type="text" id="userNm" name="userNm" class="form-control" placeholder="이름을 입력해주세요">
-            </div>
-                <input class="checkComment" id="nameCheck" tabindex="-1">
-            <div class="form-group">
-                <label>이메일</label>
-                <input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="이메일을 입력해주세요">
-            </div>
-                <input class="checkComment" id="emailCheck" tabindex="-1">
-            <div class="form-group">
-                <label >휴대폰 번호</label>
-                <input type="number" id="userPhone" name="userPhone" class="form-control" placeholder="휴대폰번호를 입력해주세요. (-를 제외하고 숫자만 입력)">
-            </div>
-            <div class="form-group">
-                <label >회원 유형</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleCust" value="ROLE_CUSTOMER">
-                    <label class="form-check-label" for="roleCust">
-                        고객회원
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleDlbm" checked value="ROLE_DLBM">
-                    <label class="form-check-label" for="roleDlbm">
-                        돌봄이회원
-                    </label>
-                </div>
-            </div>
+        <div class="title">
+            <h4>서비스 등록하기</h4>
+        </div>
+        <div class="content">
+            <div id="joinForm">
 
-            <div style="text-align: center">
-                <button type="submit" class="btn btn-primary" id="registerBtn">회원가입</button>
-            </div>
+                <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" id="userId" name="userId" class="form-control" placeholder="ID를 입력해주세요">
+                </div>
+                    <input class="checkComment" id="idCheck" tabindex="-1">
+                <div class="form-group">
+                    <label>비밀번호</label>
+                    <input type="password" id="userPwd" name="userPwd" class="form-control" placeholder="비밀번호 입력">
+                </div>
+                    <input class="checkComment" id="pwdCheck" tabindex="-1">
+                <div class="form-group">
+                    <label>비밀번호 확인</label>
+                    <input type="password" id="userPwdCheck" name="userPwdCheck" class="form-control" placeholder="비밀번호 확인 입력">
+                </div>
+                    <input class="checkComment" id="pwdCheckCheck" tabindex="-1">
+                <div class="form-group">
+                    <label>이름</label>
+                    <input type="text" id="userNm" name="userNm" class="form-control" placeholder="이름을 입력해주세요">
+                </div>
+                    <input class="checkComment" id="nameCheck" tabindex="-1">
+                <div class="form-group">
+                    <label>이메일</label>
+                    <input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="이메일을 입력해주세요">
+                </div>
+                    <input class="checkComment" id="emailCheck" tabindex="-1">
+                <div class="form-group">
+                    <label >휴대폰 번호</label>
+                    <input type="number" id="userPhone" name="userPhone" class="form-control" placeholder="휴대폰번호를 입력해주세요. (-를 제외하고 숫자만 입력)">
+                </div>
+                <div class="form-group">
+                    <label >회원 유형</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleCust" value="ROLE_CUSTOMER">
+                        <label class="form-check-label" for="roleCust">
+                            고객회원
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleDlbm" checked value="ROLE_DLBM">
+                        <label class="form-check-label" for="roleDlbm">
+                            돌봄이회원
+                        </label>
+                    </div>
+                </div>
 
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-primary" id="registerBtn">회원가입</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="${path}/resources/js/joinCheck.js"></script>
 </div>

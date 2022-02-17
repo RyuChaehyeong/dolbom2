@@ -13,7 +13,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link href="${root }/resources/css/style.css" rel="stylesheet">
+<link href="${path }/resources/css/style.css" rel="stylesheet">
 <script>
 
 
@@ -37,7 +37,7 @@
     <div class="mainbox">
 
         <div class="title">
-            <h4>서비스 상세 조회하기</h4>
+            <h4>마이페이지</h4>
         </div>
         <div class="content">
             <div  id="dlbmHist" class="section1">
@@ -60,7 +60,12 @@
                             </thead>
                             <c:forEach items="${prgrQuoList}" var="prgrQuo">
                                 <tr>
-                                    <td><c:out value="${prgrQuo.reqTitle}"/></td>
+                                    <td>
+                                        <a href="${path}/quote/get?reqId=${prgrQuo.reqId}"
+                                           onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">
+                                            <c:out value="${prgrQuo.reqTitle}"/>
+                                        </a>
+                                    </td>
                                     <td><fmt:formatDate value="${prgrQuo.startDt}" pattern="yyyy-MM-dd"/></td>
                                     <td><fmt:formatDate value="${prgrQuo.endDt}" pattern="yyyy-MM-dd"/></td>
                                     <td><c:out value="${prgrQuo.custLoc}"/></td>
@@ -91,7 +96,12 @@
                             </thead>
                             <c:forEach items="${cmplQuoList}" var="cmplQuo">
                                 <tr>
-                                    <td><c:out value="${cmplQuo.reqTitle}"/></td>
+                                    <td>
+                                        <a href="${path}/quote/get?reqId=${cmplQuo.reqId}"
+                                           onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;">
+                                            <c:out value="${cmplQuo.reqTitle}"/>
+                                        </a>
+                                    </td>
                                     <td><fmt:formatDate value="${cmplQuo.startDt}" pattern="yyyy-MM-dd"/></td>
                                     <td><fmt:formatDate value="${cmplQuo.endDt}" pattern="yyyy-MM-dd"/></td>
                                     <td><c:out value="${cmplQuo.custLoc}"/></td>
@@ -120,11 +130,15 @@
                             </thead>
                             <c:forEach items="${complDlbmList}" var="dlbm">
                                 <tr>
-                                    <td><c:out value="${dlbm.srvcNm}"/></td>
+                                    <td>
+                                        <a href="${path}/dlbm/get?srvcId=${dlbm.srvcId}">
+                                            <c:out value="${dlbm.srvcNm}"/>
+                                        </a>
+                                    </td>
                                     <td><c:out value="${dlbm.rate}"/></td>
                                     <td><c:out value="${dlbm.cnt}"/></td>
-                                    <td><c:out value="${dlbm.animalCtgrCd}"/></td>
-                                    <td><c:out value="${dlbm.breedCtgrCd}"/></td>
+                                    <td><c:out value="${dlbm.animalCtgrNm}"/></td>
+                                    <td><c:out value="${dlbm.breedCtgrNm}"/></td>
                                 </tr>
                             </c:forEach>
                             <p class="noInfo" hidden>조회된 내역이 없습니다.</p>

@@ -101,4 +101,9 @@ public class DlbmServiceTests {
     public void testGetCmplDlbmHist() {
         service.getCmplDlbmHist("cust9").forEach(srvc -> log.info(srvc));
     }
+
+    @Test
+    public void testUpCnt() {
+        service.upCnt(181L);
+    }
 }

@@ -73,7 +73,7 @@
                         <span class="input-group-text">요청상세</span>
                         <textarea class="form-control" id="reqDtl" name="reqDtl"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 10px">견적 보내기</button>
+                    <button type="submit" class="btn btn-outline-dark" id="reqButton" style="margin-top: 10px">견적 보내기</button>
 
 
                 </div>

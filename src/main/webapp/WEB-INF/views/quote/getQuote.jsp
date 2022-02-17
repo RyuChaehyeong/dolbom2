@@ -39,7 +39,7 @@ function modify(){
 };
 
 function delConfirm() {
-    if (!confirm('해당 견적 요청을 삭제하시겠습니까?')) {
+    if (!confirm('해당 견적 요청을 취소 하시겠습니까?')) {
         return false;
     } else {
         const paramData = {
@@ -167,6 +167,36 @@ function acceptQuo() {
     }
 }
 
+function signQuo()  {
+    if (!confirm('해당 요청을 진행하시겠습니까?')) {
+        return false;
+    } else {
+        const paramData = {
+            reqId : $("#reqId").val(),
+            lastModifiedBy : $("#lastModifiedBy").val(),
+            srvcId : $("#srvcId").val()
+        }
+
+        const param = JSON.stringify(paramData);
+        $.ajax({
+            type : 'post',
+            url : '/quote/signQuo',
+            data : param,
+            contentType : "application/json; charset=utf-8",
+            success : function (result, status, xhr) {
+                alert("돌봄이 성사되었습니다.\n돌봄 상세 내용과 고객정보가 메일로 발송되었습니다.");
+                window.open("about:blank","_self");
+                window.close();
+            },
+            error : function (xhr, status, er) {
+                if (error) {
+                    error(er);
+                }
+            }
+        })
+    }
+}
+
 </script>
 <html>
 <head>
@@ -183,7 +213,6 @@ function acceptQuo() {
 
 
     <div class="content">
-        <form name="reqRegisterForm" onsubmit="return validateForm()">
             <div class="formGroup">
                 <input type="text" class="form-control" id="reqId" name="reqId" value='<c:out value="${req.reqId}" />' hidden/>
                 <input type="text" class="form-control" id="srvcId" name="srvcId" value='<c:out value="${req.srvcId}" />' hidden/>
@@ -191,6 +220,9 @@ function acceptQuo() {
                 <input type="text" class="form-control" id="extraAddress" name="extraAddress" hidden >
                 <sec:authentication property="principal" var="principal"/>
                 <input type="text" class="form-control" id="lastModifiedBy" name="lastModifiedBy" value='<c:out value="${principal.username}"/>' hidden  >
+                <div style="margin-bottom: 15px">
+                    <h5>견적서 상태 : ${req.reqPrgrStatNm}</h5>
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">서비스이름</span>
                     <input type="text" class="form-control" id="srvcNm" name="srvcNm" value='<c:out value="${srvcNm}"/>' readonly ='readonly'/>
@@ -239,21 +271,31 @@ function acceptQuo() {
                     </div>
                 </c:if>
 
-                <c:if test="${req.reqPrgrStatCd == 10}">
-                    <div id="modiDelBtn">
-                        <button type="button" class="btn btn-primary btn-sm" id="modiBtn" onclick="modify()">수정</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="delConfirm()">삭제</button>
-                    </div>
-                </c:if>
-                <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyQuo()" hidden>수정 완료</button>
+                <sec:authorize access="hasRole('ROLE_DLBM')">
+                    <c:if test="${req.reqPrgrStatCd == 20}">
+                        <div class="input-group mb-3" style="margin-top: 15px">
+                            <span class="input-group-text">견적금액</span>
+                            <input type="number" class="form-control" name="quoPrice" id="quoPrice">
+                        </div>
+                        <button class="btn btn-primary btn-sm" id="addPrice" style="margin-top: 10px" onclick="addQuoPrice()">견적금액 등록</button>
+                    </c:if>
+                </sec:authorize>
 
-                <c:if test="${req.reqPrgrStatCd == 20}">
-                    <div class="input-group mb-3" style="margin-top: 15px">
-                        <span class="input-group-text">견적금액</span>
-                        <input type="number" class="form-control" name="quoPrice" id="quoPrice">
-                    </div>
-                    <button class="btn btn-primary btn-sm" id="addPrice" style="margin-top: 10px" onclick="addQuoPrice()">견적금액 등록</button>
-                </c:if>
+                <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                    <c:if test="${req.reqPrgrStatCd == 10}">
+                        <div id="modiDelBtn">
+                            <button type="button" class="btn btn-primary btn-sm" id="modiBtn" onclick="modify()">수정</button>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${req.reqPrgrStatCd != 50}">
+                        <div id="modiDelBtn">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="delConfirm()">취소</button>
+                        </div>
+                    </c:if>
+
+                    <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyQuo()" hidden>수정 완료</button>
+                </sec:authorize>
 
                 <c:if test="${req.reqPrgrStatCd == 30}">
                     <sec:authorize access="hasRole('ROLE_CUSTOMER')">
@@ -262,10 +304,38 @@ function acceptQuo() {
                 </c:if>
 
                 <c:if test="${req.reqPrgrStatCd == 40}">
-                    <p class="comment">돌봄이 수락되었습니다. 돌봄이가 확인중이니, 잠시만 기다려주세요!</p>
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                        <p class="comment">
+                            돌봄이 수락되었습니다.
+                            <br>돌봄이가 확인 후, 메일로 돌봄 상세 내용과 돌봄이의 연락처가 메일로 발송됩니다.
+                        </p>
+                    </sec:authorize>
+
+
+                    <sec:authorize access="hasRole('ROLE_DLBM')">
+                        <button class="btn btn-primary btn-sm" id="signed" style="margin-top: 10px" onclick="signQuo()">성사</button>
+                        <p class="comment">
+                            고객이 돌봄을 수락하였습니다. 돌봄 시작일자 이전에 성사버튼을 눌러주세요.
+                            <br> 성사 버튼을 누르면, 돌봄 상세 내용과 고객의 연락처가 메일로 발송됩니다.
+                        </p>
+                    </sec:authorize>
+                </c:if>
+
+                <c:if test="${req.reqPrgrStatCd == 50}">
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                        <p class="comment">
+                            돌봄이 성사되었습니다.
+                            <br>돌봄 상세 내용과 돌봄이의 연락처가 메일로 발송되었습니다.
+                        </p>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('ROLE_DLBM')">
+                        <p class="comment">
+                            돌봄이 성사되었습니다.
+                            <br>돌봄 상세 내용과 고객의 연락처가 메일로 발송되었습니다.
+                        </p>
+                    </sec:authorize>
                 </c:if>
             </div>
-        </form>
 
     </div>
 </div>

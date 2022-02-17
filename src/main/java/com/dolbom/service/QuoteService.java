@@ -20,4 +20,8 @@ public interface QuoteService {
     int delete(QuoteReqVO quote);
 
     Map<String, List<QuoteReqVO>> getQuoHist(String userId, String auth);
+
+    int signQuo(QuoteReqVO quote);
+
+    int upView(String reqId);
 }

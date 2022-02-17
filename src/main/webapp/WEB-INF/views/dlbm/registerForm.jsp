@@ -21,6 +21,9 @@ $(document).ready(function (){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>돌봄 서비스 등록하기</title>
     <script src="${path}/resources/js/common.js"></script>
+    <style type="text/css">
+
+    </style>
 </head>
 
 <body>
@@ -32,7 +35,8 @@ $(document).ready(function (){
          <h4>서비스 등록하기</h4>
        </div>
         <div class="content">
-            <form name="dlbmRegForm" action="${root }/dlbm/register" method="post" onsubmit="return validateDlbmForm()">
+            <form id="dlbmRegForm" name="dlbmRegForm" action="${root }/dlbm/register" method="post" onsubmit="return validateDlbmForm()">
+
                 <div class="formGroup">
                     <input type="text" class="form-control" name="srvcId" value='<c:out value="${param.srvcId}" />' hidden />
                     <input type="text" class="form-control" name="extraAddress" id="extraAddress" hidden >
@@ -82,7 +86,11 @@ $(document).ready(function (){
                         <span class="input-group-text">서비스 상세</span>
                         <textarea class="form-control" id="srvcDtl" name="srvcDtl"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="reqButton" style="margin-top: 10px">서비스 등록</button>
+                    <button type="submit" class="btn btn-outline-dark" id="reqButton" style="margin-top: 10px">서비스 등록</button>
+
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <jsp:include page="/resources/include/footer.jsp" />

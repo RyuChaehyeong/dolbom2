@@ -37,6 +37,11 @@ $(document).ready(function (){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>돌봄 서비스 조회하기</title>
     <script src="${path}/resources/js/common.js"></script>
+    <style type="text/css">
+        table {
+            font-size: 12pt;
+        }
+    </style>
 </head>
 
 <body>

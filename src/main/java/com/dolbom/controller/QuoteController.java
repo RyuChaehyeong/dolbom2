@@ -7,13 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Date;
 
 @RequestMapping("/quote")
 @Log4j
@@ -22,14 +19,14 @@ import java.util.Date;
 public class QuoteController {
 
     private QuoteService quoteService;
-    private DlbmService srvcService;
+    private DlbmService dlbmService;
 
 
     @GetMapping("/registerForm")
     public String registerQuotePopup(@RequestParam("srvcId") Long srvcId, Model model) {
         log.info("REQUEST REGISTER POPUP LOADED..");
 
-        String srvcNm = srvcService.get(srvcId).getSrvcNm();
+        String srvcNm = dlbmService.get(srvcId).getSrvcNm();
         model.addAttribute("srvcNm", srvcNm);
 
         return "/quote/registerQuotePopup";
@@ -53,11 +50,11 @@ public class QuoteController {
 
 
     @GetMapping("/get")
-    public String get(@RequestParam("reqId") Long reqId, Model model) {
+    public String get(@RequestParam("reqId") Long reqId,  Model model) {
         log.info("RETRIEVE REQUEST - REQID: " + reqId );
 
         QuoteReqVO req = quoteService.get(reqId);
-        String srvcNm = srvcService.get(req.getSrvcId()).getSrvcNm();
+        String srvcNm = dlbmService.get(req.getSrvcId()).getSrvcNm();
 
         model.addAttribute("req", req);
         model.addAttribute("srvcNm", srvcNm);
@@ -99,11 +96,34 @@ public class QuoteController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @PostMapping("/signQuo")
+    public @ResponseBody ResponseEntity signQuo(@RequestBody QuoteReqVO quote) {
+        log.info("DLBM SIGN QUOTE - REQID: " + quote.getReqId());
+        int signRes = quoteService.signQuo(quote);
+
+        log.info("UPDATE SRVC USAGE CNT - SRVCID: " + quote.getSrvcId());
+        int upRes = dlbmService.upCnt(quote.getSrvcId());
+
+        return signRes == 1 && upRes == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @PostMapping("/delete")
     public @ResponseBody ResponseEntity delete(@RequestBody QuoteReqVO request) {
         log.info("DELETE REQUEST - REQID: " + request.getReqId());
         int cnt = quoteService.delete(request);
+
+        return cnt == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PostMapping("/upView")
+    public @ResponseBody ResponseEntity upView(@RequestParam String reqId) {
+        log.info("DLBM VIEW QUOTE REQ - REQID : " + reqId);
+
+        int cnt = quoteService.upView(reqId);
 
         return cnt == 1
                 ? new ResponseEntity<>("success", HttpStatus.OK)

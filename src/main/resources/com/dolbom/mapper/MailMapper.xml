@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dolbom.mapper.MailMapper">
+    <select id="getTemplate" resultType="string">
+        SELECT TEMPLATE
+            FROM MAIL_TEMPLATE
+            WHERE MAIL_GROUP_ID = #{mailGroup}
+              AND ATRB = #{atbr}
+    </select>
+
+    <insert id="registerHist">
+        INSERT INTO MAIL_SEND_HIST
+        (
+            MAIL_HIST_SN,
+            MAIL_GROUP_ID,
+            ATRB, MAIL_SJ,
+            MAIL_CONTENT,
+            MAIL_RECEIVER,
+            MAIL_SENT_DT
+        )
+        VALUES
+            (
+                SEQ_MAIL_HIST_SN.nextval,
+                #{mailGroup},
+                #{atrb},
+                #{mailSj},
+                #{mailContent},
+                #{receiver},
+                sysdate
+            )
+    </insert>
+</mapper>

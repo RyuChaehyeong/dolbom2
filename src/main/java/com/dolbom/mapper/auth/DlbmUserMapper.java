@@ -17,4 +17,6 @@ public interface DlbmUserMapper {
     String checkEmail(String email);
 
     DlbmUserVO getUserInfo(String userId);
+
+    String getEmail(String userId);
 }

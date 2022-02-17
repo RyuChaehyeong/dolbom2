@@ -195,7 +195,7 @@ function closeReview(item) {
         #noneReview{
             text-align: center;
             align-content: center;
-            background-color: antiquewhite;
+            background-color: #e9e9e9;
         }
     </style>
 </head>
@@ -273,8 +273,8 @@ function closeReview(item) {
                     <textarea class="form-control" readonly="readonly" name="srvcDtl" id="srvcDtl"><c:out value="${srvc.srvcDtl}" /></textarea>
                 </div>
                 <div class="text-center" style="margin-bottom: 10px">
-                    <button id="openReviewBtn" class="btn btn-warning btn-sm" style="margin-top: 20px;" onclick="openReview()">리뷰열기▼</button>
-                    <button id="closeReviewBtn" class="btn btn-warning btn-sm" style="margin-top: 20px;" onclick="closeReview()" hidden>리뷰 닫기▲</button>
+                    <button id="openReviewBtn" class="btn btn-light btn-sm" style="margin-top: 20px;" onclick="openReview()">리뷰열기▼</button>
+                    <button id="closeReviewBtn" class="btn btn-light btn-sm" style="margin-top: 20px;" onclick="closeReview()" hidden>리뷰 닫기▲</button>
                 </div>
                 <div id="reviewContainer">
                     <table class="table" id="reviewTbl"  hidden>
@@ -293,13 +293,13 @@ function closeReview(item) {
         <sec:authentication property="principal" var="principal"/>
         <c:if test="${srvc.dlbmId eq principal.username}">
             <div id="modiDelBtn">
-                <button type="button" class="btn btn-primary btn-sm" id="modiBtn" onclick="modify()">수정</button>
-                <button type="button" class="btn btn-secondary btn-sm" id="delBtn" onclick="delConfirm()">삭제</button>
+                <button type="button" class="btn btn-outline-dark btn-sm" id="modiBtn" onclick="modify()">수정</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" id="delBtn" onclick="delConfirm()">삭제</button>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyDlbm()" hidden>수정 완료</button>
+            <button type="submit" class="btn btn-outline-dark btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyDlbm()" hidden>수정 완료</button>
         </c:if>
             <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-                <button onclick="openPopup()" class="gap-2 col-6 mx-auto btn btn-primary" type="button"  id="reqButton">견적 요청</button>
+                <button onclick="openPopup()" class="gap-2 col-6 mx-auto btn btn-outline-dark" type="button"  id="reqButton">견적 요청</button>
             </sec:authorize>
     </div>
 </div>

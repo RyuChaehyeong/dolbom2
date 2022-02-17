@@ -55,6 +55,7 @@
                 WHERE SRVC.DLT_YN = 'N'
                 AND SRVC.USE_YN = 'Y'
                 AND ROWNUM <= #{pageNum} * #{amount}
+                ORDER BY SRVC.CREATED_DT DESC
                 )
                 WHERE RN > (#{pageNum} -1) * #{amount}
         ]]>
@@ -124,10 +125,7 @@
                                      AND SRVC.BREED_CTGR_CD = CC1.CD_ID
                  LEFT OUTER JOIN CMMN_CD CC2
                                  ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
-        WHERE SRVC.DLT_YN = 'N'
-          AND SRVC.USE_YN = 'Y'
-          AND
-              SRVC_ID = #{srvcId}
+        WHERE  SRVC_ID = #{srvcId}
     </select>
 
     <update id="delete">
@@ -155,11 +153,12 @@
     </update>
 
     <select id="getmyDlbmHist" resultType="com.dolbom.domain.DlbmVO">
-        SELECT SRVC.SRVC_NM,
+        SELECT SRVC.SRVC_ID,
+               SRVC.SRVC_NM,
                SRVC.RATE,
                SRVC.CNT,
-               CC1.CD_NM BREED_CTGR_CD,
-               CC2.CD_NM ANIMAL_CTGR_CD
+               CC1.CD_NM BREED_CTGR_NM,
+               CC2.CD_NM ANIMAL_CTGR_NM
             FROM SRVC
             LEFT OUTER JOIN CMMN_CD CC1
                  ON SRVC.ANIMAL_CTGR_CD = CC1.CD_GROUP_ID
@@ -170,11 +169,12 @@
     </select>
 
     <select id="getCmplDlbmHist" resultType="com.dolbom.domain.DlbmVO">
-        SELECT SRVC.SRVC_NM,
+        SELECT SRVC.SRVC_ID,
+               SRVC.SRVC_NM,
                SRVC.RATE,
                SRVC.CNT,
-               CC1.CD_NM BREED_CTGR_CD,
-               CC2.CD_NM ANIMAL_CTGR_CD
+               CC1.CD_NM BREED_CTGR_NM,
+               CC2.CD_NM ANIMAL_CTGR_NM
         FROM SRVC
         INNER JOIN QUOTE_REQ QR
             ON SRVC.SRVC_ID = QR.SRVC_ID
@@ -186,6 +186,12 @@
         LEFT OUTER JOIN CMMN_CD CC2
             ON SRVC.ANIMAL_CTGR_CD= CC2.CD_ID
         WHERE QR.CUST_ID = #{userId}
-        GROUP BY SRVC.SRVC_NM, SRVC.RATE, SRVC.CNT, CC1.CD_NM, CC2.CD_NM
+        GROUP BY SRVC.SRVC_ID, SRVC.SRVC_NM, SRVC.RATE, SRVC.CNT, CC1.CD_NM, CC2.CD_NM
     </select>
+
+    <update id="upCnt">
+        UPDATE SRVC
+        SET CNT = NVL(CNT, 0) + 1
+            WHERE SRVC_ID = #{srvcId}
+    </update>
 </mapper>

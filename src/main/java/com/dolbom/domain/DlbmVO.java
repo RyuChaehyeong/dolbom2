@@ -19,6 +19,10 @@ public class DlbmVO {
 
     private String breedCtgrCd;
 
+    private String animalCtgrNm;
+
+    private String breedCtgrNm;
+
     private String srvcDtl;
 
     private String postcode;

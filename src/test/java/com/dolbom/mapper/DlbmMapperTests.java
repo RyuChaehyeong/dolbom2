@@ -99,4 +99,9 @@ public class DlbmMapperTests {
     public void testGetCmplDlbmHist() {
         mapper.getCmplDlbmHist("cust9").forEach(srvc -> log.info(srvc));
     }
+
+    @Test
+    public void testUpCnt() {
+        mapper.upCnt(181L);
+    }
 }

@@ -22,4 +22,6 @@ public interface DlbmService {
     List<DlbmVO> getmyDlbmHist(String userId);
 
     List<DlbmVO> getCmplDlbmHist(String userId);
+
+    int upCnt(Long srvcId);
 }

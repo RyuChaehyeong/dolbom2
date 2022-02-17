@@ -71,4 +71,9 @@ public class DlbmServiceImpl implements DlbmService {
         List<DlbmVO> cmplHist = dlbmMapper.getCmplDlbmHist(userId);
         return cmplHist;
     }
+
+    @Override
+    public int upCnt(Long srvcId) {
+        return dlbmMapper.upCnt(srvcId) ;
+    }
 }

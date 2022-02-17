@@ -22,4 +22,8 @@ public interface QuoteMapper {
     List<QuoteReqVO> getQuoHist(@Param("userId" )String userId,
                                 @Param("auth") String auth,
                                 @Param("status") String status);
+
+    int signQuo(QuoteReqVO quote);
+
+    int upView(String reqId);
 }

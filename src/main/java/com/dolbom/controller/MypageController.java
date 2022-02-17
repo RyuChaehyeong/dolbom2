@@ -30,13 +30,14 @@ public class MypageController {
     @GetMapping("/info")
     public String loadCustPage(@RequestParam String userId, @RequestParam String auth, Model model) {
 
-        log.info("GET CUST MYPAGE - CUST ID: " + userId);
+        log.info("GET MYPAGE - USER ID: " + userId);
 
-        DlbmUserVO userInfo = dlbmUserService.getUserInfo(userId);
 
         Map<String, List<QuoteReqVO>> map = quoteService.getQuoHist(userId, auth);
         List<QuoteReqVO> cmplQuoList = map.get("cmplList");
         List<QuoteReqVO> prgrQuoList = map.get("prgrList");
+
+        DlbmUserVO userInfo = dlbmUserService.getUserInfo(userId);
 
         if ("DLBM".equals(auth)) {
             List<DlbmVO> myDlbmList = dlbmService.getmyDlbmHist(userId);

@@ -45,24 +45,28 @@
     <select id="get" resultType="com.dolbom.domain.QuoteReqVO">
 
     SELECT
-         REQ_ID,
-         SRVC_ID,
-         CUST_ID,
-         REQ_TITLE,
-         POSTCODE,
-         CUST_LOC,
-         DETAIL_ADDRESS,
-         START_DT,
-         END_DT,
-         REQ_DTL,
-         REQ_PRGR_STAT_CD,
-         QUO_PRICE,
-         CREATED_DT,
-         CREATED_BY,
-         LAST_MODIFIED_DT,
-         LAST_MODIFIED_BY
-    FROM QUOTE_REQ
-    WHERE REQ_ID = #{reqId}
+        QR.REQ_ID,
+        QR.SRVC_ID,
+        QR.CUST_ID,
+        QR.REQ_TITLE,
+        QR.POSTCODE,
+        QR.CUST_LOC,
+        QR.DETAIL_ADDRESS,
+        QR.START_DT,
+        QR.END_DT,
+        QR.REQ_DTL,
+        QR.REQ_PRGR_STAT_CD,
+        CC1.CD_NM REQ_PRGR_STAT_NM,
+        QR.QUO_PRICE,
+        QR.CREATED_DT,
+        QR.CREATED_BY,
+        QR.LAST_MODIFIED_DT,
+        QR.LAST_MODIFIED_BY
+    FROM QUOTE_REQ QR
+    LEFT OUTER JOIN CMMN_CD CC1
+         ON  CC1.CD_GROUP_ID = 'CDA'
+         AND QR.REQ_PRGR_STAT_CD = CC1.CD_ID
+    WHERE QR.REQ_ID = #{reqId}
     </select>
 
 
@@ -80,19 +84,27 @@
             WHERE REQ_ID = #{reqId}
     </update>
 
-    <update id="addQuoPrice">
-        UPDATE QUOTE_REQ
-        SET QUO_PRICE = #{quoPrice},
-            REQ_PRGR_STAT_CD = 30,
-            LAST_MODIFIED_DT = sysdate,
-            LAST_MODIFIED_BY = #{lastModifiedBy}
-        WHERE REQ_ID = #{reqId}
-    </update>
 
     <update id="delete">
         UPDATE QUOTE_REQ
         SET DLT_YN = 'Y',
             REQ_PRGR_STAT_CD = '99',
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
+        WHERE REQ_ID = #{reqId}
+    </update>
+
+    <update id="upView">
+        UPDATE QUOTE_REQ
+        SET REQ_PRGR_STAT_CD = 20,
+            VIEW_CNT = NVL(VIEW_CNT, 0) + 1
+        WHERE REQ_ID = #{reqId}
+    </update>
+
+    <update id="addQuoPrice">
+        UPDATE QUOTE_REQ
+        SET QUO_PRICE = #{quoPrice},
+            REQ_PRGR_STAT_CD = 30,
             LAST_MODIFIED_DT = sysdate,
             LAST_MODIFIED_BY = #{lastModifiedBy}
         WHERE REQ_ID = #{reqId}
@@ -106,15 +118,25 @@
         WHERE REQ_ID = #{reqId}
     </update>
 
+    <update id="signQuo">
+        UPDATE QUOTE_REQ
+        SET REQ_PRGR_STAT_CD = 50,
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{lastModifiedBy}
+        WHERE REQ_ID = #{reqId}
+    </update>
+
     <select id="getQuoHist" resultType="com.dolbom.domain.QuoteReqVO">
-        SELECT QR.REQ_TITLE REQ_TITLE,
+        SELECT QR.REQ_ID,
+               QR.REQ_TITLE REQ_TITLE,
                QR.START_DT START_DT,
                QR.END_DT END_DT,
                QR.CUST_LOC CUST_LOC,
                SRVC.SRVC_NM SRVC_NM,
                CC1.CD_NM BREED_CTGR_NM,
                CC2.CD_NM ANIMAL_CTGR_NM,
-               CC3.CD_NM REQ_PRGR_STAT_NM
+               CC3.CD_NM REQ_PRGR_STAT_NM,
+               QR.REQ_PRGR_STAT_CD
         FROM QUOTE_REQ QR
                  INNER JOIN SRVC
                             ON QR.SRVC_ID = SRVC.SRVC_ID

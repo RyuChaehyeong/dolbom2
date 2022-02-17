@@ -113,4 +113,10 @@
             FROM DLBM_USER
             WHERE USER_ID = #{userId}
     </select>
+
+    <select id="getEmail" resultType="string">
+        SELECT USER_EMAIL
+            FROM DLBM_USER
+            WHERE USER_ID = #{userId}
+    </select>
 </mapper>
