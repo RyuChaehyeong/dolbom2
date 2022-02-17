@@ -4,18 +4,34 @@
 
 <mapper namespace="com.dolbom.mapper.MailMapper">
     <select id="getTemplate" resultType="string">
-        SELECT TEMPLATE
+        SELECT MAIL_TMPL
             FROM MAIL_TEMPLATE
-            WHERE MAIL_GROUP_ID = #{mailGroup}
+            WHERE MAIL_GROUP_ID = #{mailGroupId}
               AND ATRB = #{atbr}
     </select>
 
+    <select id="getMailSj" resultType="string">
+        SELECT MAIL_SJ
+        FROM MAIL_TEMPLATE
+        WHERE MAIL_GROUP_ID = #{mailGroupId}
+          AND ATRB = #{atbr}
+    </select>
+    <select id="getMailTemplInfo" resultType="com.dolbom.domain.MailVO">
+        SELECT MAIL_GROUP_ID,
+               ATRB,
+               MAIL_SJ,
+               MAIL_TMPL
+        FROM MAIL_TEMPLATE
+        WHERE MAIL_GROUP_ID = #{mailGroupId}
+          AND ATRB = #{atbr}
+    </select>
     <insert id="registerHist">
         INSERT INTO MAIL_SEND_HIST
         (
             MAIL_HIST_SN,
             MAIL_GROUP_ID,
-            ATRB, MAIL_SJ,
+            ATRB,
+            MAIL_SJ,
             MAIL_CONTENT,
             MAIL_RECEIVER,
             MAIL_SENT_DT
@@ -23,7 +39,7 @@
         VALUES
             (
                 SEQ_MAIL_HIST_SN.nextval,
-                #{mailGroup},
+                #{mailGroupId},
                 #{atrb},
                 #{mailSj},
                 #{mailContent},

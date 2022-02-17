@@ -113,6 +113,7 @@ function addQuoPrice() {
     } else {
         const paramData = {
             reqId : $("#reqId").val(),
+            custId : $("#custId").val(),
             quoPrice : insertedPrice,
             lastModifiedBy : $("#lastModifiedBy").val()
         }
@@ -144,6 +145,7 @@ function acceptQuo() {
     } else {
         const paramData = {
             reqId : $("#reqId").val(),
+            srvcId: $("#srvcId").val(),
             lastModifiedBy : $("#lastModifiedBy").val()
         }
 

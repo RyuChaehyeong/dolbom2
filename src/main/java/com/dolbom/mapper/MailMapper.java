@@ -7,8 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MailMapper {
-    String getTemplate(@Param("mailGroup") String mailGroup,
+    String getTemplate(@Param("mailGroupId") String mailGroupId,
                        @Param("atbr") String atbr);
 
     void registerHist(MailVO mail);
+
+    String getMailSj(@Param("mailGroupId") String mailGroupId,
+                       @Param("atbr") String atbr);
+
+    MailVO getMailTemplInfo(@Param("mailGroupId") String mailGroupId,
+                            @Param("atbr") String atbr);
 }

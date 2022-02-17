@@ -1,5 +1,6 @@
 package com.dolbom.util;
 
+import com.dolbom.domain.MailVO;
 import org.apache.log4j.Logger;
 import org.springframework.ui.Model;
 
@@ -18,7 +19,7 @@ public class MailUtil {
 
     public static void sendEmail(String mailSj, String content, String email) {
 
-        final String host = "";
+        final String host = "smtp.naver.com";
         final String user = "";
         final String password = "";
 
@@ -57,6 +58,23 @@ public class MailUtil {
 
     }
 
+    public static String quoPrgrNotiMail(Map<String, String> mailMap, MailVO mailVO) {
+        //양식 불러오기
+        String template = mailVO.getMailTmpl();
+        //메일 양식에 있는 텍스트를 내용으로 replace, 메일 내용
+        String mailContent = changeContent(template, mailMap);
+        //메일 제목
+        String mailSj = mailVO.getMailSj();
+        //메일 주소
+        String receiveEmail = mailVO.getReceiver();
+        //메일 발송
+        MailUtil.sendEmail(mailSj, mailContent, receiveEmail);
+
+        return mailContent;
+
+
+    }
+
     public static String changeContent(String temp, Map<String, String> map) {
 
         for (String key : map.keySet()) {
@@ -66,6 +84,10 @@ public class MailUtil {
         }
         return temp;
     }
+
+
+
+
 
 
 }
