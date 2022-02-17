@@ -18,9 +18,9 @@ public class MailUtil {
 
     public static void sendEmail(String mailSj, String content, String email) {
 
-        final String host = "smtp.naver.com";
-        final String user = "doodoo89@naver.com";
-        final String password = "ChaeYoo0)";
+        final String host = "";
+        final String user = "";
+        final String password = "";
 
         String toMail = email;
 
