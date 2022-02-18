@@ -8,5 +8,5 @@ public interface ReviewService {
 
     List<ReviewVO> getList(Long srvcId);
 
-    int register(ReviewVO review);
+    boolean register(ReviewVO review);
 }

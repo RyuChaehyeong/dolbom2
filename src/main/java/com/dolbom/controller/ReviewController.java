@@ -54,10 +54,9 @@ public class ReviewController {
     public @ResponseBody ResponseEntity register(@RequestBody ReviewVO review) {
         log.info("REVIEW REGISTER - REQID: " + review.getReqId());
 
-        int cnt = reviewService.register(review);
+        boolean res = reviewService.register(review);
 
-        return cnt == 1
-                ? new ResponseEntity<>("success", HttpStatus.OK)
+        return res ? new ResponseEntity<>("success", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -26,5 +26,7 @@ public interface DlbmMapper {
     List<DlbmVO> getCmplDlbmHist(String userId);
 
     int upCnt(Long srvcId);
+
+    int updateRate(Long srvcId);
 }
 

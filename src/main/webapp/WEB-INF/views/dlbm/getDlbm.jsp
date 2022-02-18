@@ -162,10 +162,13 @@ function openReview() {
                 $('#reviewTbl').attr('hidden', false);
                 $.each(data, function(idx, item) {
                     console.log(item);
-                    var review = "<tbody><tr>";
+                    const createdDate = dateFormat(item.createdDt);
+
+                    let review = "<tbody><tr>";
                     review += "<td>" + item.custId + "</td>";
                     review += "<td>" + item.rate + "</td>";
                     review += "<td>" + item.reviewComment + "</td>";
+                    review += "<td>" + createdDate + "</td>";
                     review += "</tr></tbody>";
 
                     tbl.append(review);
@@ -183,6 +186,11 @@ function closeReview(item) {
     $('#closeReviewBtn').attr('hidden', true);
     $('#openReviewBtn').attr('hidden', false);
     $('#noneReview').attr('hidden', true);
+}
+
+function dateFormat(date) {
+    const d = new Date(date);
+    return  d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
 }
 
 </script>
@@ -277,12 +285,13 @@ function closeReview(item) {
                     <button id="closeReviewBtn" class="btn btn-light btn-sm" style="margin-top: 20px;" onclick="closeReview()" hidden>리뷰 닫기▲</button>
                 </div>
                 <div id="reviewContainer">
-                    <table class="table" id="reviewTbl"  hidden>
+                    <table class="table" id="reviewTbl" hidden>
                         <thead class="table-light">
                         <tr>
                             <td>고객ID</td>
                             <td>평점</td>
                             <td>한줄평</td>
+                            <td>등록일자</td>
                         </tr>
                         </thead>
                     </table>

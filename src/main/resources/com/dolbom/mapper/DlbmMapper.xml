@@ -194,4 +194,20 @@
         SET CNT = NVL(CNT, 0) + 1
             WHERE SRVC_ID = #{srvcId}
     </update>
+
+    <update id="updateRate">
+        UPDATE SRVC
+        SET RATE = (
+            SELECT RATE
+            FROM (
+                     SELECT SRVC_ID,
+                            TO_CHAR(AVG(RATE), 'FM9990.9') RATE
+                     FROM REVIEW
+                     WHERE SRVC_ID = #{srvcId}
+                     GROUP BY SRVC_ID
+                 )
+        )
+        WHERE SRVC_ID = #{srvcId}
+    </update>
+
 </mapper>
