@@ -10,7 +10,7 @@ public interface DlbmUserMapper {
 
     boolean registerMemberInfo(DlbmUserVO dlbmUser);
 
-    boolean registerAuthInfo(DlbmUserAuthVO autoVO);
+    boolean registerAuthInfo(DlbmUserVO dlbmUser);
 
     String checkId(String id);
 

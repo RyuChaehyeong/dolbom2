@@ -15,7 +15,12 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="${path }/resources/css/style.css" rel="stylesheet">
 <script>
-
+function openPopup(reqId) {
+    window.open(
+        '/review/registerForm?reqId='+reqId,
+        'window_name',
+        'width=600,height=400,location=no,status=no,scrollbars=yes');
+}
 
 </script>
 <html>
@@ -25,6 +30,10 @@
     <script src="${path}/resources/js/common.js"></script>
     <style type="text/css">
         table {
+            font-size: 10pt;
+            text-align: center;
+        }
+        #reviewPopup {
             font-size: 10pt;
         }
     </style>
@@ -92,6 +101,7 @@
                                 <td>대분류</td>
                                 <td>소분류</td>
                                 <td>상태</td>
+                                <td>리뷰</td>
                             </tr>
                             </thead>
                             <c:forEach items="${cmplQuoList}" var="cmplQuo">
@@ -108,6 +118,12 @@
                                     <td><c:out value="${cmplQuo.animalCtgrNm}"/></td>
                                     <td><c:out value="${cmplQuo.breedCtgrNm}"/></td>
                                     <td><c:out value="${cmplQuo.reqPrgrStatNm}"/></td>
+
+                                    <td>
+                                        <c:if test="${cmplQuo.reqPrgrStatCd == 50}">
+                                            <button id="reviewPopup" class="btn btn-outline-danger btn-sm" onclick="openPopup(${cmplQuo.reqId})">작성</button>
+                                        </c:if>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             <p class="noInfo" hidden>조회된 내역이 없습니다.</p>

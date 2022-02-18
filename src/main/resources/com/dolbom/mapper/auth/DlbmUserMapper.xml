@@ -79,7 +79,7 @@
         )
     </insert>
 
-    <insert id="registerAuthInfo">
+    <insert id="registerAuthInfo" parameterType="com.dolbom.domain.auth.DlbmUserVO">
 
         INSERT INTO DLBM_USER_AUTH
         (
@@ -89,7 +89,12 @@
         VALUES
             (
                 #{userId},
-                #{auth}
+        <if test="userTypeCd != null and userTypeCd.equals('10') ">
+                'ROLE_DLBM'
+        </if>
+        <if test="userTypeCd != null and userTypeCd.equals('20') ">
+                'ROLE_CUSTOMER'
+        </if>
             )
     </insert>
 

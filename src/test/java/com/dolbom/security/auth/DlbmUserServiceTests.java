@@ -38,7 +38,7 @@ public class DlbmUserServiceTests {
         DlbmUserVO dlbmUser = new DlbmUserVO();
         DlbmUserAuthVO auth = new DlbmUserAuthVO();
 
-        String userId = "chaehyeong55";
+        String userId = "chaehyeong786";
         dlbmUser.setUserId(userId);
         dlbmUser.setUserPwd("123");
         dlbmUser.setUserNm("유채형");
@@ -48,9 +48,7 @@ public class DlbmUserServiceTests {
         dlbmUser.setCreatedBy(userId);
         dlbmUser.setLastModifiedBy(userId);
 
-        auth.setUserId(userId);
-        auth.setAuth("ROLD_DLBM");
-        dlbmUserService.register(dlbmUser, auth);
+        dlbmUserService.register(dlbmUser);
     }
 
 

@@ -126,6 +126,14 @@
         WHERE REQ_ID = #{reqId}
     </update>
 
+    <update id="registReview">
+        UPDATE QUOTE_REQ
+        SET REQ_PRGR_STAT_CD = 60,
+            LAST_MODIFIED_DT = sysdate,
+            LAST_MODIFIED_BY = #{custId}
+        WHERE REQ_ID = #{reqId}
+    </update>
+
     <select id="getQuoHist" resultType="com.dolbom.domain.QuoteReqVO">
         SELECT QR.REQ_ID,
                QR.REQ_TITLE REQ_TITLE,

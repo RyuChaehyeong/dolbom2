@@ -34,9 +34,8 @@ public class DlbmUserController {
     ResponseEntity register(@RequestBody Map<String, Object> data) {
         ObjectMapper mapper = new ObjectMapper();
         DlbmUserVO dlbmUser = mapper.convertValue(data.get("memInfo"), DlbmUserVO.class);
-        DlbmUserAuthVO auth = mapper.convertValue(data.get("memAuth"), DlbmUserAuthVO.class);
 
-        boolean res  = dlbmUserService.register(dlbmUser, auth);
+        boolean res  = dlbmUserService.register(dlbmUser);
 
         log.info("MEMBER REGISTRATION - userID: " + dlbmUser.getUserId());
         return res

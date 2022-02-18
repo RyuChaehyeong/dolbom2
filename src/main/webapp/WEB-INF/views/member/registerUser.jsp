@@ -63,7 +63,7 @@
     <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
         <div class="title">
-            <h4>서비스 등록하기</h4>
+            <h4>회원가입</h4>
         </div>
         <div class="content">
             <div id="joinForm">
@@ -100,17 +100,18 @@
                 <div class="form-group">
                     <label >회원 유형</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleCust" value="ROLE_CUSTOMER">
-                        <label class="form-check-label" for="roleCust">
-                            고객회원
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="roleDlbm" checked value="ROLE_DLBM">
+                        <input class="form-check-input" type="radio" name="userTypeCd" id="roleDlbm" checked value="10">
                         <label class="form-check-label" for="roleDlbm">
                             돌봄이회원
                         </label>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="userTypeCd" id="roleCust" value="20">
+                        <label class="form-check-label" for="roleCust">
+                            고객회원
+                        </label>
+                    </div>
+
                 </div>
 
                 <div style="text-align: center">

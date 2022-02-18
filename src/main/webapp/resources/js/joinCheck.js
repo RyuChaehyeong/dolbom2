@@ -7,14 +7,11 @@ $("#registerBtn").on("click", function () {
     const userNm = $("#userNm").val();
     const userEmail = $("#userEmail").val();
     const userPhone = $("#userPhone").val();
-    const roleCust = $("#roleCust").val();
-    const roleDlbm = $("#roleDlbm").val();
-    let userTypeCd = 10;
-    let auth = roleDlbm;
+    const userTypeCd = $(":input:radio[name=userTypeCd]:checked").val();
 
-    if(roleDlbm == null || roleDlbm == "" || roleDlbm == undefined) {
-        userTypeCd = 20;
-        auth = roleCust;
+    if (userTypeCd == null || userTypeCd == "" || userTypeCd == undefined) {
+        alert("회원 유형을 선택해주세요.");
+        return false;
     }
 
     if(userId == null || userId == "" || userId == undefined) {
@@ -74,14 +71,9 @@ $("#registerBtn").on("click", function () {
             lastModifiedBy : userId
         }
 
-        const memAuth = {
-            userId : userId,
-            auth : auth
-        }
 
         const paramData = {
-            memInfo : memInfo,
-            memAuth : memAuth
+            memInfo : memInfo
         }
 
         const param = JSON.stringify(paramData);
@@ -99,7 +91,7 @@ $("#registerBtn").on("click", function () {
                     error(er);
                 }
             }
-        })
+        });
     }
 });
 

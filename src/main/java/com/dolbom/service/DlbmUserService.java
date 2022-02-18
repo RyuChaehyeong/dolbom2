@@ -5,7 +5,7 @@ import com.dolbom.domain.auth.DlbmUserVO;
 
 public interface DlbmUserService {
 
-    boolean register(DlbmUserVO dlbmUser, DlbmUserAuthVO auth);
+    boolean register(DlbmUserVO dlbmUser);
 
     String checkId(String id);
 

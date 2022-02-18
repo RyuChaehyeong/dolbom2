@@ -26,4 +26,7 @@ public interface QuoteMapper {
     int signQuo(QuoteReqVO quote);
 
     int upView(String reqId);
+
+    void registReview(@Param("reqId" )Long reqId,
+                      @Param("custId") String custId);
 }

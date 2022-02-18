@@ -59,6 +59,7 @@ public class QuoteReqVO {
 
     private String breedCtgrNm;
 
+    private String reviewYn;
 
 
 

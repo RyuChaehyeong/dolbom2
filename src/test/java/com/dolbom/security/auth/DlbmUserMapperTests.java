@@ -271,7 +271,7 @@ public class DlbmUserMapperTests {
     @DisplayName("돌봄 사용자 등록 테스트")
     public void testRegisterUser() {
         DlbmUserVO dlbmUser = new DlbmUserVO();
-        dlbmUser.setUserId("chaehyeong14");
+        dlbmUser.setUserId("chaehyeong1592");
         dlbmUser.setUserPwd(pwencoder.encode("123"));
         dlbmUser.setUserNm("유채형");
         dlbmUser.setUserEmail("fluid15@test.com");
@@ -286,10 +286,11 @@ public class DlbmUserMapperTests {
     @Test
     @DisplayName("돌봄 사용자 권한 등록 테스트")
     public void testRegisterUserAuth() {
-        DlbmUserAuthVO authVO = new DlbmUserAuthVO();
-        authVO.setUserId("chaehyeong14");
-        authVO.setAuth("ROLE_DLBM");
-        dlbmUserMapper.registerAuthInfo(authVO);
+        DlbmUserVO dlbmUser = new DlbmUserVO();
+        dlbmUser.setUserId("chaehyeong1592");
+        dlbmUser.setUserTypeCd("10");
+
+        dlbmUserMapper.registerAuthInfo(dlbmUser);
 
     }
 

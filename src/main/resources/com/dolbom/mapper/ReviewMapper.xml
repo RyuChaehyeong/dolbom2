@@ -23,5 +23,30 @@
 
     <insert id="register">
 
+        INSERT INTO REVIEW
+        (
+            REQ_ID,
+            SRVC_ID,
+            RATE,
+            REVIEW_COMMENT,
+            CREATED_DT,
+            CREATED_BY,
+            LAST_MODIFIED_DT,
+            LAST_MODIFIED_BY,
+            CUST_ID
+        )
+        VALUES
+       (
+           #{reqId},
+           #{srvcId},
+           #{rate},
+           #{reviewComment},
+           sysdate,
+           #{createdBy},
+           sysdate,
+           #{lastModifiedBy},
+           #{custId}
+       )
+
     </insert>
 </mapper>

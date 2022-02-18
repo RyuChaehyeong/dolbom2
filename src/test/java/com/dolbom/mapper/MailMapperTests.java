@@ -21,13 +21,4 @@ public class MailMapperTests {
     private MailMapper mapper;
 
 
-    @Test
-    public void testGetTempl() {
-
-        String templ = mapper.getTemplate("100", "10");
-        log.info(templ);
-
-
-    }
-
 }

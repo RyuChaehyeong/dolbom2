@@ -17,10 +17,10 @@ public class DlbmUserServiceImpl implements DlbmUserService{
     private PasswordEncoder pwencoder;
 
     @Override
-    public boolean register(DlbmUserVO dlbmUser, DlbmUserAuthVO auth) {
+    public boolean register(DlbmUserVO dlbmUser) {
         dlbmUser.setUserPwd(pwencoder.encode(dlbmUser.getUserPwd()));
         boolean infoRes = dlbmUserMapper.registerMemberInfo(dlbmUser);
-        boolean authRes = dlbmUserMapper.registerAuthInfo(auth);
+        boolean authRes = dlbmUserMapper.registerAuthInfo(dlbmUser);
         return infoRes&&authRes ? true : false;
     }
 
