@@ -13,7 +13,45 @@
 <script>
 $(document).ready(function (){
 
+    const cdGroupId = '100';
+    $.ajax({
+        type: 'GET',
+        url: "/getCode?cdGroupId=" + cdGroupId,
+        dataType: 'json',
+        success : function (data) {
+
+            console.log(data);
+            $.each(data, function(idx, item) {
+                console.log(item);
+                $("#animalCtgrCd").append($("<option></option>").attr("value",item.cdId).text(item.cdNm));
+            });
+
+        }
+    });
+
+    $("#animalCtgrCd").change(function getBreedCd() {
+        $('#breedCtgrCd').children('option:not(:first)').remove();
+
+        const cdGroupId = $("#animalCtgrCd").val();
+        console.log()
+        $.ajax({
+            type: 'GET',
+            url: "/getCode?cdGroupId=" + cdGroupId,
+            dataType: 'json',
+            success : function (data) {
+
+                console.log(data);
+                $.each(data, function(idx, item) {
+                    console.log(item);
+                    $("#breedCtgrCd").append($("<option></option>").attr("value",item.cdId).text(item.cdNm));
+                });
+
+            }
+        });
+    })
+
 });
+
 
 </script>
 <html>
@@ -63,10 +101,7 @@ $(document).ready(function (){
                     <div class="input-group mb-3">
                         <span class="input-group-text" >동물 분류</span>
                         <select class="form-select" aria-label="Default select example" id="animalCtgrCd" name="animalCtgrCd" style="width: 700px">
-                            <option selected>동물분류 선택</option>
-                            <option value="A01">강아지</option>
-                            <option value="A02">고양이</option>
-                            <option value="A03">새</option>
+                            <option selected>동물 선택</option>
                         </select>
                     </div>
 
@@ -74,11 +109,6 @@ $(document).ready(function (){
                         <span class="input-group-text" >종 분류</span>
                         <select class="form-select" aria-label="Default select example" id="breedCtgrCd" name="breedCtgrCd" style="width: 700px">
                             <option selected>종 선택</option>
-                            <option value="01">푸들</option>
-                            <option value="02">시츄</option>
-                            <option value="03">불독</option>
-                            <option value="04">비글</option>
-                            <option value="05">포메라니안</option>
                         </select>
                     </div>
 

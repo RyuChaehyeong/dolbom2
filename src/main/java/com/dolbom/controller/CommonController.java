@@ -1,17 +1,27 @@
 package com.dolbom.controller;
 
+import com.dolbom.domain.CodeVO;
+import com.dolbom.domain.ReviewVO;
+import com.dolbom.service.CommonService;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-
-@Controller
 @Log4j
+@AllArgsConstructor
+@Controller
 public class CommonController {
+
+    private CommonService commonService;
 
     @GetMapping("/accessError")
     public void accessDenied(Authentication auth, Model model) {
@@ -42,5 +52,12 @@ public class CommonController {
         log.info("Logout");
     }
 
+    @GetMapping("/getCode")
+    public @ResponseBody
+    List<CodeVO> getCode(@RequestParam String cdGroupId) {
+        log.info("CODE GETLIST - cdGroupId : " + cdGroupId);
+        List<CodeVO> codeList = commonService.getCode(cdGroupId);
+        return codeList;
+    }
 
 }

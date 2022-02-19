@@ -29,7 +29,7 @@ public class ReviewController {
     private DlbmService dlbmService;
 
     @GetMapping("/getList")
-    private @ResponseBody List<ReviewVO> getList(@RequestParam Long srvcId) {
+    public @ResponseBody List<ReviewVO> getList(@RequestParam Long srvcId) {
         log.info("REVIEW GETLIST - srvcId : " + srvcId);
         List<ReviewVO> reviewList = reviewService.getList(srvcId);
         return reviewList;
