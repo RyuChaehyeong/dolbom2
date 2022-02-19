@@ -14,26 +14,21 @@
 $(document).ready(function (){
 
     const cdGroupId = '100';
-    $.ajax({
-        type: 'GET',
-        url: "/getCode?cdGroupId=" + cdGroupId,
-        dataType: 'json',
-        success : function (data) {
+    const selectEle = $("#animalCtgrCd");
+    loadOption(cdGroupId, selectEle);
 
-            console.log(data);
-            $.each(data, function(idx, item) {
-                console.log(item);
-                $("#animalCtgrCd").append($("<option></option>").attr("value",item.cdId).text(item.cdNm));
-            });
-
-        }
-    });
 
     $("#animalCtgrCd").change(function getBreedCd() {
         $('#breedCtgrCd').children('option:not(:first)').remove();
 
         const cdGroupId = $("#animalCtgrCd").val();
-        console.log()
+        const selectEle = $("#breedCtgrCd");
+        console.log();
+        loadOption(cdGroupId, selectEle);
+
+    });
+
+    function loadOption(cdGroupId, selectEle) {
         $.ajax({
             type: 'GET',
             url: "/getCode?cdGroupId=" + cdGroupId,
@@ -43,12 +38,12 @@ $(document).ready(function (){
                 console.log(data);
                 $.each(data, function(idx, item) {
                     console.log(item);
-                    $("#breedCtgrCd").append($("<option></option>").attr("value",item.cdId).text(item.cdNm));
+                    selectEle.append($("<option> </option>").attr("value",item.cdId).text(item.cdNm));
                 });
 
             }
         });
-    })
+    }
 
 });
 
