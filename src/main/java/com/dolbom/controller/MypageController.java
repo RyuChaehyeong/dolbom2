@@ -8,6 +8,7 @@ import com.dolbom.service.DlbmUserService;
 import com.dolbom.service.QuoteService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class MypageController {
     private QuoteService quoteService;
     private DlbmUserService dlbmUserService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/info")
     public String loadCustPage(@RequestParam String userId, @RequestParam String auth, Model model) {
 

@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,14 @@ public class DlbmController {
     @Setter(onMethod_ = @Autowired)
     private DlbmService dlbmService;
 
+    @PreAuthorize("hasRole('ROLE_DLBM')")
     @GetMapping("/registerForm")
     public String registerPage() {
         log.info("SERVICE REGISTER PAGE LOADED..");
         return "/dlbm/registerForm";
     }
 
+    @PreAuthorize("hasRole('ROLE_DLBM')")
     @PostMapping("/register")
     public String register(DlbmVO dlbm, RedirectAttributes rttr) {
         log.info("SERVICE REGISTER- SRVC ID: " + dlbm.getSrvcId());

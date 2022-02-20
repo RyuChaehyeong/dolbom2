@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class ReviewController {
         return reviewList;
     }
 
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     @GetMapping("/registerForm")
     public String registerQuotePopup(@RequestParam("reqId") Long reqId, Model model) {
 
@@ -50,6 +52,7 @@ public class ReviewController {
         return "/review/registerReviewPopup";
     }
 
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     @PostMapping("/register")
     public @ResponseBody ResponseEntity register(@RequestBody ReviewVO review) {
         log.info("REVIEW REGISTER - REQID: " + review.getReqId());

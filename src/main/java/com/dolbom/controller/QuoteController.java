@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class QuoteController {
     private QuoteService quoteService;
     private DlbmService dlbmService;
 
-
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER')")
     @GetMapping("/registerForm")
     public String registerQuotePopup(@RequestParam("srvcId") Long srvcId, Model model) {
         log.info("REQUEST REGISTER POPUP LOADED..");
@@ -32,6 +33,7 @@ public class QuoteController {
         return "/quote/registerQuotePopup";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_DLBM')")
     @PostMapping("/register")
     public String register(QuoteReqVO quote, RedirectAttributes rttr) {
         log.info("REGISTER REQUEST: " + quote);

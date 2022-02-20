@@ -31,6 +31,39 @@ function modify(){
     $('#modiDelBtn').attr('hidden', true);
     $('#complModi').attr('hidden', false);
 
+    const cdGroupId = '100';
+    const selectEle = $("#animalCtgrCd");
+    selectEle.children('option').remove();
+    loadOption(cdGroupId, selectEle);
+
+
+    $("#animalCtgrCd").change(function getBreedCd() {
+        $('#breedCtgrCd').children('option').remove();
+
+        const cdGroupId = $("#animalCtgrCd").val();
+        const selectEle = $("#breedCtgrCd");
+        console.log();
+        loadOption(cdGroupId, selectEle);
+
+    });
+
+    function loadOption(cdGroupId, selectEle) {
+        $.ajax({
+            type: 'GET',
+            url: "/getCode?cdGroupId=" + cdGroupId,
+            dataType: 'json',
+            success : function (data) {
+
+                console.log(data);
+                $.each(data, function(idx, item) {
+                    console.log(item);
+                    selectEle.append($("<option> </option>").attr("value",item.cdId).text(item.cdNm));
+                });
+
+            }
+        });
+    }
+
 }
 
 function openPopup() {
@@ -42,6 +75,7 @@ function openPopup() {
 
 function modifyDlbm(){
     const srvcNm = $("#srvcNm").val();
+    const dlbmId = $("#dlbmId").val();
     const animalCtgrCd = $("#animalCtgrCd").val();
     const breedCtgrCd = $("#breedCtgrCd").val();
     const postcode = $("#postcode").val();
@@ -88,7 +122,7 @@ function modifyDlbm(){
         dlbmLoc : loc,
         detailAddress : detailAddress,
         srvcDtl :srvcDtl,
-        lastModifiedBy : $("#lastModifiedBy").val()
+        lastModifiedBy : dlbmId
 
     }
 
@@ -117,7 +151,7 @@ function delConfirm() {
     } else {
         const paramData = {
             srvcId : $("#srvcId").val(),
-            lastModifiedBy : $("#lastModifiedBy").val()
+            lastModifiedBy : $("#dlbmId").val()
         }
 
         const param = JSON.stringify(paramData);
@@ -220,11 +254,9 @@ function dateFormat(date) {
         <div class="content">
             <div class="formGroup">
                 <div class="form-group">
-                    <sec:authentication property="principal" var="principal"/>
                     <input class="form-control" id="srvcId" name="srvcId" value='<c:out value="${srvc.srvcId}" />' readonly = "readonly" hidden/>
-                    <input type="text" class="form-control" id="dlbmId" name="dlbmId" value='<c:out value="${principal.username}"/>' hidden >
+                    <input type="text" class="form-control" id="dlbmId" name="dlbmId" value='<c:out value="${srvc.dlbmId}"/>' hidden >
                     <input type="text" class="form-control" id="extraAddress" name="extraAddress" hidden >
-                    <input type="text" class="form-control" id="lastModifiedBy" name="lastModifiedBy" value='<c:out value="${principal.username}"/>' hidden  >
                     <input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
                     <input type="hidden" name="pageNum" value='<c:out value="${cri.amount}"/>'>
                 </div>
@@ -246,9 +278,6 @@ function dateFormat(date) {
                     <select class="form-select" disabled
                             id="animalCtgrCd" name="animalCtgrCd" style="width: 700px">
                         <option selected><c:out value="${srvc.animalCtgrCd}" /></option>
-                        <option value="A01">강아지</option>
-                        <option value="A02">고양이</option>
-                        <option value="A03">새</option>
                     </select>
                 </div>
 
@@ -257,13 +286,9 @@ function dateFormat(date) {
                     <select class="form-select" disabled
                             id="breedCtgrCd" name="breedCtgrCd" style="width: 700px">
                         <option selected><c:out value="${srvc.breedCtgrCd}" /></option>
-                        <option value="01">푸들</option>
-                        <option value="02">시츄</option>
-                        <option value="03">불독</option>
-                        <option value="04">비글</option>
-                        <option value="05">포메라니안</option>
                     </select>
                 </div>
+
                 <div class="input-group mb-3" id="postcdInput" hidden>
                     <span class="input-group-text" >우편번호</span>
                     <input type="text" class="form-control" name="postcode" id="postcode">
@@ -299,17 +324,23 @@ function dateFormat(date) {
                 </div>
             </div>
         </div>
-        <sec:authentication property="principal" var="principal"/>
-        <c:if test="${srvc.dlbmId eq principal.username}">
-            <div id="modiDelBtn">
-                <button type="button" class="btn btn-outline-dark btn-sm" id="modiBtn" onclick="modify()">수정</button>
-                <button type="button" class="btn btn-outline-danger btn-sm" id="delBtn" onclick="delConfirm()">삭제</button>
-            </div>
-            <button type="submit" class="btn btn-outline-dark btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyDlbm()" hidden>수정 완료</button>
-        </c:if>
-            <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-                <button onclick="openPopup()" class="gap-2 col-6 mx-auto btn btn-outline-dark" type="button"  id="reqButton">견적 요청</button>
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal" var="principal"/>
+            <c:if test="${srvc.dlbmId eq principal.username}">
+                <div id="modiDelBtn">
+                    <button type="button" class="btn btn-outline-dark btn-sm" id="modiBtn" onclick="modify()">수정</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="delBtn" onclick="delConfirm()">삭제</button>
+                </div>
+                <button type="submit" class="btn btn-outline-dark btn-sm" id="complModi" style="margin-top: 10px" onclick="modifyDlbm()" hidden>수정 완료</button>
+            </c:if>
+        </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <button onclick="location.href='/login'" class="gap-2 col-6 mx-auto btn btn-outline-dark" type="button"  id="reqButton">로그인하고 견적요청 하러가기</button>
             </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                <button onclick="openPopup()" class="gap-2 col-6 mx-auto btn btn-outline-dark" type="button"  id="reqButton">견적 요청</button>
+        </sec:authorize>
+
     </div>
 </div>
 <jsp:include page="/resources/include/footer.jsp" />
