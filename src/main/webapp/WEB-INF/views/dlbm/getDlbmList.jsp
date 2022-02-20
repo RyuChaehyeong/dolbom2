@@ -47,7 +47,6 @@ $(document).ready(function (){
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
         <div class="title">
             <h4>서비스 조회하기</h4>

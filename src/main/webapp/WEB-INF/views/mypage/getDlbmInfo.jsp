@@ -53,7 +53,6 @@ function upCnt (reqId,reqPrgrStatCd) {
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
 
         <div class="title">
@@ -62,7 +61,7 @@ function upCnt (reqId,reqPrgrStatCd) {
 
         <div class="content">
             <div id="dlbmHist" class="section1">
-                <h5>돌봄이력</h5>
+                <h5>&nbsp; 돌봄이력</h5>
 
                 <div class="section2">
                     <div class="smallTitle">
@@ -170,7 +169,7 @@ function upCnt (reqId,reqPrgrStatCd) {
             </div>
 
             <div id="myInfo" class="section1">
-                <h5>나의 정보</h5>
+                <h5>&nbsp; 나의 정보</h5>
                 <div class="section2">
                     <div class="input-group mb-3">
                         <span class="input-group-text">ID</span>
@@ -187,10 +186,6 @@ function upCnt (reqId,reqPrgrStatCd) {
                     <div class="input-group mb-3">
                         <span class="input-group-text">휴대폰 번호</span>
                         <input type="number" id="userPhone" name="userPhone" class="form-control" value='<c:out value="${userInfo.userPhone}"/>'>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">비밀번호변경</span>
-                        <button type="button" class="btn btn-secondary btn-sm" id="changePwd">변경</button>
                     </div>
                 </div>
             </div>

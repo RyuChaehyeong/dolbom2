@@ -30,7 +30,7 @@ function openPopup(reqId) {
     <script src="${path}/resources/js/common.js"></script>
     <style type="text/css">
         table {
-            font-size: 10pt;
+            font-size: 8pt;
             text-align: center;
         }
         #reviewPopup {
@@ -42,7 +42,6 @@ function openPopup(reqId) {
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
 
         <div class="title">
@@ -50,7 +49,7 @@ function openPopup(reqId) {
         </div>
         <div class="content">
             <div  id="dlbmHist" class="section1">
-                <h5>돌봄이력</h5>
+                <h5>&nbsp; 돌봄이력</h5>
                     <div  class="section2">
                         <div class="smallTitle">
                             내가 보낸 견적 요청서
@@ -163,7 +162,7 @@ function openPopup(reqId) {
             </div>
 
             <div id="myInfo" class="section1">
-                <h5>나의 정보</h5>
+                <h5>&nbsp; 나의 정보</h5>
                 <div class="section2">
                     <div class="input-group mb-3">
                         <span class="input-group-text">ID</span>

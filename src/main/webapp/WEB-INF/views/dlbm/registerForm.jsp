@@ -62,7 +62,6 @@ $(document).ready(function (){
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
        <div class="title">
          <h4>서비스 등록하기</h4>
@@ -95,14 +94,14 @@ $(document).ready(function (){
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" >동물 분류</span>
-                        <select class="form-select" aria-label="Default select example" id="animalCtgrCd" name="animalCtgrCd" style="width: 700px">
+                        <select class="form-select" aria-label="Default select example" id="animalCtgrCd" name="animalCtgrCd" style="width: 718px">
                             <option selected>동물 선택</option>
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" >종 분류</span>
-                        <select class="form-select" aria-label="Default select example" id="breedCtgrCd" name="breedCtgrCd" style="width: 700px">
+                        <select class="form-select" aria-label="Default select example" id="breedCtgrCd" name="breedCtgrCd" style="width: 718px">
                             <option selected>종 선택</option>
                         </select>
                     </div>

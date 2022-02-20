@@ -30,7 +30,6 @@
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
 
         <div class="title">
@@ -48,8 +47,10 @@
                 <div id="rememberCheck">
                     <input type="checkbox" name="remember-me"> 자동로그인
                 </div>
-
-                <button id="loginBtn" type="submit" class="gap-2 col-6 mx-auto btn btn-primary">로그인</button>
+                <div id="errorMsg">
+                    <p><c:out value="${error }"/></p>
+                </div>
+                <span style="margin-right: 100px"></span><button id="loginBtn" type="submit" class="gap-2 col-6 mx-auto btn btn-outline-dark">로그인</button>
 
                 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
             </form>

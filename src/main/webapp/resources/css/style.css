@@ -30,7 +30,6 @@
 .mainbox {
     width: 900px;
     margin: auto;
-    height: 1000px;
 }
 
 .footer {
@@ -96,13 +95,13 @@
 .section1 {
     magin: 20px;
     padding: 15px;
-    background-color: aliceblue;
+    background-color: #f7f7f7;
 }
 
 .section2 {
     magin: 30px;
     padding: 15px;
-    background-color: mintcream;
+
 }
 
 .smallTitle {

@@ -33,7 +33,7 @@ public class QuoteController {
         return "/quote/registerQuotePopup";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_DLBM')")
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER')")
     @PostMapping("/register")
     public String register(QuoteReqVO quote, RedirectAttributes rttr) {
         log.info("REGISTER REQUEST: " + quote);

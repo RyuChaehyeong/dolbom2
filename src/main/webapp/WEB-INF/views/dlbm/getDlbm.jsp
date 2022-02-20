@@ -245,7 +245,6 @@ function dateFormat(date) {
 <body>
 <jsp:include page="/resources/include/header.jsp" />
 <div class="container">
-    <jsp:include page="/resources/include/sidebar.jsp" />
     <div class="mainbox">
 
         <div class="title">
@@ -276,7 +275,7 @@ function dateFormat(date) {
                 <div class="input-group mb-3">
                     <span class="input-group-text" >동물 분류</span>
                     <select class="form-select" disabled
-                            id="animalCtgrCd" name="animalCtgrCd" style="width: 700px">
+                            id="animalCtgrCd" name="animalCtgrCd" style="width: 718px">
                         <option selected><c:out value="${srvc.animalCtgrCd}" /></option>
                     </select>
                 </div>
@@ -284,7 +283,7 @@ function dateFormat(date) {
                 <div class="input-group mb-3">
                     <span class="input-group-text" >종 분류</span>
                     <select class="form-select" disabled
-                            id="breedCtgrCd" name="breedCtgrCd" style="width: 700px">
+                            id="breedCtgrCd" name="breedCtgrCd" style="width: 718px">
                         <option selected><c:out value="${srvc.breedCtgrCd}" /></option>
                     </select>
                 </div>
